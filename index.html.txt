@@ -1,0 +1,4360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carta virtual de Cevichería Tipo's - Pescados y mariscos frescos en Pueblo Libre. Delivery y recogida. Horario: 11:00 am - 5:00 pm">
+    <meta name="keywords" content="cevichería, pescados, mariscos, comida peruana, delivery, Pueblo Libre, ceviche, chicharrón">
+    <meta name="author" content="Cevichería Tipo's">
+    <title>Carta Virtual | Cevichería Tipo's</title>
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --VERDE: #1C6125;
+            --ROJO: #ae2012;
+            --AMARILLO: #CED914;
+            --NEGRO: #000000;
+            --blanco: #ffffff;
+            --gris-claro: #f8f9fa;
+            --verde-claro: #e8f5e9;
+            --sombra: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--gris-claro);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .pantalla {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 1rem;
+            transition: all 0.4s ease;
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .pantalla.activa {
+            display: flex;
+            opacity: 1;
+            position: relative;
+        }
+
+        .header {
+            width: 100%;
+            padding: 1rem 0;
+            background-color: var(--blanco);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            text-align: center;
+            border-bottom: 2px solid var(--AMARILLO);
+        }
+
+        .logo {
+            max-width: 250px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .eslogan {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--VERDE);
+            margin: 1rem 0 0.5rem;
+            font-weight: 700;
+        }
+
+        .subtitulo {
+            font-size: 1rem;
+            color: var(--ROJO);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin: 1.5rem 0;
+            color: var(--VERDE);
+            text-align: center;
+            border-bottom: 2px solid var(--AMARILLO);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin: 1.5rem 0;
+            color: var(--VERDE);
+            text-align: center;
+        }
+
+        .btn {
+            background: var(--VERDE);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--blanco);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: var(--ROJO);
+        }
+
+        .btn-regresar {
+            background: var(--AMARILLO);
+            color: var(--NEGRO);
+            margin-top: 1.5rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            width: 100%;
+            margin: 0 auto 1.5rem;
+        }
+
+        .menu-btn-img {
+            background: var(--blanco);
+            border-radius: 8px;
+            padding: 1.2rem;
+            box-shadow: var(--sombra);
+            transition: all 0.3s;
+            border: 1px solid var(--VERDE);
+            cursor: pointer;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .btn-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            transition: background 0.3s ease;
+        }
+
+        .menu-btn-img:hover .btn-overlay {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-btn-img h3 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
+        }
+
+        .menu-btn-img:hover {
+            transform: translateY(-3px);
+            border-color: var(--ROJO);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-size: 105%;
+        }
+
+        .plato-lista {
+            list-style: none;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .plato-item {
+            background: var(--blanco);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--sombra);
+            transition: all 0.3s;
+            border-left: 3px solid var(--VERDE);
+        }
+
+        .plato-item:hover {
+            transform: translateX(3px);
+            border-left-color: var(--ROJO);
+        }
+
+        .plato-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .plato-texto {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .plato-nombre {
+            font-weight: 600;
+            color: var(--VERDE);
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .plato-precio {
+            background: var(--ROJO);
+            color: var(--blanco);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-weight: 600;
+            min-width: 70px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .precio-doble {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            min-width: 90px;
+        }
+
+        .precio-opcion {
+            display: flex;
+            justify-content: space-between;
+            background: var(--ROJO);
+            color: var(--blanco);
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .precio-tipo {
+            text-align: left;
+        }
+
+        .precio-valor {
+            text-align: right;
+            margin-left: 0.3rem;
+        }
+
+        .plato-desc {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+
+        .plato-imagen {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 180px;
+            position: relative;
+        }
+
+        .plato-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .plato-imagen:hover img {
+            transform: scale(1.05);
+        }
+
+        .location-card-premium {
+            background: linear-gradient(180deg, #ffffff 0%, #fcfcfc 100%);
+            border-radius: 20px;
+            padding: 35px 25px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(28, 97, 37, 0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .location-card-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--AMARILLO);
+            border-radius: 0 0 4px 4px;
+        }
+
+        .icon-anchor {
+            color: var(--VERDE);
+            width: 48px;
+            height: 48px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .premium-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--VERDE);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .premium-address {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-mapa-pro {
+            display: inline-block;
+            background-color: var(--VERDE);
+            color: #ffffff;
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(28, 97, 37, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-mapa-pro:hover {
+            background-color: var(--ROJO);
+            box-shadow: 0 6px 20px rgba(174, 32, 18, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .titulo-pro {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--VERDE);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--AMARILLO);
+            padding-bottom: 0.5rem;
+        }
+
+        .subtitulo-reserva {
+            text-align: center;
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 2.5rem;
+            font-style: italic;
+        }
+
+        .form-reserva {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--blanco);
+            padding: 2rem 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--VERDE);
+        }
+
+        .form-grupo-pro {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grupo-pro label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--VERDE);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .form-grupo-pro input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-grupo-pro input:focus {
+            outline: none;
+            border-color: var(--VERDE);
+            box-shadow: 0 0 0 4px var(--verde-claro);
+        }
+
+        .form-grid-pro {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1rem;
+        }
+
+        .btn-enviar-reserva {
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 1rem;
+            border-radius: 10px;
+            background: var(--VERDE);
+            color: var(--blanco);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-enviar-reserva:hover {
+            background: var(--ROJO);
+            transform: scale(1.02);
+        }
+
+        .info-pedidos {
+            background-color: var(--AMARILLO);
+            color: var(--NEGRO);
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .horario {
+            margin-top: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            padding: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+            background-color: var(--VERDE);
+            color: var(--blanco);
+        }
+
+        .platos-inicio {
+            width: 100%;
+            max-width: 600px;
+            margin: 1.5rem auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            border: 3px solid var(--AMARILLO);
+        }
+
+        .platos-inicio img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .btn-agregar {
+            background-color: var(--VERDE);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-agregar:hover {
+            background-color: var(--ROJO);
+        }
+
+        /* ========== MODAL DEL CARRITO ========== */
+        .carrito-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 20000 !important;
+            overflow-y: auto;
+        }
+
+        .carrito-contenido {
+            max-width: 800px;
+            width: 95%;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            box-shadow: 0 20px 60px rgba(28, 97, 37, 0.15);
+            position: relative;
+            border: 1px solid rgba(28, 97, 37, 0.1);
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .carrito-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--VERDE);
+        }
+
+        .carrito-header h2 {
+            margin: 0;
+            color: var(--VERDE);
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .cerrar-carrito {
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--ROJO);
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            transition: transform 0.3s;
+        }
+
+        .cerrar-carrito:hover {
+            transform: scale(1.2);
+        }
+
+        .carrito-vacio {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        /* ========== ITEMS DEL CARRITO ========== */
+        .carrito-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto auto;
+            gap: 1.5rem;
+            align-items: center;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .carrito-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(28, 97, 37, 0.1);
+            border-color: var(--VERDE);
+        }
+
+        .carrito-item-imagen {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .carrito-item-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carrito-item-info {
+            flex: 1;
+        }
+
+        .carrito-item-nombre {
+            font-weight: 600;
+            color: var(--VERDE);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .carrito-item-precio {
+            font-weight: 600;
+            color: var(--ROJO);
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+
+        .carrito-item-cantidad {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--gris-claro);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+        }
+
+        .cantidad-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--VERDE);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .cantidad-btn:hover {
+            background: var(--ROJO);
+            transform: scale(1.1);
+        }
+
+        .cantidad-btn.restar {
+            background: var(--ROJO);
+        }
+
+        .cantidad-btn.restar:hover {
+            background: #8a1a0e;
+        }
+
+        .carrito-cantidad-numero {
+            font-weight: bold;
+            font-size: 1.1rem;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .carrito-item-subtotal {
+            font-weight: 700;
+            color: var(--VERDE);
+            font-size: 1.2rem;
+            min-width: 100px;
+            text-align: right;
+        }
+
+        .carrito-item-eliminar {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .carrito-item-eliminar:hover {
+            background: #ff4757;
+            transform: scale(1.1);
+        }
+
+        .especificaciones-carrito {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* ========== RESUMEN DEL CARRITO ========== */
+        .carrito-resumen {
+            background: linear-gradient(135deg, var(--VERDE) 0%, #2a7e36 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(28, 97, 37, 0.3);
+        }
+
+        .resumen-linea {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .resumen-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .carrito-botones {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-vaciar {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .btn-vaciar:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-finalizar {
+            background: var(--AMARILLO);
+            color: var(--NEGRO);
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .btn-finalizar:hover {
+            background: #e6d600;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(206, 217, 20, 0.3);
+        }
+
+        /* ========== SUGERENCIAS ========== */
+        .sugerencias-section {
+            margin-top: 2.5rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+            border-radius: 15px;
+            border-left: 5px solid var(--AMARILLO);
+        }
+
+        .sugerencias-titulo {
+            color: var(--NEGRO);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .sugerencias-titulo::before {
+            content: "💡";
+            font-size: 1.8rem;
+        }
+
+        .sugerencias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sugerencia-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .sugerencia-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--VERDE);
+            box-shadow: 0 8px 20px rgba(28, 97, 37, 0.15);
+        }
+
+        .sugerencia-icono {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .sugerencia-info {
+            flex: 1;
+        }
+
+        .sugerencia-nombre {
+            font-weight: 600;
+            color: var(--VERDE);
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .sugerencia-precio {
+            color: var(--ROJO);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .sugerencias-nota {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px dashed #ccc;
+        }
+
+        /* ========== ANIMACIONES ========== */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .formulario-pedido {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--VERDE);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--VERDE);
+            outline: none;
+        }
+
+        .metodo-pago {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metodo-pago-opcion {
+            flex: 1;
+            min-width: 120px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .metodo-pago-opcion.seleccionado {
+            border-color: var(--VERDE);
+            background-color: var(--verde-claro);
+        }
+
+        .metodo-pago-imagen {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 0.5rem;
+            object-fit: contain;
+        }
+
+        .campo-pago {
+            display: none;
+        }
+
+        .campo-pago.mostrar {
+            display: block;
+        }
+
+        .modal-personalizacion {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 20000 !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-personalizacion-contenido {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .modal-personalizacion-titulo {
+            color: var(--VERDE);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+
+        .categoria-titulo {
+            font-weight: bold;
+            color: var(--VERDE);
+            margin: 15px 0 8px 0;
+            text-align: left;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .opciones-personalizacion {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .opcion-personalizacion {
+            background: var(--gris-claro);
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .opcion-personalizacion:hover {
+            border-color: var(--VERDE);
+            background: #f0f0f0;
+        }
+
+        .opcion-personalizacion.seleccionado {
+            background: var(--VERDE);
+            color: white;
+            border-color: var(--VERDE);
+            box-shadow: 0 0 0 2px rgba(28, 97, 37, 0.2);
+        }
+
+        .campo-especificaciones {
+            margin-bottom: 1.5rem;
+        }
+
+        .campo-especificaciones label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--VERDE);
+        }
+
+        .campo-especificaciones textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .botones-modal-personalizacion {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-cancelar-personalizacion {
+            background: #ccc;
+            color: #333;
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-confirmar-personalizacion {
+            background: var(--VERDE);
+            color: white;
+            flex: 2;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-cancelar-personalizacion:hover {
+            background: #aaa;
+        }
+
+        .btn-confirmar-personalizacion:hover {
+            background: var(--ROJO);
+        }
+
+        .error-mensaje {
+            color: var(--ROJO);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            
+            .logo {
+                max-width: 200px;
+            }
+            
+            .plato-info {
+                flex-direction: column;
+            }
+            
+            .plato-precio, .precio-doble {
+                margin-top: 0.5rem;
+                align-self: flex-start;
+            }
+            
+            .platos-inicio {
+                max-width: 90%;
+            }
+            
+            .plato-imagen {
+                height: 150px;
+            }
+
+            .menu-btn-img {
+                min-height: 100px;
+                padding: 1rem;
+            }
+            
+            .menu-btn-img h3 {
+                font-size: 1.2rem;
+            }
+
+            .location-card-premium {
+                padding: 25px 15px;
+                margin-top: 20px;
+            }
+
+            .premium-title {
+                font-size: 1.3rem;
+            }
+
+            .form-reserva {
+                padding: 1.5rem;
+            }
+
+            .form-grid-pro {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .titulo-pro {
+                font-size: 1.8rem;
+            }
+
+            .carrito-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .carrito-item-imagen {
+                margin: 0 auto;
+            }
+            
+            .carrito-item-cantidad {
+                justify-content: center;
+            }
+            
+            .carrito-botones {
+                flex-direction: column;
+            }
+            
+            .sugerencias-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .carrito-contenido {
+                padding: 1.5rem;
+                margin: 1rem auto;
+            }
+            
+            .carrito-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .carrito-resumen {
+                padding: 1.5rem;
+            }
+
+            .metodo-pago {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .plato-nombre {
+                font-size: 0.95rem;
+            }
+            
+            .precio-doble {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .plato-imagen {
+                height: 120px;
+            }
+
+            .menu-btn-img {
+                min-height: 90px;
+            }
+            
+            .menu-btn-img h3 {
+                font-size: 1.1rem;
+            }
+
+            .carrito-contenido {
+                padding: 1rem;
+            }
+
+            .titulo-pro {
+                font-size: 1.6rem;
+            }
+
+            .form-reserva {
+                padding: 1rem;
+            }
+        }
+        
+        /* Mejora para las sugerencias con imágenes */
+        .sugerencia-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 12px;
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .sugerencia-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--VERDE);
+        }
+
+        .sugerencia-item img {
+            border-radius: 6px;
+        }
+
+        .sugerencia-info {
+            flex: 1;
+        }
+
+        .sugerencia-nombre {
+            font-weight: 600;
+            color: var(--VERDE);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .sugerencia-precio {
+            color: var(--ROJO);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Indicador de campo obligatorio en personalización */
+        .categoria-titulo[style*="color: var(--ROJO)"] {
+            color: var(--ROJO) !important;
+            font-weight: bold;
+        }
+
+        /* Asterisco rojo para campos obligatorios */
+        .categoria-titulo.obligatorio::after {
+            content: " *";
+            color: var(--ROJO);
+            font-weight: bold;
+        }
+
+        /* Mensaje de error en el modal */
+        .mensaje-error-modal {
+            color: var(--ROJO);
+            font-size: 0.85rem;
+            text-align: center;
+            margin: 10px 0;
+            padding: 8px;
+            background: #ffe6e6;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .mensaje-error-modal.mostrar {
+            display: block;
+        }
+        
+        /* Estilos para las opciones de personalización */
+        .opcion-personalizacion {
+            background: var(--gris-claro);
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .opcion-personalizacion:hover {
+            border-color: var(--VERDE);
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .opcion-personalizacion.seleccionado {
+            background: var(--VERDE);
+            color: white;
+            border-color: var(--VERDE);
+            box-shadow: 0 0 0 3px rgba(28, 97, 37, 0.2);
+        }
+
+        /* Separadores visuales entre secciones */
+        .separador-seccion {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gris-claro), transparent);
+            margin: 25px 0;
+        }
+        
+        /* Notificaciones sutiles */
+        #notificacion-agregado {
+            animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 2s;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(120%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(120%);
+            }
+        }
+        
+        /* Mejora para el botón del carrito */
+        .carrito-btn {
+            position: fixed;
+            width: 70px;
+            height: 70px;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--ROJO);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(174, 32, 18, 0.4);
+            z-index: 9000 !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+        }
+
+        .carrito-btn:hover {
+            transform: scale(1.1);
+            background-color: #c62828;
+            box-shadow: 0 6px 20px rgba(174, 32, 18, 0.6);
+        }
+
+        .carrito-btn span {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .carrito-cantidad {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--AMARILLO);
+            color: var(--NEGRO);
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Asegurar que el modal del carrito tenga el z-index más alto */
+        .carrito-modal {
+            z-index: 20000;
+        }
+
+        .whatsapp-btn {
+            z-index: 9000 !important;
+        }
+        
+        /* ========== BOTONES FLOTANTES ========== */
+        /* Botón de WhatsApp - izquierda */
+        .whatsapp-btn {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            left: 20px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 9000 !important; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            background-color: #1da851;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .whatsapp-btn {
+                width: 55px;
+                height: 55px;
+                bottom: 15px;
+                left: 15px;
+                font-size: 22px;
+            }
+            
+            .carrito-btn {
+                width: 60px;
+                height: 60px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .carrito-cantidad {
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+                bottom: 10px;
+                left: 10px;
+                font-size: 20px;
+            }
+            
+            .carrito-btn {
+                width: 55px;
+                height: 55px;
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .carrito-cantidad {
+                width: 22px;
+                height: 22px;
+                font-size: 0.75rem;
+            }
+        }
+        
+        /* ========== CORRECCIONES RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            /* Mejoras para modal de personalización en móvil */
+            .modal-personalizacion-contenido {
+                width: 95%;
+                padding: 1.5rem;
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+            
+            .opcion-personalizacion {
+                min-width: 100px !important;
+                padding: 12px 5px !important;
+                font-size: 0.85rem !important;
+            }
+            
+            .botones-modal-personalizacion {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn-cancelar-personalizacion,
+            .btn-confirmar-personalizacion {
+                width: 100% !important;
+            }
+            
+            /* Mejoras para el formulario de pedido en móvil */
+            .carrito-contenido {
+                width: 95%;
+                margin: 10px auto;
+                padding: 15px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            
+            .carrito-item {
+                grid-template-columns: 1fr;
+                text-align: left;
+                gap: 10px;
+            }
+            
+            .carrito-item-imagen {
+                width: 100%;
+                height: 150px;
+                margin: 0 auto;
+            }
+            
+            .carrito-item-cantidad {
+                justify-content: flex-start;
+            }
+            
+            /* Ajustes para botones de opciones */
+            .opciones-personalizacion > div {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .opcion-personalizacion {
+                width: 100% !important;
+                margin-bottom: 5px;
+            }
+            
+            /* Asegurar que los textos no se salgan */
+            .carrito-item-nombre {
+                font-size: 0.95rem;
+                word-break: break-word;
+            }
+            
+            .plato-nombre {
+                font-size: 0.9rem;
+            }
+            
+            .plato-desc {
+                font-size: 0.8rem;
+            }
+            
+            /* Mejoras para formulario de reserva */
+            .form-reserva {
+                padding: 15px;
+            }
+            
+            .form-grid-pro {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Ajustes extra para pantallas muy pequeñas */
+            .modal-personalizacion-contenido {
+                padding: 1rem;
+            }
+            
+            .opcion-personalizacion {
+                padding: 10px 5px !important;
+                font-size: 0.8rem !important;
+            }
+            
+            .carrito-contenido {
+                padding: 10px;
+            }
+            
+            .carrito-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .carrito-resumen {
+                padding: 1rem;
+            }
+            
+            .carrito-item-subtotal {
+                font-size: 1rem;
+            }
+            
+            /* Botones más grandes para tocar fácilmente */
+            .btn-agregar, .btn {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .cantidad-btn {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        /* ========== MEJORAS PARA OPCIONES EN MODAL ========== */
+        .opcion-personalizacion {
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent; /* Elimina el highlight azul en iOS */
+        }
+
+        .opcion-personalizacion:active {
+            transform: scale(0.98);
+        }
+
+        /* Evitar zoom en inputs en iOS */
+        @media screen and (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px; /* Previene zoom automático en iOS */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .btn-agregar {
+                width: 100%;
+                padding: 12px;
+                font-size: 0.9rem;
+                margin-top: 10px;
+            }
+            
+            .plato-item {
+                padding: 15px;
+            }
+            
+            .plato-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .plato-precio, .precio-doble {
+                margin-top: 10px;
+                align-self: stretch;
+                text-align: center;
+            }
+            
+            .precio-opcion {
+                justify-content: space-between;
+                padding: 8px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn-agregar {
+                padding: 14px;
+                font-size: 1rem;
+                font-weight: bold;
+            }
+            
+            .plato-imagen {
+                height: 140px;
+            }
+        }
+        
+        #error-distrito {
+            color: var(--ROJO);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://wa.me/51977420834" class="whatsapp-btn" target="_blank">
+        <span style="font-size: 24px;">📱</span>
+    </a>
+
+    <div class="carrito-btn" onclick="mostrarCarrito()">
+    <span>🛒</span>
+    <div class="carrito-cantidad" id="carrito-contador">0</div>
+</div>
+
+    <div id="carrito-modal" class="carrito-modal">
+        <div class="carrito-contenido">
+            <div class="carrito-header">
+                <h2>🛒 Tu Pedido</h2>
+                <button class="cerrar-carrito" onclick="cerrarCarrito()">×</button>
+            </div>
+            
+            <div id="carrito-items"></div>
+            
+            <div id="carrito-vacio" class="carrito-vacio">
+                <div style="text-align: center; padding: 3rem 1rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🛒</div>
+                    <h3 style="color: var(--VERDE); margin-bottom: 0.5rem;">Carrito Vacío</h3>
+                    <p style="color: #666;">Agrega platos deliciosos para comenzar</p>
+                    <button class="btn" onclick="mostrarPantalla('menu'); cerrarCarrito();" style="margin-top: 1rem;">
+                        Ver Menú
+                    </button>
+                </div>
+            </div>
+            
+            <div id="sugerencias-container" class="sugerencias-section" style="display: none;">
+                <div class="sugerencias-titulo">¿Te faltó algo?</div>
+                <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Completa tu experiencia con estos acompañamientos recomendados:</p>
+                
+                <div class="sugerencias-grid">
+                    </div>
+                
+                <p class="sugerencias-nota">¡Haz tu pedido más completo y delicioso!</p>
+            </div>
+            
+            <div id="carrito-resumen" class="carrito-resumen" style="display: none;">
+                <div class="resumen-linea">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-carrito">S/ 0.00</span>
+                </div>
+                <div class="resumen-linea">
+                    <span>Envío:</span>
+                    <span id="envio-carrito">S/ 0.00</span>
+                </div>
+                <div class="resumen-linea resumen-total">
+                    <span>TOTAL:</span>
+                    <span id="total-carrito">S/ 0.00</span>
+                </div>
+            </div>
+            
+            <div id="carrito-botones" class="carrito-botones" style="display: none;">
+                <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar Carrito</button>
+                <button class="btn-finalizar" onclick="mostrarFormularioPedido()">
+                    <span>Finalizar Pedido</span>
+                    <span>→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-personalizacion" class="modal-personalizacion">
+        <div class="modal-personalizacion-contenido">
+            <span class="cerrar-carrito" onclick="cerrarModalPersonalizacion()" style="position: absolute; right: 15px; top: 15px;">×</span>
+            
+            <h3 class="modal-personalizacion-titulo" id="titulo-personalizacion">Personaliza tu pedido</h3>
+            
+            <div id="opciones-container" class="opciones-personalizacion">
+                </div>
+            
+            <div class="campo-especificaciones">
+                <label for="especificaciones-personalizacion">Especificaciones adicionales:</label>
+                <textarea id="especificaciones-personalizacion" placeholder="Ej: Sin cebolla, extra picante, etc."></textarea>
+            </div>
+            
+            <div class="botones-modal-personalizacion">
+                <button class="btn-cancelar-personalizacion" onclick="cerrarModalPersonalizacion()">Cancelar</button>
+                <button class="btn-confirmar-personalizacion" onclick="confirmarPersonalizacion()">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-formulario-pedido" class="carrito-modal">
+        <div class="carrito-contenido">
+            <span class="cerrar-carrito" onclick="cerrarFormularioPedido()">×</span>
+            <h2>Completar Pedido</h2>
+            
+            <div class="formulario-pedido">
+                <div id="resumen-pedido" style="background: var(--gris-claro); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                    <h4 style="color: var(--VERDE); margin-bottom: 0.5rem;">Resumen del Pedido:</h4>
+                    <div id="detalles-resumen"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cliente-nombre">Tu Nombre *</label>
+                    <input type="text" id="cliente-nombre" placeholder="Ej: Juan Pérez" required>
+                    <div class="error-mensaje" id="error-nombre">Por favor ingresa tu nombre</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cliente-telefono">WhatsApp *</label>
+                    <input type="tel" id="cliente-telefono" placeholder="Ej: 987654321" required>
+                    <div class="error-mensaje" id="error-telefono">Por favor ingresa tu WhatsApp</div>
+                </div>
+                
+                <div class="form-group">
+    <label>Tipo de Pedido *</label>
+    <div style="display: flex; gap: 10px; margin-top: 5px;">
+        <button type="button" id="btn-delivery" class="btn-agregar" style="flex: 1;" onclick="seleccionarTipoPedido('delivery')"> Delivery</button>
+        <button type="button" id="btn-recoger" class="btn-agregar" style="flex: 1; background: var(--gris-claro); color: #333;" onclick="seleccionarTipoPedido('recoger')"> Recoger</button>
+    </div>
+</div>
+
+<div id="seccion-delivery" style="display: none;">
+    <div class="form-group">
+        <label for="cliente-distrito">Distrito para Delivery *</label>
+        <select id="cliente-distrito" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;" onchange="actualizarCostoDelivery()">
+            <option value="">Selecciona tu distrito</option>
+            <option value="Hospital Militar Reja Negra - S/ 0">Hospital Militar (Reja Negra - Av brasil)</option>
+            <option value="Pueblo Libre - S/ 5">Pueblo Libre — S/ 5</option>
+            <option value="interdistrital-consultar">Interdistrital (Consultar precio)</option>
+        </select>
+    </div>
+    
+    <div class="form-group" style="margin-top: 15px;">
+        <label for="cliente-direccion">Dirección Exacta y Referencia *</label>
+        <textarea id="cliente-direccion" rows="2" placeholder="Ej: Av. La Marina 500, frente al grifo Primax" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-family: 'Poppins', sans-serif;"></textarea>
+        <div class="error-mensaje" id="error-direccion">Por favor ingresa tu dirección exacta</div>
+    </div>
+</div>
+                
+                <div class="form-group">
+                    <label>Método de Pago *</label>
+                    <div class="metodo-pago">
+                        <div class="metodo-pago-opcion seleccionado" onclick="seleccionarMetodoPago('efectivo')">
+                          <img src="img/icono-efectivo.png" alt="Efectivo" class="metodo-pago-imagen">
+                            <div>Efectivo</div>
+                        </div>
+                        <div class="metodo-pago-opcion" onclick="seleccionarMetodoPago('yape')">
+                          <img src="img/icono-yape.png" alt="Yape" class="metodo-pago-imagen">
+                            <div>Yape</div>
+                        </div>
+                          <div class="metodo-pago-opcion" onclick="seleccionarMetodoPago('plin')">
+                            <img src="img/icono-plin.webp" alt="Plin" class="metodo-pago-imagen">
+                            <div>Plin</div>
+                        </div>
+                        <div class="metodo-pago-opcion" onclick="seleccionarMetodoPago('tarjeta')">
+                            <img src="img/icono-tarjeta.png" class="metodo-pago-imagen" alt="Tarjeta">
+                            <div>Tarjeta</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="campo-efectivo" class="campo-pago mostrar">
+                    <div class="form-group">
+                        <label for="monto-efectivo">¿Con cuánto pagas en efectivo? *</label>
+                        <input type="number" id="monto-efectivo" placeholder="Ej: 150.00" step="0.01" min="0" oninput="calcularVuelto()">
+                        <div class="error-mensaje" id="error-efectivo">Por favor ingresa el monto con el que pagarás</div>
+                    </div>
+                    <div id="vuelto-info" style="display: none; padding: 10px; border-radius: 5px; margin-top: 10px; border: 2px solid transparent;">
+                        <p style="margin: 0; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
+                            <span id="vuelto-texto">Vuelto:</span>
+                            <span id="monto-vuelto" style="font-size: 1.1rem;">S/ 0.00</span>
+                        </p>
+                        <p id="advertencia-falta" style="margin: 5px 0 0 0; font-size: 0.8rem; color: var(--ROJO); display: none;">
+                            ⚠ Asegúrate de tener el dinero completo
+                        </p>
+                    </div>
+                    <div style="margin-top: 10px; padding: 8px; background: #f8f9fa; border-radius: 5px; font-size: 0.9rem; color: #666;">
+                        💡 <strong>Total a pagar: <span id="total-recordatorio">S/ 0.00</span></strong>
+                    </div>
+                </div>
+
+                <div id="campo-yape" class="campo-pago">
+                    <div class="form-group">
+                        <p style="color: var(--VERDE); font-weight: bold;">📱 Pago con Yape</p>
+                        <p style="font-size: 0.9rem; color: #666;">El repartidor compartirá el número de Yape para la transferencia por WhatsApp.</p>
+                    </div>
+                </div>
+
+                <div id="campo-plin" class="campo-pago">
+                    <div class="form-group">
+                        <p style="color: var(--VERDE); font-weight: bold;">📱 Pago con Plin</p>
+                        <p style="font-size: 0.9rem; color: #666;">El repartidor compartirá el número de Plin para la transferencia por WhatsApp.</p>
+                    </div>
+                </div>
+
+                <div id="campo-tarjeta" class="campo-pago">
+                    <div class="form-group">
+                        <p style="color: var(--VERDE); font-weight: bold;">💳 Pago con Tarjeta</p>
+                        <p style="font-size: 0.9rem; color: #666;">El repartidor llevará POS para cobro con tarjeta (Visa/Mastercard).</p>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="instrucciones">Instrucciones adicionales</label>
+                    <textarea id="instrucciones" placeholder="Ej: llamar antes de llegar, Dejar en recepción etc." rows="3"></textarea>
+                </div>
+                
+                <div style="background: var(--AMARILLO); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Sub-total:</span>
+                        <span id="subtotal-pedido">S/ 0.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Delivery:</span>
+                        <span id="costo-delivery">S/ 0.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; border-top: 2px solid var(--VERDE); padding-top: 5px;">
+                        <span>TOTAL A PAGAR:</span>
+                        <span id="total-pedido">S/ 0.00</span>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 1rem;">
+                    <button type="button" class="btn-cancelar-personalizacion" onclick="cerrarFormularioPedido()">Cancelar</button>
+                    <button type="button" class="btn-confirmar-personalizacion" onclick="validarYEnviarPedido()">Enviar Pedido por WhatsApp</button>
+                </div>
+                
+                <p style="font-size: 0.8rem; color: #666; margin-top: 1rem; text-align: center;">
+                   ¡Dale un último vistazo a tu carrito! Al confirmar, tu pedido será definitivo. Así nos aseguramos de enviarte exactamente lo que elegiste sin demoras.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <img src="img/logo.png" alt="Logo Tipo's" class="logo">
+        <div class="eslogan">PESCADOS & MARISCOS</div>
+        <div class="subtitulo">PASIÓN POR LA BUENA COMIDA</div>
+    </div>
+
+    <div id="bienvenida" class="pantalla activa">
+        <div class="container">
+            <div class="platos-inicio">
+                <img src="img/banner-inicio.png" alt="Platos de la Cevichería Tipo's">
+            </div>
+            
+            <div style="text-align: center; margin: 2rem 0;">
+                <button class="btn" onclick="mostrarPantalla('menu')">
+                    Ver Carta 
+                </button>
+                <button class="btn" onclick="mostrarPantalla('reservas')" style="background: var(--ROJO);">
+                      Agendar Reserva
+                </button>
+            </div>
+
+            <div class="location-card-premium">
+                <svg class="icon-anchor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="5" r="3"></circle>
+                    <line x1="12" y1="22" x2="12" y2="8"></line>
+                    <path d="M5 12H2a10 10 0 0 0 20 0h-3"></path>
+                </svg>
+
+                <h3 class="premium-title">
+                    Sigue la corriente hasta TIPO'S
+                </h3>
+                <p class="premium-address">
+                    Av. Brasil 2804, Pueblo Libre.
+                </p>
+
+                <a href="https://maps.app.goo.gl/DzDT7KyLXhH5m8AC6" target="_blank" class="btn-mapa-pro">
+                    Ver Ubicación
+                </a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="font-size: 0.75rem; color: #888; max-width: 600px; margin: 0 auto;">
+                    Nota: Las imágenes mostradas son ilustrativas. 
+                    Nuestros platos mantienen la calidad y esencia que nos caracteriza.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="reservas" class="pantalla">
+        <div class="container">
+            <h2 class="titulo-pro">Agendar una Reserva</h2>
+            <p class="subtitulo-reserva">Elige tu fecha y te contactaremos por WhatsApp para confirmar.</p>
+            
+            <div class="form-reserva">
+                <div class="form-grupo-pro">
+                    <label for="reserva-nombre">Tu Nombre:</label>
+                    <input type="text" id="reserva-nombre" placeholder="Ej: Juan Pérez">
+                </div>
+                
+                <div class="form-grupo-pro">
+                    <label for="reserva-telefono">Tu WhatsApp:</label>
+                    <input type="tel" id="reserva-telefono" placeholder="Ej: 987 654 321">
+                </div>
+                
+                <div class="form-grid-pro">
+                    <div class="form-grupo-pro">
+                        <label for="reserva-personas">Personas:</label>
+                        <input type="number" id="reserva-personas" value="2" min="1">
+                    </div>
+                    <div class="form-grupo-pro">
+                        <label for="reserva-fecha">Fecha:</label>
+                        <input type="date" id="reserva-fecha">
+                    </div>
+                </div>
+                
+                <div class="form-grupo-pro">
+                    <label for="reserva-hora">Hora (11:00 am - 5:00 pm):</label>
+                    <input type="time" id="reserva-hora">
+                </div>
+                
+                <button class="btn-enviar-reserva" onclick="enviarReservaWhatsApp()">
+                    <span>Solicitar Reserva por WhatsApp</span> 
+                </button>
+                
+                <button class="btn btn-regresar" onclick="mostrarPantalla('bienvenida')" style="width:100%; margin-top: 1rem;">
+                    Volver al Inicio
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu" class="pantalla">
+        <div class="container">
+            <h1>Nuestra Carta</h1>
+            
+            <div class="menu-grid">
+                <div class="menu-btn-img" onclick="mostrarPantalla('entradas')" style="background-image: url('img/btn-entradas.png')">
+                    <div class="btn-overlay"></div>
+                    <h3>ENTRADAS</h3>
+                </div>
+                
+                <div class="menu-btn-img" onclick="mostrarPantalla('cebiches')" style="background-image: url('img/btn-cebiches.png')">
+                    <div class="btn-overlay"></div>
+                    <h3>CEBICHES</h3>
+                </div>
+                
+                <div class="menu-btn-img" onclick="mostrarPantalla('combinaciones')" style="background-image: url('img/btn-combinaciones.png')">
+                    <div class="btn-overlay"></div>
+                    <h3>COMBINACIONES</h3>
+                </div>
+
+                <div class="menu-btn-img" onclick="mostrarPantalla('rondas')" style="background-image: url('img/btn-rondas.png')">
+                    <div class="btn-overlay"></div>
+                    <h3>RONDAS</h3>
+                </div>
+                
+                <div class="menu-btn-img" onclick="mostrarPantalla('chicharrones')" style="background-image: url('img/btn-chicharrones.png')">
+                    <div class="btn-overlay"></div>
+                    <h3>CHICHARRONES</h3>
+                </div>
+
+                <div class="menu-btn-img" onclick="mostrarPantalla('pescados-enteros')" style="background-image: url('img/btn-pescados.jpg')">
+                    <div class="btn-overlay"></div>
+                    <h3>PESCADOS ENTEROS</h3>
+                </div>
+                
+                <div class="menu-btn-img" onclick="mostrarPantalla('sopas')" style="background-image: url('img/btn-sopas.png')">
+                    <div class="btn-overlay"></div>
+                    <h3>SOPAS</h3>
+                </div>
+                
+                <div class="menu-btn-img" onclick="mostrarPantalla('platos-de-fondo')" style="background-image: url('img/btn-platos-fondo.png')">
+                    <div class="btn-overlay"></div>
+                    <h3>PLATOS DE FONDO</h3>
+                </div>
+
+                <div class="menu-btn-img" onclick="mostrarPantalla('guardiciones')" style="background-image: url('img/btn-guarniciones.png')">
+                    <div class="btn-overlay"></div>
+                    <h3>GUARNICIONES</h3>
+                </div>
+                
+                <div class="menu-btn-img" onclick="mostrarPantalla('bebidas')" style="background-image: url('img/btn-bebidas.png')">
+                    <div class="btn-overlay"></div>
+                    <h3>BEBIDAS</h3>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('bienvenida')">
+                    INICIO
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="entradas" class="pantalla">
+        <div class="container">
+            <h2>Entradas</h2>
+            
+            <ul class="plato-lista">
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Tequeños Jamon y Queso / Tequeños de Langostinos</div>
+                        </div>
+                        <div class="plato-precio">S/16</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/tequenos.png" alt="Tequeños langostino">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Tequeños Jamon y Queso', 16)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Causa de pulpa de cangrejo</div>
+                            <div class="plato-desc">La tradicional causa rellena de verduras, pulpa de cangrejo y mayonesa.</div>
+                        </div>
+                        <div class="plato-precio">S/25</div>
+                    </div>
+                    <div class="plato-imagen">  
+                        <img src="img/causa-cangrejo.png" alt="Causa de pulpa de cangrejo">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Causa de pulpa de cangrejo', 25)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Causa de langostinos</div>
+                            <div class="plato-desc">La tradicional causa rellena de verduras, pulpa de langostinos y mayonesa.</div>
+                        </div>
+                        <div class="plato-precio">S/25</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/causa-langostinos.png" alt="Causa de langostinos">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Causa de langostinos', 25)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Causa acebichada</div>
+                            <div class="plato-desc">El dúo perfecto. Deliciosa causa limeña de pulpa de cangrejo acompañada nuestro cebiche de pescado.</div>
+                        </div>
+                        <div class="plato-precio">S/30</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/causa-acebichada.png" alt="Causa acebichada">        
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Causa acebichada', 30, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Causa de pollo</div>
+                            <div class="plato-desc">La tradicional causa rellena de verduras, pollo desmenuzado y mayonesa.</div>
+                        </div>
+                        <div class="plato-precio">S/23</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/causa-pollo.png" alt="Causa de pollo">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Causa de pollo', 23)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Poderoso</div>
+                            <div class="plato-desc">Nuestro energizante natural marino, leche de tigre con crema de ají amarillo, trozos de pescado, mixtura de mariscos y porción de nuestro tradicional chicharrón de pota</div>
+                        </div>
+                        <div class="plato-precio">S/18</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/poderoso.png" alt="Poderoso">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Poderoso', 18, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Leche de pantera</div>
+                            <div class="plato-desc">Potente combinación de leche de tigre, conchas negras y porción de chicharrón de pota.</div>
+                        </div>
+                        <div class="plato-precio">S/18</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/leche-pantera.png" alt="Leche de pantera">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Leche de pantera', 18, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Leche de tigre</div>
+                            <div class="plato-desc">Un clásico de tipos. El juguito de nuestro cebiche con trozos de pescado, cebolla, ají, choclo, y chicharrón de pota. ¡Ideal para empezar cualquier comida!</div>
+                        </div>
+                        <div class="plato-precio">S/16</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/leche-tigre.png" alt="Leche de tigre">  
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Leche de tigre', 16, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+            </ul>
+
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
+                    Volver al Menú  
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cebiches" class="pantalla">
+        <div class="container">
+            <h2>Cebiches</h2>
+            
+            <ul class="plato-lista">
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Cebiche de pescado</div>
+                        </div>
+                        <div class="plato-precio">S/35</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/cebiche-pescado.png" alt="Cebiche de pescado">        
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Cebiche de pescado', 35, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Cebiche mixto</div>
+                            <div class="plato-desc">(Pescado, pulpo, langostino)</div>
+                        </div>
+                        <div class="plato-precio">S/38</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/cebiche-mixto.png" alt="Cebiche mixto">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Cebiche mixto', 38, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Cebiche de conchas negras</div>
+                        </div>
+                        <div class="plato-precio">S/36</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/cebiche-conchas.png" alt="Cebiche de conchas negras">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Cebiche de conchas negras', 36, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Cebiche clásico</div>
+                            <div class="plato-desc">(Pescado, conchas negras, camote, canchita serrana)</div>
+                        </div>
+                        <div class="plato-precio">S/48</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/cebiche-clasico.png" alt="Cebiche clásico">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Cebiche clásico', 48, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Tiradito de pescado</div>
+                        </div>
+                        <div class="plato-precio">S/32</div>  
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/tiradito.png" alt="Tiradito de pescado">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Tiradito de pescado', 32, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
+                    Volver al Menú
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="combinaciones" class="pantalla">
+        <div class="container">
+            <h2>Combinaciones</h2>
+            
+            <ul class="plato-lista">
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Combinado 1</div>
+                            <div class="plato-desc">(Cebiche de pescado con chicharrón de pota)</div>
+                        </div>
+                        <div class="plato-precio">S/32</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/combinado-1.png" alt="Combinado 1">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Combinado 1', 32, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Combinado 2</div>
+                            <div class="plato-desc">(Cebiche de pescado con chicharrón de pescado)</div>
+                        </div>
+                        <div class="plato-precio">S/34</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/combinado-2.png" alt="Combinado 2">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Combinado 2', 34, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>  
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Doble Marino</div>
+                            <div class="plato-desc">(Cebiche de pescado / arroz con mariscos)</div>
+                        </div>
+                        <div class="plato-precio">S/35</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/doble-marino.png" alt="Doble Marino">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Doble Marino', 35, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Doble Marino 2</div>
+                            <div class="plato-desc">(Cebiche de pescado / Chaufa con mariscos o pescado )</div>
+                        </div>
+                        <div class="plato-precio">S/42</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/doble-marino-2.png" alt="Doble Marino 2">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalCombinadoMarino('Doble Marino 2', 42)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Triple Marino 1</div>
+                            <div class="plato-desc">(Cebiche, arroz con mariscos y chicharron de pota)</div>
+                        </div>
+                        <div class="plato-precio">S/34</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/triple-1.png" alt="Triple Marino 1">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Triple Marino 1', 34, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Triple Marino 2</div>
+                            <div class="plato-desc">(Cebiche, arroz con mariscos y chicharron de pota)</div>
+                        </div>
+                        <div class="plato-precio">S/38</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/triple-2.png" alt="Triple Marino 2">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Triple Marino 2', 38, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Triple Marino 3</div>
+                            <div class="plato-desc">(Cebiche, chaufa de pescado/mariscos y chicharron de pota)</div>
+                        </div>
+                        <div class="plato-precio">S/38</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/triple-3.png" alt="Triple Marino 3">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalCombinadoMarino('Triple Marino 3', 38)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Triple Marino 4</div>
+                            <div class="plato-desc">(Cebiche, chaufa de pescado/mariscos y chicharron de pescado)</div>
+                        </div>
+                        <div class="plato-precio">S/42</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/triple-4.png" alt="Triple Marino 4">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalCombinadoMarino('Triple Marino 4', 42)">Agregar al pedido</button>
+                </li>
+            </ul>
+
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
+                    Volver al Menú
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="rondas" class="pantalla">
+        <div class="container">
+            <h2>Triples</h2>
+            
+            <ul class="plato-lista">
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Ronda Marina 1</div>
+                            <div class="plato-desc">(Causa de pulpa de cangrejo cebiche, tiradito de pescado, arroz c/mariscos y chicharron de pota)</div>
+                        </div>
+                        <div class="plato-precio">S/61</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/ronda-1.png" alt="Ronda Marina 1">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Ronda Marina 1', 61, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Ronda Marina 2</div>
+                            <div class="plato-desc">(Causa de pulpa de cangrejo cebiche, tiradito de pescado, arroz c/mariscos y chicharron de pota)</div>
+                        </div>
+                        <div class="plato-precio">S/64</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/ronda-2.png" alt="Ronda Marina 2">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Ronda Marina 2', 64, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Ronda Marina 3</div>
+                            <div class="plato-desc">(Causa de pulpa de cangrejo cebiche, tiradito de pescado, arroz chaufa c/mariscos y chicharron de pota)</div>
+                        </div>
+                        <div class="plato-precio">S/65</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/ronda-3.png" alt="Ronda Marina 3">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalCombinadoMarino('Ronda Marina 3', 65)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Ronda Marina 4</div>
+                            <div class="plato-desc">(Causa de pulpa de cangrejo, cebiche, chaufa de pescado/mariscos y chicharron de pescado)</div>
+                        </div>
+                        <div class="plato-precio">S/68</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/ronda-4.png" alt="Ronda Marina 4">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalCombinadoMarino('Ronda Marina 4', 68)">Agregar al pedido</button>
+                </li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
+                    Volver al Menú
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="chicharrones" class="pantalla">
+        <div class="container">
+            <h2>Chicharrones</h2>
+            
+            <ul class="plato-lista">
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Jalea Mixta</div>
+                            <div class="plato-desc">(Pescado, pota, langostino, yuyo, yuca, sarsa de cebolla)</div>
+                        </div>
+                        <div class="plato-precio">S/38</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/jalea-mixta.png" alt="Jalea Mixta">        
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Jalea Mixta', 38)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Jalea de pescado</div>
+                            <div class="plato-desc">(Pescado, langostino, yuyo, yuca, sarsa de cebolla)</div>
+                        </div>
+                        <div class="plato-precio">S/40</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/jalea-pescado.png" alt="Jalea de pescado">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Jalea de pescado', 40)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Chicharrón de pescado</div>
+                            <div class="plato-desc">(Chicharrón de pescado, yucas fritas y de sarsa criolla)</div>
+                        </div>
+                        <div class="plato-precio">S/34</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chicharron-pescado.png" alt="Chicharrón de pescado">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Chicharrón de pescado', 34)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Chicharrón de langostinos</div>
+                            <div class="plato-desc">(Chicharrón de langostinos, yucas fritas y de sarsa criolla)</div>
+                        </div>
+                        <div class="plato-precio">S/46</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chicharron-langostino.png" alt="Chicharrón de langostinos">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Chicharrón de langostinos', 46)">Agregar al pedido</button>
+                </li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
+                    Volver al Menú
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pescados-enteros" class="pantalla">
+        <div class="container">
+            <h2>Pescados Enteros</h2>
+            
+            <ul class="plato-lista">
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Cabrilla dorada</div>
+                            <div class="plato-desc">(Servido con arroz, yuca frita y sarsa criolla)</div>
+                        </div>
+                        <div class="plato-precio">S/40</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/cabrilla-dorada.jpg" alt="Cabrilla dorada">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Cabrilla dorada', 40)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Cabrilla al ajo</div>
+                            <div class="plato-desc">(Servido con arroz, yuca frita y sarsa criolla)</div>
+                        </div>
+                        <div class="plato-precio">S/42</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/cabrilla-ajo.png" alt="Cabrilla al ajo">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Cabrilla al ajo', 42)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Cabrilla al ajillo</div>
+                            <div class="plato-desc">(Servido con arroz, yuca frita)</div>
+                        </div>
+                        <div class="plato-precio">S/42</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/cabrilla-ajillo.png" alt="Cabrilla al ajillo">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Cabrilla al ajillo', 42)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Cabrilla a lo macho</div>
+                            <div class="plato-desc">(Servido con arroz, yuca frita)</div>
+                        </div>
+                        <div class="plato-precio">S/48</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/cabrilla-lo-macho.png" alt="Cabrilla a lo macho">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Cabrilla a lo macho', 48)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Trucha dorada</div>
+                            <div class="plato-desc">(Servido con arroz, yuca frita y sarsa criolla)</div>
+                        </div>
+                        <div class="plato-precio">S/30</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/trucha-dorada.png" alt="Trucha dorada">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Trucha dorada', 30)">Agregar al pedido</button>
+                </li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
+                    Volver al Menú
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="sopas" class="pantalla">
+        <div class="container">
+            <h2>Sopas y Sudados</h2>
+            
+            <ul class="plato-lista">
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Parihuela</div>
+                        </div>
+                        <div class="plato-precio">S/35</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/parihuela.png" alt="Parihuela">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Parihuela', 35)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Chupe de pescado</div>
+                        </div>
+                        <div class="plato-precio">S/34</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chupe-pescado.png" alt="Chupe de pescado">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Chupe de pescado', 34)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Chupe de langostinos</div>
+                        </div>
+                        <div class="plato-precio">S/36</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chupe-langostinos.png" alt="Chupe de langostinos">        
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Chupe de langostinos', 36)">Agregar al pedido</button>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Sudado de pescado filete</div>
+                        </div>
+                        <div class="plato-precio">S/35</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/sudado-filete.png" alt="Sudado de pescado filete">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Sudado de pescado filete', 35)">Agregar al pedido</button>
+                </li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
+                    Volver al Menú
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="platos-de-fondo" class="pantalla">
+        <div class="container">
+            <h2>Platos de Fondo</h2>
+            
+            <ul class="plato-lista">
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Arroz con mariscos</div>
+                        </div>
+                        <div class="plato-precio">S/32</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/arroz-mariscos.png" alt="Arroz con mariscos">      
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Arroz con mariscos', 32)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Arroz con langostinos</div>
+                        </div>
+                        <div class="plato-precio">S/32</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/arroz-langostinos.png" alt="Arroz con langostinos">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Arroz con langostinos', 32)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Arroz chaufa de mariscos</div>
+                        </div>
+                        <div class="plato-precio">S/32</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chaufa-mariscos.png" alt="Arroz chaufa de mariscos">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Arroz chaufa de mariscos', 32)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Arroz chaufa de pollo</div>
+                        </div>
+                        <div class="plato-precio">S/28</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chaufa-pollo.png" alt="Arroz chaufa de pollo">
+                    </div>          
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Arroz chaufa de pollo', 28)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Arroz chaufa de carne</div>
+                        </div>
+                        <div class="plato-precio">S/28</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chaufa-carne.png" alt="Arroz chaufa de carne">
+                    </div>          
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Arroz chaufa de carne', 28)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Arroz chaufa de pescado</div>
+                        </div>
+                        <div class="plato-precio">S/30</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chaufa-pescado.jpg" alt="Arroz chaufa de pescado">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Arroz chaufa de pescado', 30)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Picante de langostinos</div>
+                        </div>
+                        <div class="plato-precio">S/40</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/picante-langostinos.png" alt="Picante de langostinos">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Picante de langostinos', 40)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Pescado a lo macho</div>
+                        </div>
+                        <div class="plato-precio">S/38</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/pescado-lo-macho.jpg" alt="Pescado a lo macho">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Pescado a lo macho', 38)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Filete en salsa de langostinos</div>
+                        </div>
+                        <div class="plato-precio">S/38</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/filete-salsa-langostinos.png" alt="Filete en salsa de langostinos">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Filete en salsa de langostinos', 38)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Filete de pescado a la plancha /o frito</div>
+                        </div>
+                        <div class="plato-precio">S/30</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/filete-plancha.png" alt="Filete de pescado">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Filete de pescado', 30, ['Plancha', 'Frito'])">Agregar al pedido</button>
+                    </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Saltado de (Cuadril / Pollo)</div>
+                        </div>
+                        <div class="plato-precio">S/30</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/saltado-cuadril.png" alt="Saltado">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Saltado', 30, ['Cuadril', 'Pollo'])">Agregar al pedido</button>
+                </li>       
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Lomo fino saltado</div>
+                        </div>
+                        <div class="plato-precio">S/40</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/lomo-saltado.png" alt="Lomo fino saltado">   
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Lomo fino saltado', 40)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Bisteck a lo pobre</div>
+                        </div>
+                        <div class="plato-precio">S/36</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/bisteck-pobre.png" alt="Bisteck a lo pobre">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Bisteck a lo pobre', 36)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Pollo a la plancha con arroz y papas fritas</div>
+                        </div>
+                        <div class="plato-precio">S/30</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/pollo-plancha.png" alt="Pollo a la plancha">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Pollo a la plancha con arroz y papas fritas', 30)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Fetuccini a la huancaina c/ ( Cuadril / pollo )</div>
+                        </div>
+                        <div class="plato-precio">S/35</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/fetuccini-huancaina.png" alt="Fetuccini a la huancaina">
+                    </div>
+                    <button class="btn-agregar" onclick="abrirModalPersonalizacion('Fetuccini a la huancaina con', 35, ['Cuadril', 'Pollo'])">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Fetuccini a la huancaina c/ lomo fino saltado</div>
+                        </div>
+                        <div class="plato-precio">S/40</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/fetuccini-lomo.png" alt="Fetuccini a la huancaina con lomo">
+                    </div>
+                      <button class="btn-agregar" onclick="agregarAlCarrito('Fetuccini a la huancaina con lomo fino', 40)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Fetuccini con Langostinos</div>
+                        </div>
+                        <div class="plato-precio">S/32</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/fetuccini-langostinos.png" alt="Fetuccini con Langostinos">       
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Fetuccini con Langostinos', 32)">Agregar al pedido</button>
+                </li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
+                    Volver al Menú
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="guardiciones" class="pantalla">
+        <div class="container">
+            <h2>GUARNICIONES</h2>
+            
+            <ul class="plato-lista">
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Porción de arroz</div>
+                        </div>
+                        <div class="plato-precio">S/6</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/porcion-arroz.png" alt="Arroz">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Porción de Arroz', 6)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Chifles</div>
+                        </div>
+                        <div class="plato-precio">S/6</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chifles.png" alt="Chifles">            
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Chifles', 6)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Choclo</div>
+                        </div>
+                        <div class="plato-precio">S/6</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/choclo.png" alt="Choclo">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Choclo', 6)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Canchita</div>
+                        </div>
+                        <div class="plato-precio">S/6</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/canchita.png" alt="Canchita">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Canchita', 6)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Yucas Fritas / Sancochadas</div>
+                        </div>
+                        <div class="plato-precio">S/6</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/yucas.png" alt="Yucas">       
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Yucas Fritas/Sancochadas', 6)">Agregar al pedido</button>
+                </li>
+                
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Yuyo frito / sancochado</div>
+                        </div>
+                        <div class="plato-precio">S/6</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/yuyo.png" alt="Yuyo">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Yuyo frito/sancochado', 6)">Agregar al pedido</button>
+                </li>
+            </ul>
+
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
+                    Volver al Menú
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bebidas" class="pantalla">
+        <div class="container">
+            <h2>Bebidas</h2>
+            
+            <div class="info-pedidos">
+                <p class="horario">Horario: 11:00 am - 5:00 pm</p>
+            </div>
+            
+            <ul class="plato-lista">
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Chicha Morada</div>
+                            <div class="plato-desc">Refrescante bebida de maíz morado</div>
+                        </div>
+                        <div class="precio-doble">
+                            <div class="precio-opcion">
+                                <span class="precio-tipo">Litro</span>
+                                <span class="precio-valor">S/10</span>
+                            </div>
+                            <div class="precio-opcion">
+                                <span class="precio-tipo">Copa (500ml)</span>
+                                <span class="precio-valor">S/6</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chicha-morada.png" alt="Chicha Morada">
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Chicha Morada - Litro', 10)">Litro</button>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Chicha Morada - Copa', 6)">Copa</button>
+                    </div>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Limonada</div>
+                            <div class="plato-desc">Natural o frozen</div>
+                        </div>
+                        <div class="precio-doble">
+                            <div class="precio-opcion">
+                                <span class="precio-tipo">Litro</span>
+                                <span class="precio-valor">S/16</span>
+                            </div>
+                            <div class="precio-opcion">
+                                <span class="precio-tipo">Copa (500ml)</span>
+                                <span class="precio-valor">S/8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/limonada.png" alt="Limonada">
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Limonada - Litro', 16)">Litro</button>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Limonada - Copa', 8)">Copa</button>
+                    </div>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Limonada frozen</div>
+                        </div>
+                        <div class="precio-doble">
+                            <div class="precio-opcion">
+                                <span class="precio-tipo">Litro</span>
+                                <span class="precio-valor">S/10</span>
+                            </div>
+                            <div class="precio-opcion">
+                                <span class="precio-tipo">Copa (500ml)</span>
+                                <span class="precio-valor">S/9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/limonada-frozen.png" alt="Limonada frozen">
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Limonada frozen - Litro', 10)">Litro</button>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Limonada frozen - Copa', 9)">Copa</button>
+                    </div>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Maracuyá</div>
+                        </div>
+                        <div class="precio-doble">
+                            <div class="precio-opcion">
+                                <span class="precio-tipo">Litro</span>
+                                <span class="precio-valor">S/16</span>
+                            </div>
+                            <div class="precio-opcion">
+                                <span class="precio-tipo">Copa (500ml)</span>
+                                <span class="precio-valor">S/8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/maracuya.png" alt="Maracuyá">
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Maracuyá - Litro', 16)">Litro</button>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Maracuyá - Copa', 8)">Copa</button>
+                    </div>
+                </li>
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Maracuyá Frozen</div>
+                        </div>
+                        <div class="precio-doble">
+                            <div class="precio-opcion">
+                                <span class="precio-tipo">Litro</span>
+                                <span class="precio-valor">S/18</span>
+                            </div>
+                            <div class="precio-opcion">
+                                <span class="precio-tipo">Copa (500ml)</span>
+                                <span class="precio-valor">S/9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/maracuya-frozen.png" alt="Maracuyá Frozen">       
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Maracuyá Frozen - Litro', 18)">Litro</button>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Maracuyá Frozen - Copa', 9)">Copa</button>
+                    </div>
+                </li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
+                    Volver al Menú
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="info-pedidos">
+            <p class="horario">Atendemos de 11:00 am - 5:00 pm</p>
+        </div>
+        <p>Cevichería Tipos © 2025 - Todos los derechos reservados</p>
+        <p>CREADO POR JJRY</p>
+    </div>
+
+    <script>
+   // ================================================
+// VARIABLES GLOBALES
+// ================================================
+let carrito = JSON.parse(localStorage.getItem('carritoTipos')) || [];
+let platoActual = null;
+let precioActual = 0;
+let opcionesSeleccionadas = {};
+let opcionesModal = [];
+let metodoPagoSeleccionado = 'efectivo';
+
+// ================================================
+// FUNCIONES DE NAVEGACIÓN
+// ================================================
+function mostrarPantalla(id) {
+    document.querySelectorAll('.pantalla').forEach(p => {
+        p.classList.remove('activa');
+    });
+    document.getElementById(id).classList.add('activa');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ================================================
+// FUNCIONES DEL CARRITO
+// ================================================
+function mostrarCarrito() {
+    actualizarCarrito();
+    document.getElementById('carrito-modal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function cerrarCarrito() {
+    document.getElementById('carrito-modal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function agregarAlCarrito(nombre, precio, especificaciones = '') {
+    const itemExistente = carrito.find(item => 
+        item.nombre === nombre && item.especificaciones === especificaciones
+    );
+    
+    if (itemExistente) {
+        itemExistente.cantidad += 1;
+    } else {
+        carrito.push({
+            nombre: nombre,
+            precio: precio,
+            cantidad: 1,
+            especificaciones: especificaciones
+        });
+    }
+    
+    actualizarCarrito();
+    mostrarNotificacionAgregado(nombre);
+}
+
+function mostrarNotificacionAgregado(nombre) {
+    const notificacion = document.createElement('div');
+    notificacion.id = 'notificacion-agregado';
+    notificacion.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: var(--VERDE);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 10000;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    `;
+    notificacion.innerHTML = `
+        <span style="font-size: 1.2rem;">✅</span>
+        <span>${nombre} agregado</span>
+    `;
+    
+    document.body.appendChild(notificacion);
+    
+    setTimeout(() => {
+        if (notificacion.parentNode) notificacion.remove();
+    }, 2500);
+}
+
+function modificarCantidad(index, cambio) {
+    if (carrito[index]) {
+        const nuevaCantidad = carrito[index].cantidad + cambio;
+        
+        if (nuevaCantidad <= 0) {
+            // Eliminar inmediatamente sin confirmar
+            carrito.splice(index, 1);
+        } else {
+            carrito[index].cantidad = nuevaCantidad;
+        }
+        
+        actualizarCarrito();
+    }
+}
+
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    actualizarCarrito();
+}
+
+function vaciarCarrito() {
+    if (carrito.length === 0) return;
+    
+    carrito = [];
+    actualizarCarrito();
+}
+
+function obtenerImagenPlato(nombre) {
+    const imagenes = {
+        'tequeños': 'img/tequenos.png',
+        'causa de pulpa': 'img/causa-cangrejo.png',
+        'causa de langostino': 'img/causa-langostinos.png',
+        'causa acebichada': 'img/causa-acebichada.png',
+        'causa de pollo': 'img/causa-pollo.png',
+        'poderoso': 'img/poderoso.png',
+        'leche de tigre': 'img/leche-tigre.png',
+        'leche de pantera': 'img/leche-pantera.png',
+        'cebiche de pescado': 'img/cebiche-pescado.png',
+        'cebiche mixto': 'img/cebiche-mixto.png',
+        'cebiche de conchas': 'img/cebiche-conchas.png',
+        'cebiche clásico': 'img/cebiche-clasico.png',
+        'tiradito': 'img/tiradito.png',
+        'combinado 1': 'img/combinado-1.png',
+        'combinado 2': 'img/combinado-2.png',
+        'doble marino': 'img/doble-marino.png',
+        'triple marino 1': 'img/triple-1.png',
+        'triple marino 2': 'img/triple-2.png',
+        'triple marino 3': 'img/triple-3.png',
+        'triple marino 4': 'img/triple-4.png',
+        'ronda marina 1': 'img/ronda-1.png',
+        'ronda marina 2': 'img/ronda-2.png',
+        'ronda marina 3': 'img/ronda-3.png',
+        'ronda marina 4': 'img/ronda-4.png',
+        'jalea': 'img/jalea-mixta.png',
+        'chicharrón': 'img/chicharron-pescado.png',
+        'cabrilla': 'img/cabrilla-dorada.jpg',
+        'trucha': 'img/trucha-dorada.png',
+        'parihuela': 'img/parihuela.png',
+        'chupe': 'img/chupe-pescado.png',
+        'sudado': 'img/sudado-filete.png',
+        'arroz con mariscos': 'img/arroz-mariscos.png',
+        'arroz chaufa': 'img/chaufa-mariscos.png',
+        'picante': 'img/picante-langostinos.png',
+        'pescado a lo macho': 'img/pescado-lo-macho.jpg',
+        'filete': 'img/filete-plancha.png',
+        'saltado': 'img/saltado-cuadril.png',
+        'lomo fino': 'img/lomo-saltado.png',
+        'bisteck': 'img/bisteck-pobre.png',
+        'pollo': 'img/pollo-plancha.png',
+        'fetuccini': 'img/fetuccini-huancaina.png',
+        'arroz': 'img/porcion-arroz.png',
+        'chifles': 'img/chifles.png',
+        'choclo': 'img/choclo.png',
+        'canchita': 'img/canchita.png',
+        'yucas': 'img/yucas.png',
+        'yuyo': 'img/yuyo.png',
+        'chicha': 'img/chicha-morada.png',
+        'limonada': 'img/limonada.png',
+        'maracuyá': 'img/maracuya.png'
+    };
+    
+    const nombreLimpio = nombre.toLowerCase();
+    
+    for (const [key, value] of Object.entries(imagenes)) {
+        if (nombreLimpio.includes(key)) {
+            return value;
+        }
+    }
+    
+    return 'img/banner-inicio.png';
+}
+
+function actualizarCarrito() {
+    const carritoItems = document.getElementById('carrito-items');
+    const carritoVacio = document.getElementById('carrito-vacio');
+    const carritoResumen = document.getElementById('carrito-resumen');
+    const carritoBotones = document.getElementById('carrito-botones');
+    const sugerenciasContainer = document.getElementById('sugerencias-container');
+    const carritoContador = document.getElementById('carrito-contador');
+    const subtotalCarrito = document.getElementById('subtotal-carrito');
+    const totalCarrito = document.getElementById('total-carrito');
+    const envioCarrito = document.getElementById('envio-carrito');
+    
+    const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
+    carritoContador.textContent = totalItems;
+    
+    if (carrito.length === 0) {
+        carritoVacio.style.display = 'block';
+        carritoItems.innerHTML = '';
+        carritoResumen.style.display = 'none';
+        carritoBotones.style.display = 'none';
+        sugerenciasContainer.style.display = 'none';
+    } else {
+        carritoVacio.style.display = 'none';
+        carritoResumen.style.display = 'block';
+        carritoBotones.style.display = 'flex';
+        
+        let html = '';
+        let subtotal = 0;
+        
+        carrito.forEach((item, index) => {
+            const subtotalItem = item.precio * item.cantidad;
+            subtotal += subtotalItem;
+            
+            html += `
+                <div class="carrito-item">
+                    <div class="carrito-item-imagen">
+                        <img src="${obtenerImagenPlato(item.nombre)}" alt="${item.nombre}">
+                    </div>
+                    <div class="carrito-item-info">
+                        <div class="carrito-item-nombre">${item.nombre}</div>
+                        ${item.especificaciones ? `<div class="especificaciones-carrito">${item.especificaciones}</div>` : ''}
+                        <div class="carrito-item-precio">S/ ${item.precio.toFixed(2)} c/u</div>
+                    </div>
+                    <div class="carrito-item-cantidad">
+                        <button class="cantidad-btn restar" onclick="modificarCantidad(${index}, -1)">-</button>
+                        <span class="carrito-cantidad-numero">${item.cantidad}</span>
+                        <button class="cantidad-btn" onclick="modificarCantidad(${index}, 1)">+</button>
+                    </div>
+                    <div class="carrito-item-subtotal">S/ ${subtotalItem.toFixed(2)}</div>
+                    <button class="carrito-item-eliminar" onclick="eliminarDelCarrito(${index})">✕</button>
+                </div>
+            `;
+        });
+        
+        carritoItems.innerHTML = html;
+        subtotalCarrito.textContent = `S/ ${subtotal.toFixed(2)}`;
+        envioCarrito.textContent = 'S/ 0.00';
+        totalCarrito.textContent = `S/ ${subtotal.toFixed(2)}`;
+        
+        mostrarSugerencias();
+    }
+    
+    localStorage.setItem('carritoTipos', JSON.stringify(carrito));
+}
+
+// ================================================
+// FUNCIONES DE SUGERENCIAS
+// ================================================
+function mostrarSugerencias() {
+    const sugerenciasContainer = document.getElementById('sugerencias-container');
+    const sugerenciasGrid = document.querySelector('.sugerencias-grid');
+    
+    if (sugerenciasGrid) {
+        const tieneAcompañamientos = carrito.some(item => 
+            item.nombre.includes('Arroz') || 
+            item.nombre.includes('Chifles') || 
+            item.nombre.includes('Choclo') || 
+            item.nombre.includes('Canchita') ||
+            item.nombre.includes('Yucas')
+        );
+        
+        const tieneBebidas = carrito.some(item => 
+            item.nombre.includes('Chicha') || 
+            item.nombre.includes('Limonada') || 
+            item.nombre.includes('Maracuyá')
+        );
+        
+        if (!tieneAcompañamientos || !tieneBebidas) {
+            sugerenciasContainer.style.display = 'block';
+            
+            let sugerenciasHTML = '';
+            const sugerencias = [];
+            
+            if (!tieneAcompañamientos) {
+                sugerencias.push(
+                    {nombre: 'Porción de Arroz', precio: 6, imagen: 'img/porcion-arroz.png'},
+                    {nombre: 'Chifles', precio: 6, imagen: 'img/chifles.png'}
+                );
+            }
+            
+            if (!tieneBebidas) {
+                sugerencias.push(
+                    {nombre: 'Chicha Morada - 1 Litro', precio: 16, imagen: 'img/chicha-morada.png'},
+                    {nombre: 'Limonada - 1 Litro', precio: 16, imagen: 'img/limonada.png'},
+                    {nombre: 'Maracuyá - 1 Litro', precio: 16, imagen: 'img/maracuya.png'}
+                );
+            }
+            
+            const tieneCebiche = carrito.some(item => 
+                item.nombre.toLowerCase().includes('cebiche')
+            );
+            
+            if (tieneCebiche && !carrito.some(item => item.nombre.includes('Leche de tigre'))) {
+                sugerencias.push(
+                    {nombre: 'Leche de tigre', precio: 16, imagen: 'img/leche-tigre.png'}
+                );
+            }
+            
+            sugerencias.forEach((sugerencia) => {
+                sugerenciasHTML += `
+                    <div class="sugerencia-item" onclick="agregarSugerencia('${sugerencia.nombre}', ${sugerencia.precio})">
+                        <div style="width: 60px; height: 60px; border-radius: 8px; overflow: hidden; flex-shrink: 0;">
+                            <img src="${sugerencia.imagen}" alt="${sugerencia.nombre}" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="sugerencia-info">
+                            <div class="sugerencia-nombre">${sugerencia.nombre}</div>
+                            <div class="sugerencia-precio">S/ ${sugerencia.precio.toFixed(2)}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            sugerenciasGrid.innerHTML = sugerenciasHTML;
+        } else {
+            sugerenciasContainer.style.display = 'none';
+        }
+    }
+}
+
+function agregarSugerencia(nombre, precio) {
+    agregarAlCarrito(nombre, precio);
+    
+    const sugerenciaItem = event.target.closest('.sugerencia-item');
+    if (sugerenciaItem) {
+        sugerenciaItem.style.background = 'var(--verde-claro)';
+        sugerenciaItem.style.borderColor = 'var(--VERDE)';
+        sugerenciaItem.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 0.8rem; width: 100%;">
+                <div style="color: var(--VERDE); font-size: 1.5rem;">✓</div>
+                <div style="flex: 1;">
+                    <div style="font-weight: 600; color: var(--VERDE);">¡Agregado!</div>
+                    <div style="font-size: 0.9rem; color: #666;">${nombre}</div>
+                </div>
+            </div>
+        `;
+        
+        setTimeout(() => mostrarSugerencias(), 1500);
+    }
+}
+
+// ================================================
+// FUNCIONES DE PERSONALIZACIÓN (SIN OTRAS PREFERENCIAS)
+// ================================================
+function abrirModalPersonalizacion(nombre, precio, opciones) {
+    platoActual = nombre;
+    precioActual = precio;
+    opcionesModal = opciones || [];
+    opcionesSeleccionadas = {};
+    
+    document.getElementById('titulo-personalizacion').textContent = `Personaliza: ${nombre}`;
+    document.getElementById('especificaciones-personalizacion').value = '';
+    
+    const opcionesContainer = document.getElementById('opciones-container');
+    if (opcionesContainer) {
+        opcionesContainer.innerHTML = '';
+        
+        if (opcionesModal.length > 0) {
+            const categorias = {
+                'Picante': {opciones: ['Sin ají', 'Poco ají', 'Picante'], emojis: ['🚫', '🌶️', '🔥']},
+                'Cocción': {opciones: ['Plancha', 'Frito'], emojis: ['🍳', '🍟']},
+                'Tipo': {opciones: ['Cuadril', 'Pollo'], emojis: ['🥩', '🍗']}
+            };
+            
+            Object.keys(categorias).forEach(categoriaNombre => {
+                const categoria = categorias[categoriaNombre];
+                const mostrarCategoria = opcionesModal.some(opcion => 
+                    categoria.opciones.some(opcionCat => 
+                        opcion.toLowerCase().includes(opcionCat.toLowerCase())
+                    )
+                );
+                
+                if (mostrarCategoria) {
+                    const seccion = document.createElement('div');
+                    seccion.style.marginBottom = '20px';
+                    seccion.style.paddingBottom = '10px';
+                    seccion.style.borderBottom = '1px solid #eee';
+                    
+                    const tituloCategoria = document.createElement('div');
+                    tituloCategoria.style.fontSize = '0.95rem';
+                    tituloCategoria.style.fontWeight = '700';
+                    tituloCategoria.style.color = 'var(--VERDE)';
+                    tituloCategoria.style.marginBottom = '8px';
+                    tituloCategoria.textContent = categoriaNombre + ':';
+                    
+                    const opcionesContainerCat = document.createElement('div');
+                    opcionesContainerCat.style.display = 'flex';
+                    opcionesContainerCat.style.gap = '10px';
+                    opcionesContainerCat.style.flexWrap = 'wrap';
+                    
+                    categoria.opciones.forEach((opcion, index) => {
+                        if (opcionesModal.some(op => op.toLowerCase().includes(opcion.toLowerCase()))) {
+                            const opcionElement = document.createElement('div');
+                            opcionElement.className = 'opcion-personalizacion';
+                            opcionElement.dataset.categoria = categoriaNombre;
+                            
+                            const emoji = categoria.emojis && categoria.emojis[index] ? categoria.emojis[index] : '';
+                            
+                            opcionElement.style.flex = '1';
+                            opcionElement.style.minWidth = '100px';
+                            opcionElement.style.padding = '12px 8px';
+                            opcionElement.style.textAlign = 'center';
+                            
+                            opcionElement.innerHTML = `
+                                ${emoji ? `<div style="font-size: 1.3rem; margin-bottom: 5px;">${emoji}</div>` : ''}
+                                <div style="font-weight: 600; font-size: 0.9rem;">${opcion}</div>
+                            `;
+                            
+                            opcionElement.onclick = () => {
+                                document.querySelectorAll(`.opcion-personalizacion[data-categoria="${categoriaNombre}"]`).forEach(el => {
+                                    el.classList.remove('seleccionado');
+                                });
+                                opcionElement.classList.add('seleccionado');
+                                opcionesSeleccionadas[categoriaNombre] = opcion;
+                            };
+                            
+                            opcionesContainerCat.appendChild(opcionElement);
+                        }
+                    });
+                    
+                    seccion.appendChild(tituloCategoria);
+                    seccion.appendChild(opcionesContainerCat);
+                    opcionesContainer.appendChild(seccion);
+                }
+            });
+        }
+    }
+    
+    document.getElementById('modal-personalizacion').style.display = 'flex';
+}
+
+function confirmarPersonalizacion() {
+    if (!platoActual || !precioActual) {
+        alert('Error: No hay plato seleccionado');
+        return;
+    }
+    
+    const requiereNivelAji = platoActual.includes('Cebiche') || 
+                            platoActual.includes('cebiche') ||
+                            platoActual.includes('Tiradito') ||
+                            platoActual.includes('tiradito') ||
+                            platoActual.includes('Leche de') ||
+                            platoActual.includes('Combinado') ||
+                            platoActual.includes('Triple') ||
+                            platoActual.includes('Ronda');
+    
+    if (requiereNivelAji && (!opcionesSeleccionadas['Picante'] || opcionesSeleccionadas['Picante'].trim() === '')) {
+        alert('⚠ Por favor, selecciona el nivel de ají:\n• Sin ají\n• Poco ají\n• Picante');
+        return;
+    }
+    
+    const especificacionesInput = document.getElementById('especificaciones-personalizacion').value;
+    let personalizacionTexto = '';
+    
+    // Solo agregar las opciones principales
+    if (opcionesSeleccionadas['Picante']) {
+        personalizacionTexto = opcionesSeleccionadas['Picante'];
+    }
+    if (opcionesSeleccionadas['Cocción']) {
+        if (personalizacionTexto) personalizacionTexto += ', ';
+        personalizacionTexto += opcionesSeleccionadas['Cocción'];
+    }
+    if (opcionesSeleccionadas['Tipo']) {
+        if (personalizacionTexto) personalizacionTexto += ', ';
+        personalizacionTexto += opcionesSeleccionadas['Tipo'];
+    }
+
+    // CORRECCIÓN: Agregar chaufa al texto final
+    if (opcionesSeleccionadas['Chaufa']) {
+        if (personalizacionTexto) personalizacionTexto += ', ';
+        personalizacionTexto += opcionesSeleccionadas['Chaufa'];
+    }
+    
+    if (especificacionesInput) {
+        if (personalizacionTexto) {
+            personalizacionTexto += ' | ' + especificacionesInput;
+        } else {
+            personalizacionTexto = especificacionesInput;
+        }
+    }
+    
+    agregarAlCarrito(platoActual, precioActual, personalizacionTexto);
+    cerrarModalPersonalizacion();
+}
+
+function cerrarModalPersonalizacion() {
+    document.getElementById('modal-personalizacion').style.display = 'none';
+    platoActual = null;
+    precioActual = 0;
+    opcionesSeleccionadas = {};
+    opcionesModal = [];
+}
+
+// ================================================
+// FUNCIONES PARA COMBINADOS MARINOS
+// ================================================
+function abrirModalCombinadoMarino(nombre, precio) {
+    platoActual = nombre;
+    precioActual = precio;
+    opcionesSeleccionadas = {};
+
+    document.getElementById('titulo-personalizacion').textContent = `Personaliza: ${nombre}`;
+    document.getElementById('especificaciones-personalizacion').value = '';
+
+    const opcionesContainer = document.getElementById('opciones-container');
+    if (opcionesContainer) {
+        opcionesContainer.innerHTML = '';
+
+        // VARIABLE PARA SABER SI SE DEBE SELECCIONAR "CHAUFA DE MARISCOS" POR DEFECTO
+        const seleccionarMariscosPorDefecto = nombre.includes('chaufa') || 
+                                               nombre.includes('Chaufa') || 
+                                               nombre === 'Doble Marino 2' || 
+                                               nombre === 'Triple Marino 3' || 
+                                               nombre === 'Triple Marino 4' || 
+                                               nombre === 'Ronda Marina 3' || 
+                                               nombre === 'Ronda Marina 4';
+        
+        if (seleccionarMariscosPorDefecto) {
+            
+            const seccionChaufa = document.createElement('div');
+            seccionChaufa.style.marginBottom = '20px';
+            
+            const tituloChaufa = document.createElement('div');
+            tituloChaufa.style.fontSize = '0.95rem';
+            tituloChaufa.style.fontWeight = '700';
+            tituloChaufa.style.color = 'var(--VERDE)';
+            tituloChaufa.style.marginBottom = '8px';
+            tituloChaufa.innerHTML = `🍚 Tipo de Chaufa <span style="color: var(--ROJO);">*</span>`;
+            
+            const opcionesChaufaContainer = document.createElement('div');
+            opcionesChaufaContainer.style.display = 'flex';
+            opcionesChaufaContainer.style.flexWrap = 'wrap';
+            opcionesChaufaContainer.style.gap = '10px';
+            
+            const opcionesChaufa = [
+                {texto: 'Chaufa de Pescado', emoji: '🐟'},
+                {texto: 'Chaufa de Mariscos', emoji: '🦐'}
+            ];
+            
+            opcionesChaufa.forEach((opcion) => {
+                const opcionElement = document.createElement('div');
+                opcionElement.className = 'opcion-personalizacion';
+                opcionElement.dataset.categoria = 'Chaufa';
+                opcionElement.style.flex = '1';
+                opcionElement.style.minWidth = '140px';
+                opcionElement.style.padding = '12px 5px';
+                opcionElement.style.textAlign = 'center';
+                
+                opcionElement.innerHTML = `
+                    <div style="font-size: 1.2rem;">${opcion.emoji}</div>
+                    <div style="font-weight: 600; font-size: 0.85rem;">${opcion.texto}</div>
+                `;
+                
+                // SELECCIONAR "CHAUFA DE MARISCOS" POR DEFECTO
+                if (opcion.texto === 'Chaufa de Mariscos') {
+                    opcionElement.classList.add('seleccionado');
+                    opcionesSeleccionadas['Chaufa'] = 'Chaufa de Mariscos';
+                }
+                
+                opcionElement.onclick = () => {
+                    document.querySelectorAll('.opcion-personalizacion[data-categoria="Chaufa"]').forEach(el => {
+                        el.classList.remove('seleccionado');
+                    });
+                    opcionElement.classList.add('seleccionado');
+                    opcionesSeleccionadas['Chaufa'] = opcion.texto;
+                };
+                
+                opcionesChaufaContainer.appendChild(opcionElement);
+            });
+            
+            seccionChaufa.appendChild(tituloChaufa);
+            seccionChaufa.appendChild(opcionesChaufaContainer);
+            opcionesContainer.appendChild(seccionChaufa);
+        }
+
+        const seccionAji = document.createElement('div');
+        seccionAji.style.marginBottom = '20px';
+        
+        const tituloAji = document.createElement('div');
+        tituloAji.style.fontSize = '0.95rem';
+        tituloAji.style.fontWeight = '700';
+        tituloAji.style.color = 'var(--VERDE)';
+        tituloAji.style.marginBottom = '8px';
+        tituloAji.innerHTML = `🌶️ Nivel de Ají <span style="color: var(--ROJO);">*</span>`;
+        
+        const opcionesAjiContainer = document.createElement('div');
+        opcionesAjiContainer.style.display = 'flex';
+        opcionesAjiContainer.style.flexWrap = 'wrap';
+        opcionesAjiContainer.style.gap = '10px';
+        
+        const opcionesAji = [
+            {texto: 'Sin ají', emoji: '🚫', desc: 'Sin picante'},
+            {texto: 'Poco ají', emoji: '🌶️', desc: 'Suave'},
+            {texto: 'Picante', emoji: '🔥', desc: 'Bien picante'}
+        ];
+        
+        opcionesAji.forEach((opcion) => {
+            const opcionElement = document.createElement('div');
+            opcionElement.className = 'opcion-personalizacion';
+            opcionElement.dataset.categoria = 'Picante';
+            opcionElement.style.flex = '1';
+            opcionElement.style.minWidth = '100px';
+            opcionElement.style.padding = '10px 5px';
+            opcionElement.style.textAlign = 'center';
+            
+            opcionElement.innerHTML = `
+                <div style="font-size: 1.2rem;">${opcion.emoji}</div>
+                <div style="font-weight: 600; font-size: 0.8rem;">${opcion.texto}</div>
+                <div style="font-size: 0.7rem; color: #666;">${opcion.desc}</div>
+            `;
+            
+            opcionElement.onclick = () => {
+                document.querySelectorAll('.opcion-personalizacion[data-categoria="Picante"]').forEach(el => {
+                    el.classList.remove('seleccionado');
+                });
+                opcionElement.classList.add('seleccionado');
+                opcionesSeleccionadas['Picante'] = opcion.texto;
+            };
+            
+            opcionesAjiContainer.appendChild(opcionElement);
+            
+            // SELECCIONAR "Poco ají" POR DEFECTO
+            if (opcion.texto === 'Poco ají') {
+                setTimeout(() => {
+                    opcionElement.classList.add('seleccionado');
+                    opcionesSeleccionadas['Picante'] = 'Poco ají';
+                }, 100);
+            }
+        });
+        
+        seccionAji.appendChild(tituloAji);
+        seccionAji.appendChild(opcionesAjiContainer);
+        opcionesContainer.appendChild(seccionAji);
+    }
+    
+    // CORRECCIÓN: Mostrar el modal
+    document.getElementById('modal-personalizacion').style.display = 'flex';
+}
+
+// ================================================
+// FUNCIONES DEL FORMULARIO DE PEDIDO
+// ================================================
+function mostrarFormularioPedido() {
+    if (carrito.length === 0) {
+        alert('✗ Tu carrito está vacío');
+        return;
+    }
+    
+    cerrarCarrito();
+    actualizarResumenPedido();
+    resetearFormularioPedido();
+    
+    const modalForm = document.getElementById('modal-formulario-pedido');
+    if (modalForm) {
+        modalForm.style.display = 'block';
+    }
+}
+
+function cerrarFormularioPedido() {
+    const modalForm = document.getElementById('modal-formulario-pedido');
+    if (modalForm) {
+        modalForm.style.display = 'none';
+    }
+    limpiarErrores();
+}
+
+function actualizarResumenPedido() {
+    const detallesResumen = document.getElementById('detalles-resumen');
+    const subtotalElement = document.getElementById('subtotal-pedido');
+    
+    if (detallesResumen && subtotalElement) {
+        let html = '';
+        let subtotal = 0;
+        
+        carrito.forEach(item => {
+            const itemTotal = item.precio * item.cantidad;
+            subtotal += itemTotal;
+            
+            html += `
+                <div style="margin-bottom: 5px;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>${item.cantidad} x ${item.nombre}</span>
+                        <span>S/ ${itemTotal.toFixed(2)}</span>
+                    </div>
+                    ${item.especificaciones ? `<div style="font-size: 0.8rem; color: #666; padding-left: 1rem;">→ ${item.especificaciones}</div>` : ''}
+                </div>
+            `;
+        });
+        
+        detallesResumen.innerHTML = html;
+        subtotalElement.textContent = `S/ ${subtotal.toFixed(2)}`;
+        
+        actualizarTotalPedido();
+    }
+}
+
+function actualizarTotalPedido() {
+    const subtotalElement = document.getElementById('subtotal-pedido');
+    const totalElement = document.getElementById('total-pedido');
+    const costoDeliveryElement = document.getElementById('costo-delivery');
+    
+    if (subtotalElement && totalElement && costoDeliveryElement) {
+        const subtotalText = subtotalElement.textContent.replace('S/ ', '');
+        const subtotal = parseFloat(subtotalText) || 0;
+        
+        const deliveryText = costoDeliveryElement.textContent || costoDeliveryElement.innerText;
+        
+        if (deliveryText.toUpperCase().includes('CONSULTAR')) {
+            totalElement.innerHTML = `S/ ${subtotal.toFixed(2)} <span style="color: #d32f2f; font-size: 0.9em; font-weight: bold;">+ delivery a consultar</span>`;
+        } else {
+            const match = deliveryText.match(/(\d+(\.\d+)?)/);
+            const delivery = match ? parseFloat(match[1]) : 0;
+            const total = subtotal + delivery;
+            totalElement.innerHTML = `S/ ${total.toFixed(2)}`;
+        }
+    }
+}
+
+function actualizarCostoDelivery() {
+    // CORRECCIÓN: Lógica completa para el costo de delivery
+    const seccionDelivery = document.getElementById('seccion-delivery');
+    if (seccionDelivery && seccionDelivery.style.display === 'none') {
+        const costoElement = document.getElementById('costo-delivery');
+        if (costoElement) costoElement.textContent = 'S/ 0.00';
+        actualizarTotalPedido();
+        return; 
+    }
+    
+    const distritoSelect = document.getElementById('cliente-distrito');
+    const costoElement = document.getElementById('costo-delivery');
+    
+    if (distritoSelect && costoElement) {
+        const valorSeleccionado = distritoSelect.value;
+        let costo = 0;
+
+        if (valorSeleccionado.includes('S/')) {
+            const partes = valorSeleccionado.split('S/');
+            costo = parseFloat(partes[1].trim());
+            costoElement.innerText = `S/ ${costo.toFixed(2)}`;
+        } 
+        else if (valorSeleccionado.includes('consultar')) {
+            costoElement.innerText = "A consultar";
+        } else {
+            costoElement.innerText = 'S/ 0.00';
+        }
+
+        actualizarTotalPedido(); 
+    }
+}
+
+function resetearFormularioPedido() {
+    const nombreInput = document.getElementById('cliente-nombre');
+    const telefonoInput = document.getElementById('cliente-telefono');
+    const distritoSelect = document.getElementById('cliente-distrito');
+    const direccionInput = document.getElementById('cliente-direccion'); // NUEVO
+    const instruccionesInput = document.getElementById('instrucciones');
+    const montoEfectivoInput = document.getElementById('monto-efectivo');
+    
+    if (nombreInput) nombreInput.value = '';
+    if (telefonoInput) telefonoInput.value = '';
+    if (distritoSelect) distritoSelect.value = '';
+    if (direccionInput) direccionInput.value = ''; // NUEVO
+    if (instruccionesInput) instruccionesInput.value = '';
+    if (montoEfectivoInput) montoEfectivoInput.value = '';
+    
+    seleccionarTipoPedido('recoger'); 
+    seleccionarMetodoPago('efectivo');
+    limpiarErrores();
+}
+function seleccionarTipoPedido(tipo) {
+    const btnDelivery = document.getElementById('btn-delivery');
+    const btnRecoger = document.getElementById('btn-recoger');
+    
+    if (btnDelivery && btnRecoger) {
+        if (tipo === 'delivery') {
+            btnDelivery.style.background = 'var(--VERDE)';
+            btnDelivery.style.color = 'white';
+            btnRecoger.style.background = 'var(--gris-claro)';
+            btnRecoger.style.color = '#333';
+            const seccionDelivery = document.getElementById('seccion-delivery');
+            if (seccionDelivery) seccionDelivery.style.display = 'block';
+        } else {
+            btnRecoger.style.background = 'var(--VERDE)';
+            btnRecoger.style.color = 'white';
+            btnDelivery.style.background = 'var(--gris-claro)';
+            btnDelivery.style.color = '#333';
+            const seccionDelivery = document.getElementById('seccion-delivery');
+            if (seccionDelivery) seccionDelivery.style.display = 'none';
+            const costoElement = document.getElementById('costo-delivery');
+            if (costoElement) costoElement.textContent = 'S/ 0.00';
+        }
+        
+        actualizarTotalPedido();
+    }
+}
+
+function seleccionarMetodoPago(metodo) {
+    metodoPagoSeleccionado = metodo;
+    
+    document.querySelectorAll('.metodo-pago-opcion').forEach(el => {
+        el.classList.remove('seleccionado');
+    });
+    
+    const opciones = document.querySelectorAll('.metodo-pago-opcion');
+    if (opciones.length >= 4) {
+        if (metodo === 'efectivo') opciones[0].classList.add('seleccionado');
+        if (metodo === 'yape') opciones[1].classList.add('seleccionado');
+        if (metodo === 'plin') opciones[2].classList.add('seleccionado');
+        if (metodo === 'tarjeta') opciones[3].classList.add('seleccionado');
+    }
+    
+    const campoEfectivo = document.getElementById('campo-efectivo');
+    const campoYape = document.getElementById('campo-yape');
+    const campoPlin = document.getElementById('campo-plin');
+    const campoTarjeta = document.getElementById('campo-tarjeta');
+    
+    if (campoEfectivo) campoEfectivo.style.display = 'none';
+    if (campoYape) campoYape.style.display = 'none';
+    if (campoPlin) campoPlin.style.display = 'none';
+    if (campoTarjeta) campoTarjeta.style.display = 'none';
+    
+    if (metodo === 'efectivo' && campoEfectivo) {
+        campoEfectivo.style.display = 'block';
+    } else if (metodo === 'yape' && campoYape) {
+        campoYape.style.display = 'block';
+    } else if (metodo === 'plin' && campoPlin) {
+        campoPlin.style.display = 'block';
+    } else if (metodo === 'tarjeta' && campoTarjeta) {
+        campoTarjeta.style.display = 'block';
+    }
+}
+
+function calcularVuelto() {
+    const montoEfectivoInput = document.getElementById('monto-efectivo');
+    const totalElement = document.getElementById('total-pedido');
+    const vueltoInfo = document.getElementById('vuelto-info');
+    const montoVuelto = document.getElementById('monto-vuelto');
+    const vueltoTexto = document.getElementById('vuelto-texto');
+    const advertenciaFalta = document.getElementById('advertencia-falta');
+    
+    if (montoEfectivoInput && totalElement && vueltoInfo && montoVuelto && vueltoTexto && advertenciaFalta) {
+        const montoEfectivo = parseFloat(montoEfectivoInput.value) || 0;
+        const totalText = totalElement.textContent.replace('S/ ', '');
+        const totalPedido = parseFloat(totalText) || 0;
+        
+        if (montoEfectivo > 0) {
+            const vuelto = montoEfectivo - totalPedido;
+            
+            if (vuelto >= 0) {
+                vueltoTexto.textContent = 'Vuelto:';
+                montoVuelto.textContent = `S/ ${vuelto.toFixed(2)}`;
+                vueltoInfo.style.display = 'block';
+                vueltoInfo.style.background = 'var(--verde-claro)';
+                vueltoInfo.style.borderColor = 'var(--VERDE)';
+                montoVuelto.style.color = 'var(--VERDE)';
+                advertenciaFalta.style.display = 'none';
+            } else {
+                const falta = Math.abs(vuelto);
+                vueltoTexto.textContent = 'Falta:';
+                montoVuelto.textContent = `S/ ${falta.toFixed(2)}`;
+                vueltoInfo.style.display = 'block';
+                vueltoInfo.style.background = '#ffe6e6';
+                vueltoInfo.style.borderColor = 'var(--ROJO)';
+                montoVuelto.style.color = 'var(--ROJO)';
+                advertenciaFalta.style.display = 'block';
+            }
+        } else {
+            vueltoInfo.style.display = 'none';
+        }
+    }
+}
+
+function limpiarErrores() {
+    document.querySelectorAll('.error-mensaje').forEach(el => {
+        el.style.display = 'none';
+    });
+    const errorDistrito = document.getElementById('error-distrito');
+    if (errorDistrito) errorDistrito.style.display = 'none';
+}
+
+function mostrarError(id, mensaje) {
+    const errorElement = document.getElementById(id);
+    if (errorElement) {
+        errorElement.textContent = mensaje;
+        errorElement.style.display = 'block';
+    }
+}
+
+function validarFormulario() {
+    let valido = true;
+    limpiarErrores();
+    
+    const nombreInput = document.getElementById('cliente-nombre');
+    const telefonoInput = document.getElementById('cliente-telefono');
+    const seccionDelivery = document.getElementById('seccion-delivery');
+    
+    // Validar nombre
+    if (!nombreInput || !nombreInput.value.trim()) {
+        mostrarError('error-nombre', 'Por favor ingresa tu nombre');
+        valido = false;
+    }
+    
+    // Validar teléfono
+    if (!telefonoInput || !telefonoInput.value.trim()) {
+        mostrarError('error-telefono', 'Por favor ingresa tu WhatsApp');
+        valido = false;
+    } else if (!/^\d{9}$/.test(telefonoInput.value.trim().replace(/\D/g, ''))) {
+        mostrarError('error-telefono', 'Por favor ingresa un WhatsApp válido (9 dígitos)');
+        valido = false;
+    }
+    
+    // Validaciones exclusivas de Delivery
+    if (seccionDelivery && seccionDelivery.style.display === 'block') {
+        const distritoSelect = document.getElementById('cliente-distrito');
+        const direccionInput = document.getElementById('cliente-direccion'); // NUEVO
+        
+        // Validar Distrito
+        if (!distritoSelect || !distritoSelect.value.trim()) {
+            let errorDistrito = document.getElementById('error-distrito');
+            if (!errorDistrito) {
+                errorDistrito = document.createElement('div');
+                errorDistrito.id = 'error-distrito';
+                errorDistrito.className = 'error-mensaje';
+                distritoSelect.parentNode.appendChild(errorDistrito);
+            }
+            errorDistrito.textContent = 'Por favor selecciona tu distrito';
+            errorDistrito.style.display = 'block';
+            valido = false;
+        }
+
+        // Validar Dirección Exacta (NUEVO)
+        if (!direccionInput || !direccionInput.value.trim()) {
+            mostrarError('error-direccion', 'Por favor ingresa tu dirección exacta');
+            valido = false;
+        }
+    }
+    
+    return valido;
+}
+function validarYEnviarPedido() {
+    if (!validarFormulario()) {
+        return;
+    }
+    
+    const botonEnviar = event.target;
+    const textoOriginal = botonEnviar.textContent;
+    
+    if (!botonEnviar.dataset.confirmando) {
+        botonEnviar.textContent = '👉 ¿CONFIRMAR ENVÍO? 👈';
+        botonEnviar.style.background = 'var(--AMARILLO)';
+        botonEnviar.style.color = 'var(--NEGRO)';
+        botonEnviar.style.fontWeight = 'bold';
+        botonEnviar.dataset.confirmando = 'true';
+        
+        setTimeout(() => {
+            if (botonEnviar.dataset.confirmando === 'true') {
+                botonEnviar.textContent = textoOriginal;
+                botonEnviar.style.background = '';
+                botonEnviar.style.color = '';
+                botonEnviar.style.fontWeight = '';
+                delete botonEnviar.dataset.confirmando;
+            }
+        }, 4000);
+        
+        return;
+    }
+    
+    botonEnviar.textContent = 'Enviando...';
+    botonEnviar.disabled = true;
+    
+    enviarPedidoWhatsApp();
+}
+
+function enviarPedidoWhatsApp() {
+    const nombreInput = document.getElementById('cliente-nombre');
+    const telefonoInput = document.getElementById('cliente-telefono');
+    const distritoSelect = document.getElementById('cliente-distrito');
+    const direccionInput = document.getElementById('cliente-direccion'); // NUEVO
+    const instruccionesInput = document.getElementById('instrucciones');
+    const subtotalElement = document.getElementById('subtotal-pedido');
+    const costoDeliveryElement = document.getElementById('costo-delivery');
+    const totalElement = document.getElementById('total-pedido');
+    
+    if (!nombreInput || !telefonoInput || !subtotalElement || !totalElement) {
+        alert('Error al obtener datos del formulario');
+        return;
+    }
+    
+    const nombre = nombreInput.value.trim();
+    const telefono = telefonoInput.value.trim();
+    const instrucciones = instruccionesInput ? instruccionesInput.value.trim() : '';
+    
+    const tipoPedido = document.getElementById('seccion-delivery') && 
+                       document.getElementById('seccion-delivery').style.display === 'block' ? 
+                       'delivery' : 'recoger';
+    
+    const subtotal = parseFloat(subtotalElement.textContent.replace('S/ ', '')) || 0;
+    const delivery = parseFloat(costoDeliveryElement.textContent.replace('S/ ', '')) || 0;
+    const total = parseFloat(totalElement.textContent.replace('S/ ', '')) || 0;
+    
+    let mensaje = `🍽 *NUEVO PEDIDO - CEVICHERÍA TIPOS* 🦐\n\n`;
+    mensaje += `*CLIENTE:*\nNombre: ${nombre}\nWhatsApp: ${telefono}\n\n`;
+    mensaje += `*MODALIDAD:* ${tipoPedido === 'delivery' ? 'Delivery 🚚' : 'Recoger en tienda 🏃'}\n`;
+    
+    // AGREGAR DISTRITO Y DIRECCIÓN AL MENSAJE
+    if (tipoPedido === 'delivery') {
+        if (distritoSelect && distritoSelect.value) {
+            mensaje += `Distrito: ${distritoSelect.value.split(' - ')[0]}\n`;
+        }
+        if (direccionInput && direccionInput.value) {
+            mensaje += `*Dirección:* ${direccionInput.value.trim()}\n`;
+        }
+    }
+    
+    mensaje += `\n*PEDIDO:*\n────────\n`;
+    
+    carrito.forEach(item => {
+        const itemTotal = item.precio * item.cantidad;
+        mensaje += `• ${item.cantidad} x ${item.nombre} — S/ ${itemTotal.toFixed(2)}\n`;
+        if (item.especificaciones) {
+            mensaje += `  → ${item.especificaciones}\n`;
+        }
+    });
+    
+    mensaje += `\n*RESUMEN DE PAGO:*\n`;
+    mensaje += `Sub-total: S/ ${subtotal.toFixed(2)}\n`;
+    
+    if (delivery > 0) {
+        mensaje += `Delivery: S/ ${delivery.toFixed(2)}\n`;
+    }
+    
+    mensaje += `*TOTAL: S/ ${total.toFixed(2)}*\n\n`;
+    mensaje += `*MÉTODO DE PAGO: ${metodoPagoSeleccionado.toUpperCase()}*\n`;
+    
+    if (metodoPagoSeleccionado === 'efectivo') {
+        const montoEfectivoInput = document.getElementById('monto-efectivo');
+        if (montoEfectivoInput) {
+            const montoEfectivo = parseFloat(montoEfectivoInput.value) || 0;
+            const vuelto = montoEfectivo - total;
+            mensaje += `Paga con: S/ ${montoEfectivo.toFixed(2)}\n`;
+            if (vuelto >= 0) {
+                mensaje += `Vuelto: S/ ${vuelto.toFixed(2)}\n`;
+            } else {
+                mensaje += `⚠ Faltan: S/ ${Math.abs(vuelto).toFixed(2)}\n`;
+            }
+        }
+    } else if (metodoPagoSeleccionado === 'yape') {
+        mensaje += `\n📱 *PAGO CON YAPE:*\nEl repartidor compartirá el número de Yape por WhatsApp.\n`;
+    } else if (metodoPagoSeleccionado === 'plin') {
+        mensaje += `\n📱 *PAGO CON PLIN:*\nEl repartidor compartirá el número de Plin por WhatsApp.\n`;
+    } else if (metodoPagoSeleccionado === 'tarjeta') {
+        mensaje += `\n💳 *PAGO CON TARJETA:*\nEl repartidor llevará POS para pago con tarjeta.\n`;
+    }
+    
+    if (instrucciones) {
+        mensaje += `\n*NOTAS:* ${instrucciones}\n`;
+    }
+    
+    const numeroWhatsApp = '51977420834';
+    const mensajeCodificado = encodeURIComponent(mensaje);
+    
+    window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, '_blank');
+    
+    setTimeout(() => {
+        carrito = [];
+        actualizarCarrito();
+        cerrarFormularioPedido();
+        mostrarPantalla('bienvenida');
+        alert('✅ Pedido enviado. Revisa WhatsApp para confirmar.');
+    }, 1000);
+}
+
+// ================================================
+// FUNCIÓN PARA RESERVAS
+// ================================================
+function enviarReservaWhatsApp() {
+    const nombreInput = document.getElementById('reserva-nombre');
+    const telefonoInput = document.getElementById('reserva-telefono');
+    const personasInput = document.getElementById('reserva-personas');
+    const fechaInput = document.getElementById('reserva-fecha');
+    const horaInput = document.getElementById('reserva-hora');
+
+    if (!nombreInput || !telefonoInput || !personasInput || !fechaInput || !horaInput) {
+        alert('✗ Por favor, completa todos los campos');
+        return;
+    }
+
+    const nombre = nombreInput.value;
+    const telefono = telefonoInput.value;
+    const personas = personasInput.value;
+    const fecha = fechaInput.value;
+    const hora = horaInput.value;
+
+    if (!nombre || !telefono || !personas || !fecha || !hora) {
+        alert('✗ Por favor, completa todos los campos');
+        return;
+    }
+
+    const fechaObj = new Date(fecha);
+    const fechaFormateada = fechaObj.toLocaleDateString('es-ES', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+    let mensaje = `¡Hola! 👋 Quisiera hacer una reserva:\n\n`;
+    mensaje += `*📋 DATOS DE LA RESERVA:*\n`;
+    mensaje += `────────────────\n`;
+    mensaje += `👤 *Nombre:* ${nombre}\n`;
+    mensaje += `📞 *WhatsApp:* ${telefono}\n`;
+    mensaje += `👥 *Personas:* ${personas}\n`;
+    mensaje += `📅 *Fecha:* ${fechaFormateada}\n`;
+    mensaje += `⏰ *Hora:* ${hora}\n\n`;
+    mensaje += `Por favor, confírmenme la disponibilidad. ¡Gracias!`;
+
+    const mensajeCodificado = encodeURIComponent(mensaje);
+    const numeroWhatsApp = '51977420834';
+    
+    window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, '_blank');
+    
+    setTimeout(() => {
+        if (nombreInput) nombreInput.value = '';
+        if (telefonoInput) telefonoInput.value = '';
+        if (personasInput) personasInput.value = '2';
+        if (fechaInput) fechaInput.value = '';
+        if (horaInput) horaInput.value = '';
+        mostrarPantalla('bienvenida');
+        alert('✅ Solicitud de reserva enviada. Revisa WhatsApp para confirmar.');
+    }, 1000);
+}
+
+// ================================================
+// INICIALIZACIÓN
+// ================================================
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar carrito
+    actualizarCarrito();
+    
+    // Configurar fechas para reservas
+    const hoy = new Date();
+    const manana = new Date(hoy);
+    manana.setDate(hoy.getDate() + 1);
+    const fechaMinima = manana.toISOString().split('T')[0];
+    
+    const campoFechaReserva = document.getElementById('reserva-fecha');
+    const campoHoraReserva = document.getElementById('reserva-hora');
+    
+    if (campoFechaReserva) {
+        campoFechaReserva.setAttribute('min', fechaMinima);
+        const maxFecha = new Date(hoy);
+        maxFecha.setDate(hoy.getDate() + 30);
+        campoFechaReserva.setAttribute('max', maxFecha.toISOString().split('T')[0]);
+    }
+    
+    if (campoHoraReserva) {
+        campoHoraReserva.setAttribute('min', '11:00');
+        campoHoraReserva.setAttribute('max', '17:00');
+        campoHoraReserva.value = '12:00';
+    }
+    
+    // Event listeners para delivery
+    const distritoSelect = document.getElementById('cliente-distrito');
+    if (distritoSelect) {
+        distritoSelect.addEventListener('change', actualizarCostoDelivery);
+    }
+    
+    // Event listener para vuelto
+    const montoEfectivoInput = document.getElementById('monto-efectivo');
+    if (montoEfectivoInput) {
+        montoEfectivoInput.addEventListener('input', calcularVuelto);
+    }
+    
+    // Configurar por defecto
+    seleccionarTipoPedido('recoger');
+    seleccionarMetodoPago('efectivo');
+    
+    // Event listener para cerrar modales con ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            cerrarCarrito();
+            cerrarModalPersonalizacion();
+            cerrarFormularioPedido();
+        }
+    });
+});
+
+// ================================================
+// EVENT LISTENERS PARA EL BOTÓN DEL CARRITO
+// ================================================
+document.addEventListener('DOMContentLoaded', function() {
+    const carritoBtn = document.querySelector('.carrito-btn');
+    if (carritoBtn) {
+        carritoBtn.addEventListener('click', mostrarCarrito);
+    }
+});
+    </script>
+</body>
+</html>
