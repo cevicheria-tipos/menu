@@ -15,7 +15,6 @@
             --NEGRO: #000000;
             --blanco: #ffffff;
             --gris-claro: #f8f9fa;
-            --verde-claro: #e8f5e9;
         }
 
         * {
@@ -32,12 +31,10 @@
         }
 
         .container {
-            max-width: 800px; /* Ancho ideal para impresión A4 */
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            border: 5px solid var(--VERDE); /* Marco decorativo */
-            background-image: url('img/fondo-textura.jpg'); /* Opcional: si tienes una textura de fondo */
-            background-size: cover;
+            border: 5px solid var(--VERDE);
         }
 
         .header {
@@ -90,7 +87,7 @@
 
         .seccion {
             margin-bottom: 40px;
-            page-break-inside: avoid; /* Evita que una sección se corte al imprimir */
+            page-break-inside: avoid;
         }
 
         .plato-lista {
@@ -159,19 +156,12 @@
             color: var(--VERDE);
         }
         
-        /* Estilos específicos para impresión */
         @media print {
-            body {
-                font-size: 12pt; /* Tamaño de letra óptimo para leer en papel */
-            }
-            .container {
-                border: none; /* Quita el borde para que no gaste tinta */
-                padding: 0;
-            }
+            body { font-size: 12pt; }
+            .container { border: none; padding: 0; }
             h1 { font-size: 24pt; }
             h2 { font-size: 18pt; }
-            .plato-nombre { font-size: 14pt; }
-            .plato-precio { font-size: 14pt; color: black; } /* Precios en negro para ahorrar tinta de color */
+            .plato-precio { color: black; }
         }
     </style>
 </head>
@@ -205,14 +195,12 @@
             <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Causa de langostinos</div>
-                    <div class="plato-desc">Rellena de verduras, pulpa de langostinos y mayonesa.</div>
                 </div>
                 <div class="plato-precio">S/ 25.00</div>
             </li>
             <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Causa acebichada</div>
-                    <div class="plato-desc">Causa de pulpa de cangrejo acompañada de cebiche de pescado.</div>
                 </div>
                 <div class="plato-precio">S/ 30.00</div>
             </li>
@@ -225,21 +213,18 @@
             <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Poderoso</div>
-                    <div class="plato-desc">Leche de tigre con crema de ají amarillo, pescado, mariscos y chicharrón de pota.</div>
                 </div>
                 <div class="plato-precio">S/ 18.00</div>
             </li>
             <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Leche de pantera</div>
-                    <div class="plato-desc">Leche de tigre, conchas negras y chicharrón de pota.</div>
                 </div>
                 <div class="plato-precio">S/ 18.00</div>
             </li>
             <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Leche de tigre</div>
-                    <div class="plato-desc">Con trozos de pescado, cebolla, ají, choclo y chicharrón de pota.</div>
                 </div>
                 <div class="plato-precio">S/ 16.00</div>
             </li>
@@ -258,7 +243,6 @@
             <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Cebiche mixto</div>
-                    <div class="plato-desc">(Pescado, pulpo, langostino)</div>
                 </div>
                 <div class="plato-precio">S/ 38.00</div>
             </li>
@@ -271,7 +255,6 @@
             <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Cebiche clásico</div>
-                    <div class="plato-desc">(Pescado, conchas negras, camote, canchita serrana)</div>
                 </div>
                 <div class="plato-precio">S/ 48.00</div>
             </li>
@@ -352,28 +335,28 @@
              <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Ronda Marina 1</div>
-                    <div class="plato-desc">Causa de cangrejo, cebiche, tiradito, arroz c/mariscos, chicharron de pota.</div>
+                    <div class="plato-desc">Causa, cebiche, tiradito, arroz c/mariscos, chicharron de pota.</div>
                 </div>
                 <div class="plato-precio">S/ 61.00</div>
             </li>
             <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Ronda Marina 2</div>
-                    <div class="plato-desc">Causa de cangrejo, cebiche, tiradito, arroz c/mariscos, chicharron de pota.</div>
+                    <div class="plato-desc">Causa, cebiche, tiradito, arroz c/mariscos, chicharron de pota.</div>
                 </div>
                 <div class="plato-precio">S/ 64.00</div>
             </li>
              <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Ronda Marina 3</div>
-                    <div class="plato-desc">Causa de cangrejo, cebiche, tiradito, chaufa c/mariscos, chicharron de pota.</div>
+                    <div class="plato-desc">Causa, cebiche, tiradito, chaufa c/mariscos, chicharron de pota.</div>
                 </div>
                 <div class="plato-precio">S/ 65.00</div>
             </li>
              <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Ronda Marina 4</div>
-                    <div class="plato-desc">Causa de cangrejo, cebiche, chaufa de pescado/mariscos, chicharron de pescado.</div>
+                    <div class="plato-desc">Causa, cebiche, chaufa de pescado/mariscos, chicharron de pescado.</div>
                 </div>
                 <div class="plato-precio">S/ 68.00</div>
             </li>
@@ -386,14 +369,12 @@
             <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Jalea Mixta</div>
-                    <div class="plato-desc">(Pescado, pota, langostino, yuyo, yuca, sarsa de cebolla)</div>
                 </div>
                 <div class="plato-precio">S/ 38.00</div>
             </li>
              <li class="plato-item">
                 <div class="plato-info">
                     <div class="plato-nombre">Jalea de pescado</div>
-                    <div class="plato-desc">(Pescado, langostino, yuyo, yuca, sarsa de cebolla)</div>
                 </div>
                 <div class="plato-precio">S/ 40.00</div>
             </li>
@@ -675,3 +656,5 @@
 
 </body>
 </html>
+</html>
+
