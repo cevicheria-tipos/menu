@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Mesa | Cevichería Tipo's</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --VERDE: #1C6125;
+            --ROJO: #ae2012;
+            --AMARILLO: #CED914;
+            --NEGRO: #000000;
+            --blanco: #ffffff;
+            --gris-claro: #f8f9fa;
+            --verde-claro: #e8f5e9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--blanco);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px; /* Ancho ideal para impresión A4 */
+            margin: 0 auto;
+            padding: 20px;
+            border: 5px solid var(--VERDE); /* Marco decorativo */
+            background-image: url('img/fondo-textura.jpg'); /* Opcional: si tienes una textura de fondo */
+            background-size: cover;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--AMARILLO);
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px;
+        }
+
+        .eslogan {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--VERDE);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .subtitulo {
+            font-size: 0.9rem;
+            color: var(--ROJO);
+            font-style: italic;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin: 20px 0;
+            color: var(--VERDE);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            color: var(--VERDE);
+            border-bottom: 2px solid var(--AMARILLO);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .seccion {
+            margin-bottom: 40px;
+            page-break-inside: avoid; /* Evita que una sección se corte al imprimir */
+        }
+
+        .plato-lista {
+            list-style: none;
+            padding: 0;
+        }
+
+        .plato-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 15px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .plato-info {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .plato-nombre {
+            font-weight: 700;
+            color: var(--VERDE);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .plato-desc {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .plato-precio {
+            font-weight: 700;
+            color: var(--ROJO);
+            font-size: 1.2rem;
+            white-space: nowrap;
+        }
+        
+        .precio-doble {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        .precio-opcion {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .precio-valor {
+            font-weight: 700;
+            color: var(--ROJO);
+            font-size: 1.1rem;
+            margin-left: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 3px solid var(--AMARILLO);
+            font-size: 0.9rem;
+            color: var(--VERDE);
+        }
+        
+        /* Estilos específicos para impresión */
+        @media print {
+            body {
+                font-size: 12pt; /* Tamaño de letra óptimo para leer en papel */
+            }
+            .container {
+                border: none; /* Quita el borde para que no gaste tinta */
+                padding: 0;
+            }
+            h1 { font-size: 24pt; }
+            h2 { font-size: 18pt; }
+            .plato-nombre { font-size: 14pt; }
+            .plato-precio { font-size: 14pt; color: black; } /* Precios en negro para ahorrar tinta de color */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="img/logo.png" alt="Logo Tipo's" class="logo">
+        <div class="eslogan">PESCADOS & MARISCOS</div>
+        <div class="subtitulo">PASIÓN POR LA BUENA COMIDA</div>
+    </div>
+
+    <h1>Nuestra Carta</h1>
+
+    <div class="seccion">
+        <h2>Entradas</h2>
+        <ul class="plato-lista">
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Tequeños Jamon y Queso / Langostinos</div>
+                </div>
+                <div class="plato-precio">S/ 16.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Causa de pulpa de cangrejo</div>
+                    <div class="plato-desc">Rellena de verduras, pulpa de cangrejo y mayonesa.</div>
+                </div>
+                <div class="plato-precio">S/ 25.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Causa de langostinos</div>
+                    <div class="plato-desc">Rellena de verduras, pulpa de langostinos y mayonesa.</div>
+                </div>
+                <div class="plato-precio">S/ 25.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Causa acebichada</div>
+                    <div class="plato-desc">Causa de pulpa de cangrejo acompañada de cebiche de pescado.</div>
+                </div>
+                <div class="plato-precio">S/ 30.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Causa de pollo</div>
+                </div>
+                <div class="plato-precio">S/ 23.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Poderoso</div>
+                    <div class="plato-desc">Leche de tigre con crema de ají amarillo, pescado, mariscos y chicharrón de pota.</div>
+                </div>
+                <div class="plato-precio">S/ 18.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Leche de pantera</div>
+                    <div class="plato-desc">Leche de tigre, conchas negras y chicharrón de pota.</div>
+                </div>
+                <div class="plato-precio">S/ 18.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Leche de tigre</div>
+                    <div class="plato-desc">Con trozos de pescado, cebolla, ají, choclo y chicharrón de pota.</div>
+                </div>
+                <div class="plato-precio">S/ 16.00</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h2>Cebiches</h2>
+        <ul class="plato-lista">
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cebiche de pescado</div>
+                </div>
+                <div class="plato-precio">S/ 35.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cebiche mixto</div>
+                    <div class="plato-desc">(Pescado, pulpo, langostino)</div>
+                </div>
+                <div class="plato-precio">S/ 38.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cebiche de conchas negras</div>
+                </div>
+                <div class="plato-precio">S/ 36.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cebiche clásico</div>
+                    <div class="plato-desc">(Pescado, conchas negras, camote, canchita serrana)</div>
+                </div>
+                <div class="plato-precio">S/ 48.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Tiradito de pescado</div>
+                </div>
+                <div class="plato-precio">S/ 32.00</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h2>Combinaciones</h2>
+        <ul class="plato-lista">
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Combinado 1</div>
+                    <div class="plato-desc">Cebiche de pescado con chicharrón de pota.</div>
+                </div>
+                <div class="plato-precio">S/ 32.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Combinado 2</div>
+                    <div class="plato-desc">Cebiche de pescado con chicharrón de pescado.</div>
+                </div>
+                <div class="plato-precio">S/ 34.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Doble Marino</div>
+                    <div class="plato-desc">Cebiche de pescado / arroz con mariscos.</div>
+                </div>
+                <div class="plato-precio">S/ 35.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Doble Marino 2</div>
+                    <div class="plato-desc">Cebiche de pescado / Chaufa con mariscos o pescado.</div>
+                </div>
+                <div class="plato-precio">S/ 42.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Triple Marino 1</div>
+                    <div class="plato-desc">Cebiche, arroz con mariscos y chicharron de pota.</div>
+                </div>
+                <div class="plato-precio">S/ 34.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Triple Marino 2</div>
+                    <div class="plato-desc">Cebiche, arroz con mariscos y chicharron de pota.</div>
+                </div>
+                <div class="plato-precio">S/ 38.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Triple Marino 3</div>
+                    <div class="plato-desc">Cebiche, chaufa de pescado/mariscos y chicharron de pota.</div>
+                </div>
+                <div class="plato-precio">S/ 38.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Triple Marino 4</div>
+                    <div class="plato-desc">Cebiche, chaufa de pescado/mariscos y chicharron de pescado.</div>
+                </div>
+                <div class="plato-precio">S/ 42.00</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h2>Rondas (Para Compartir)</h2>
+        <ul class="plato-lista">
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Ronda Marina 1</div>
+                    <div class="plato-desc">Causa de cangrejo, cebiche, tiradito, arroz c/mariscos, chicharron de pota.</div>
+                </div>
+                <div class="plato-precio">S/ 61.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Ronda Marina 2</div>
+                    <div class="plato-desc">Causa de cangrejo, cebiche, tiradito, arroz c/mariscos, chicharron de pota.</div>
+                </div>
+                <div class="plato-precio">S/ 64.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Ronda Marina 3</div>
+                    <div class="plato-desc">Causa de cangrejo, cebiche, tiradito, chaufa c/mariscos, chicharron de pota.</div>
+                </div>
+                <div class="plato-precio">S/ 65.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Ronda Marina 4</div>
+                    <div class="plato-desc">Causa de cangrejo, cebiche, chaufa de pescado/mariscos, chicharron de pescado.</div>
+                </div>
+                <div class="plato-precio">S/ 68.00</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h2>Chicharrones</h2>
+        <ul class="plato-lista">
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Jalea Mixta</div>
+                    <div class="plato-desc">(Pescado, pota, langostino, yuyo, yuca, sarsa de cebolla)</div>
+                </div>
+                <div class="plato-precio">S/ 38.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Jalea de pescado</div>
+                    <div class="plato-desc">(Pescado, langostino, yuyo, yuca, sarsa de cebolla)</div>
+                </div>
+                <div class="plato-precio">S/ 40.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Chicharrón de pescado</div>
+                </div>
+                <div class="plato-precio">S/ 34.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Chicharrón de langostinos</div>
+                </div>
+                <div class="plato-precio">S/ 46.00</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h2>Pescados Enteros</h2>
+        <ul class="plato-lista">
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cabrilla dorada</div>
+                </div>
+                <div class="plato-precio">S/ 40.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cabrilla al ajo</div>
+                </div>
+                <div class="plato-precio">S/ 42.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cabrilla al ajillo</div>
+                </div>
+                <div class="plato-precio">S/ 42.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cabrilla a lo macho</div>
+                </div>
+                <div class="plato-precio">S/ 48.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Trucha dorada</div>
+                </div>
+                <div class="plato-precio">S/ 30.00</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h2>Sopas y Sudados</h2>
+        <ul class="plato-lista">
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Parihuela</div>
+                </div>
+                <div class="plato-precio">S/ 35.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Chupe de pescado</div>
+                </div>
+                <div class="plato-precio">S/ 34.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Chupe de langostinos</div>
+                </div>
+                <div class="plato-precio">S/ 36.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Sudado de pescado filete</div>
+                </div>
+                <div class="plato-precio">S/ 35.00</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h2>Platos de Fondo</h2>
+        <ul class="plato-lista">
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Arroz con mariscos</div>
+                </div>
+                <div class="plato-precio">S/ 32.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Arroz con langostinos</div>
+                </div>
+                <div class="plato-precio">S/ 32.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Arroz chaufa de mariscos</div>
+                </div>
+                <div class="plato-precio">S/ 32.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Arroz chaufa de pollo</div>
+                </div>
+                <div class="plato-precio">S/ 28.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Arroz chaufa de carne</div>
+                </div>
+                <div class="plato-precio">S/ 28.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Arroz chaufa de pescado</div>
+                </div>
+                <div class="plato-precio">S/ 30.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Picante de langostinos</div>
+                </div>
+                <div class="plato-precio">S/ 40.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Pescado a lo macho</div>
+                </div>
+                <div class="plato-precio">S/ 38.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Filete en salsa de langostinos</div>
+                </div>
+                <div class="plato-precio">S/ 38.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Filete de pescado (Plancha / Frito)</div>
+                </div>
+                <div class="plato-precio">S/ 30.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Saltado (Cuadril / Pollo)</div>
+                </div>
+                <div class="plato-precio">S/ 30.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Lomo fino saltado</div>
+                </div>
+                <div class="plato-precio">S/ 40.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Bisteck a lo pobre</div>
+                </div>
+                <div class="plato-precio">S/ 36.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Pollo a la plancha</div>
+                </div>
+                <div class="plato-precio">S/ 30.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Fetuccini a la huancaina c/ (Cuadril / pollo)</div>
+                </div>
+                <div class="plato-precio">S/ 35.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Fetuccini a la huancaina c/ lomo fino</div>
+                </div>
+                <div class="plato-precio">S/ 40.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Fetuccini con Langostinos</div>
+                </div>
+                <div class="plato-precio">S/ 32.00</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h2>Guarniciones</h2>
+        <ul class="plato-lista">
+            <li class="plato-item">
+                <div class="plato-nombre">Porción de arroz</div>
+                <div class="plato-precio">S/ 6.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-nombre">Chifles</div>
+                <div class="plato-precio">S/ 6.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-nombre">Choclo</div>
+                <div class="plato-precio">S/ 6.00</div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-nombre">Canchita</div>
+                <div class="plato-precio">S/ 6.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-nombre">Yucas (Fritas / Sancochadas)</div>
+                <div class="plato-precio">S/ 6.00</div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-nombre">Yuyo (Frito / Sancochado)</div>
+                <div class="plato-precio">S/ 6.00</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h2>Bebidas</h2>
+        <ul class="plato-lista">
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Chicha Morada</div>
+                </div>
+                <div class="precio-doble">
+                    <span class="precio-opcion">Copa S/ 6.00</span>
+                    <span class="precio-valor">Litro S/ 10.00</span>
+                </div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Limonada (Natural / Frozen)</div>
+                </div>
+                <div class="precio-doble">
+                    <span class="precio-opcion">Copa S/ 8.00</span>
+                    <span class="precio-valor">Litro S/ 16.00</span>
+                </div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Limonada Frozen</div>
+                </div>
+                <div class="precio-doble">
+                    <span class="precio-opcion">Copa S/ 9.00</span>
+                    <span class="precio-valor">Litro S/ 10.00</span>
+                </div>
+            </li>
+            <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Maracuyá</div>
+                </div>
+                <div class="precio-doble">
+                    <span class="precio-opcion">Copa S/ 8.00</span>
+                    <span class="precio-valor">Litro S/ 16.00</span>
+                </div>
+            </li>
+             <li class="plato-item">
+                <div class="plato-info">
+                    <div class="plato-nombre">Maracuyá Frozen</div>
+                </div>
+                <div class="precio-doble">
+                    <span class="precio-opcion">Copa S/ 9.00</span>
+                    <span class="precio-valor">Litro S/ 18.00</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>Av. Brasil 2804, Pueblo Libre</p>
+        <p>Horario de Atención: 11:00 am - 5:00 pm</p>
+    </div>
+</div>
+
+</body>
+</html>
