@@ -3080,7 +3080,7 @@
                         <div class="precio-doble">
                             <div class="precio-opcion">
                                 <span class="precio-tipo">Litro</span>
-                                <span class="precio-valor">S/10</span>
+                                <span class="precio-valor">S/18</span>
                             </div>
                             <div class="precio-opcion">
                                 <span class="precio-tipo">Copa (500ml)</span>
@@ -3092,7 +3092,7 @@
                         <img src="img/limonada-frozen.png" alt="Limonada frozen">
                     </div>
                     <div style="display: flex; gap: 10px; margin-top: 10px;">
-                        <button class="btn-agregar" onclick="agregarAlCarrito('Limonada frozen - Litro', 10)">Litro</button>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Limonada frozen - Litro', 18)">Litro</button>
                         <button class="btn-agregar" onclick="agregarAlCarrito('Limonada frozen - Copa', 9)">Copa</button>
                     </div>
                 </li>
@@ -3163,9 +3163,7 @@
     </div>
 
     <script>
-   // ================================================
-// VARIABLES GLOBALES
-// ================================================
+
 let carrito = JSON.parse(localStorage.getItem('carritoTipos')) || [];
 let platoActual = null;
 let precioActual = 0;
@@ -3173,9 +3171,7 @@ let opcionesSeleccionadas = {};
 let opcionesModal = [];
 let metodoPagoSeleccionado = 'efectivo';
 
-// ================================================
-// FUNCIONES DE NAVEGACIÓN
-// ================================================
+
 function mostrarPantalla(id) {
     document.querySelectorAll('.pantalla').forEach(p => {
         p.classList.remove('activa');
@@ -3184,9 +3180,7 @@ function mostrarPantalla(id) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ================================================
-// FUNCIONES DEL CARRITO
-// ================================================
+
 function mostrarCarrito() {
     actualizarCarrito();
     document.getElementById('carrito-modal').style.display = 'block';
@@ -3499,9 +3493,7 @@ function agregarSugerencia(nombre, precio) {
     }
 }
 
-// ================================================
-// FUNCIONES DE PERSONALIZACIÓN (SIN OTRAS PREFERENCIAS)
-// ================================================
+
 function abrirModalPersonalizacion(nombre, precio, opciones) {
     platoActual = nombre;
     precioActual = precio;
@@ -3651,9 +3643,8 @@ function cerrarModalPersonalizacion() {
     opcionesModal = [];
 }
 
-// ================================================
-// FUNCIONES PARA COMBINADOS MARINOS
-// ================================================
+
+
 function abrirModalCombinadoMarino(nombre, precio) {
     platoActual = nombre;
     precioActual = precio;
@@ -3711,7 +3702,6 @@ function abrirModalCombinadoMarino(nombre, precio) {
                     <div style="font-weight: 600; font-size: 0.85rem;">${opcion.texto}</div>
                 `;
                 
-                // SELECCIONAR "CHAUFA DE MARISCOS" POR DEFECTO
                 if (opcion.texto === 'Chaufa de Mariscos') {
                     opcionElement.classList.add('seleccionado');
                     opcionesSeleccionadas['Chaufa'] = 'Chaufa de Mariscos';
@@ -3793,13 +3783,10 @@ function abrirModalCombinadoMarino(nombre, precio) {
         opcionesContainer.appendChild(seccionAji);
     }
     
-    // CORRECCIÓN: Mostrar el modal
     document.getElementById('modal-personalizacion').style.display = 'flex';
 }
 
-// ================================================
-// FUNCIONES DEL FORMULARIO DE PEDIDO
-// ================================================
+
 function mostrarFormularioPedido() {
     if (carrito.length === 0) {
         alert('✗ Tu carrito está vacío');
@@ -3877,7 +3864,6 @@ function actualizarTotalPedido() {
 }
 
 function actualizarCostoDelivery() {
-    // CORRECCIÓN: Lógica completa para el costo de delivery
     const seccionDelivery = document.getElementById('seccion-delivery');
     if (seccionDelivery && seccionDelivery.style.display === 'none') {
         const costoElement = document.getElementById('costo-delivery');
@@ -3912,14 +3898,14 @@ function resetearFormularioPedido() {
     const nombreInput = document.getElementById('cliente-nombre');
     const telefonoInput = document.getElementById('cliente-telefono');
     const distritoSelect = document.getElementById('cliente-distrito');
-    const direccionInput = document.getElementById('cliente-direccion'); // NUEVO
+    const direccionInput = document.getElementById('cliente-direccion'); 
     const instruccionesInput = document.getElementById('instrucciones');
     const montoEfectivoInput = document.getElementById('monto-efectivo');
     
     if (nombreInput) nombreInput.value = '';
     if (telefonoInput) telefonoInput.value = '';
     if (distritoSelect) distritoSelect.value = '';
-    if (direccionInput) direccionInput.value = ''; // NUEVO
+    if (direccionInput) direccionInput.value = ''; 
     if (instruccionesInput) instruccionesInput.value = '';
     if (montoEfectivoInput) montoEfectivoInput.value = '';
     
@@ -4072,7 +4058,7 @@ function validarFormulario() {
     // Validaciones exclusivas de Delivery
     if (seccionDelivery && seccionDelivery.style.display === 'block') {
         const distritoSelect = document.getElementById('cliente-distrito');
-        const direccionInput = document.getElementById('cliente-direccion'); // NUEVO
+        const direccionInput = document.getElementById('cliente-direccion'); 
         
         // Validar Distrito
         if (!distritoSelect || !distritoSelect.value.trim()) {
@@ -4135,7 +4121,7 @@ function enviarPedidoWhatsApp() {
     const nombreInput = document.getElementById('cliente-nombre');
     const telefonoInput = document.getElementById('cliente-telefono');
     const distritoSelect = document.getElementById('cliente-distrito');
-    const direccionInput = document.getElementById('cliente-direccion'); // NUEVO
+    const direccionInput = document.getElementById('cliente-direccion'); 
     const instruccionesInput = document.getElementById('instrucciones');
     const subtotalElement = document.getElementById('subtotal-pedido');
     const costoDeliveryElement = document.getElementById('costo-delivery');
@@ -4290,14 +4276,11 @@ function enviarReservaWhatsApp() {
     }, 1000);
 }
 
-// ================================================
-// INICIALIZACIÓN
-// ================================================
+
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar carrito
     actualizarCarrito();
     
-    // Configurar fechas para reservas
     const hoy = new Date();
     const manana = new Date(hoy);
     manana.setDate(hoy.getDate() + 1);
@@ -4319,23 +4302,19 @@ document.addEventListener('DOMContentLoaded', function() {
         campoHoraReserva.value = '12:00';
     }
     
-    // Event listeners para delivery
     const distritoSelect = document.getElementById('cliente-distrito');
     if (distritoSelect) {
         distritoSelect.addEventListener('change', actualizarCostoDelivery);
     }
     
-    // Event listener para vuelto
     const montoEfectivoInput = document.getElementById('monto-efectivo');
     if (montoEfectivoInput) {
         montoEfectivoInput.addEventListener('input', calcularVuelto);
     }
     
-    // Configurar por defecto
     seleccionarTipoPedido('recoger');
     seleccionarMetodoPago('efectivo');
     
-    // Event listener para cerrar modales con ESC
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             cerrarCarrito();
@@ -4345,9 +4324,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ================================================
-// EVENT LISTENERS PARA EL BOTÓN DEL CARRITO
-// ================================================
+
 document.addEventListener('DOMContentLoaded', function() {
     const carritoBtn = document.querySelector('.carrito-btn');
     if (carritoBtn) {
