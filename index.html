@@ -240,16 +240,15 @@
             margin-bottom: 0.2rem;
         }
 
-        .plato-precio {
-            background: var(--ROJO);
-            color: var(--blanco);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-weight: 600;
-            min-width: 70px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
+     .plato-precio {
+    background: none;
+    color: var(--VERDE); /* Verde de la marca */
+    padding: 2px 0;
+    font-weight: 700;
+    font-size: 1.15rem;
+    border-bottom: 2px solid var(--AMARILLO); 
+    display: inline-block;
+}
 
         .precio-doble {
             display: flex;
@@ -1657,22 +1656,16 @@
             }
         }
         
-       @media (max-width: 768px) {
+ @media (max-width: 768px) {
     .btn-agregar {
         width: 100% !important;     
-        padding: 18px !important;    
-        font-size: 1.1rem !important; 
-        margin-top: 15px !important;
-        background-color: #ae2012 !important; 
+        padding: 16px !important;    
+        background-color: var(--VERDE) !important; /* Verde amigable */
         font-weight: 700 !important;  
         border-radius: 12px !important;
-        box-shadow: 0 4px 10px rgba(174, 32, 18, 0.4) !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        box-shadow: 0 4px 10px rgba(28, 97, 37, 0.3) !important;
     }
-}
-            
+}           
             .plato-item {
                 padding: 15px;
             }
