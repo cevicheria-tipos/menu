@@ -11,1045 +11,588 @@
             --ROJO: #ae2012;
             --AMARILLO: #CED914;
             --blanco: #ffffff;
-            --fondo: #fcfcfc;
-            --sombra: rgba(0,0,0,0.12);
+            --fondo: #f8f9fa;
+            --sombra: 0 4px 15px rgba(0,0,0,0.1);
         }
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-            scroll-behavior: smooth; 
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: 'Poppins', sans-serif; 
             background-color: var(--fondo); 
             color: #333; 
-            line-height: 1.4;
             overflow-x: hidden;
+            padding-bottom: 20px;
         }
 
-        /* Navegación Fija - Mejorada */
-        .nav-categorias {
-            display: flex; 
-            gap: 8px; 
-            overflow-x: auto; 
-            position: sticky;
-            top: 0; 
-            background: white; 
-            padding: 12px 15px; 
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-            scrollbar-width: none;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
+        .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background: white;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            position: relative;
         }
-        .nav-categorias::-webkit-scrollbar { 
-            display: none; 
+        .logo { max-width: 120px; height: auto; }
+        .eslogan { font-family: 'Playfair Display', serif; color: var(--VERDE); font-weight: 700; margin-top: 5px; }
+
+        /* PANTALLAS (Lógica de App) */
+        .pantalla {
+            display: none; /* Oculto por defecto */
+            animation: fadeIn 0.3s ease-in-out;
         }
-        .nav-item {
-            background: #fff; 
-            color: var(--VERDE); 
-            padding: 8px 16px;
-            border-radius: 25px; 
-            text-decoration: none; 
-            font-size: 0.85rem;
-            font-weight: 600; 
-            border: 1.5px solid var(--VERDE); 
-            flex-shrink: 0;
-            transition: all 0.3s ease;
+        .pantalla.activa {
+            display: block; /* Solo se muestra la activa */
         }
-        .nav-item:hover,
-        .nav-item:active {
-            background: var(--VERDE);
+
+        /* GRID DE CATEGORÍAS (Estilo Delivery) */
+        .grid-categorias {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas */
+            gap: 15px;
+            padding-bottom: 20px;
+        }
+        
+        .cat-btn {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            cursor: pointer;
+            position: relative;
+            height: 140px; /* Altura fija para uniformidad */
+            transition: transform 0.2s;
+            border: 1px solid #eee;
+        }
+        .cat-btn:active { transform: scale(0.98); }
+        
+        .cat-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7); /* Oscurecer imagen para leer texto */
+        }
+        
+        .cat-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
             color: white;
-            transform: scale(1.05);
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .container { 
-            max-width: 600px; 
-            margin: 0 auto; 
-            padding: 0 10px;
+        /* BOTÓN VOLVER FLOTANTE */
+        .btn-volver-float {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--ROJO);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(174, 32, 18, 0.4);
+            z-index: 1000;
+            display: none; /* Se muestra solo dentro de categorías */
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+        }
+        
+        .titulo-seccion {
+            font-family: 'Playfair Display', serif;
+            color: var(--VERDE);
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--AMARILLO);
+            padding-bottom: 10px;
+            display: inline-block;
             width: 100%;
         }
 
-        /* Header con Estilo */
-        .header {
-            text-align: center; 
-            padding: 25px 20px; 
-            background: white;
-            border-radius: 0 0 25px 25px; 
-            margin-bottom: 20px; 
-            box-shadow: 0 4px 12px var(--sombra);
-        }
-        .logo { 
-            max-width: 140px; 
-            height: auto;
-            margin-bottom: 8px; 
-        }
-        .eslogan { 
-            font-family: 'Playfair Display', serif; 
-            color: var(--VERDE); 
-            font-size: 1.1rem; 
-            margin-bottom: 5px;
-        }
-
-        h2 {
-            font-family: 'Playfair Display', serif; 
-            font-size: 1.6rem;
-            color: var(--VERDE); 
-            margin: 30px 0 15px; 
-            display: flex;
-            align-items: center; 
-            gap: 10px; 
-            padding-left: 5px;
-        }
-        h2::after { 
-            content: ""; 
-            flex: 1; 
-            height: 2px; 
-            background: var(--AMARILLO); 
-            margin-left: 10px;
-        }
-
-        /* Tarjetas de Platos Optimizadas */
+        /* TARJETAS DE PLATOS */
         .plato-card {
-            background: white; 
-            border-radius: 18px; 
-            margin-bottom: 20px;
-            overflow: hidden; 
-            box-shadow: 0 5px 15px var(--sombra);
-            border: 1px solid #eee;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .plato-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-        .plato-img { 
-            width: 100%; 
-            height: 220px; 
-            overflow: hidden; 
-            position: relative;
-        }
-        .plato-img img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .plato-card:hover .plato-img img {
-            transform: scale(1.05);
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            box-shadow: var(--sombra);
         }
         
-        .plato-info { 
-            padding: 18px; 
-        }
-        .plato-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-start; 
-            margin-bottom: 8px; 
-            gap: 10px;
-        }
-        .plato-nombre { 
-            font-weight: 700; 
-            color: var(--VERDE); 
-            font-size: 1.1rem; 
-            line-height: 1.3; 
-            flex: 1;
-            min-width: 0; /* Para que el texto no desborde */
-        }
-        .plato-precio { 
-            font-weight: 800; 
-            color: var(--ROJO); 
-            font-size: 1.2rem; 
+        .plato-img-mini {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
             flex-shrink: 0;
-            white-space: nowrap;
         }
-        .plato-desc { 
-            font-size: 0.9rem; 
-            color: #666; 
-            font-style: italic; 
-            line-height: 1.4;
-            margin-top: 5px;
+        
+        .plato-info { flex: 1; }
+        
+        .plato-nombre {
+            font-weight: 700;
+            color: var(--VERDE);
+            font-size: 0.95rem;
+            line-height: 1.2;
+            margin-bottom: 4px;
         }
-
-        .bebida-opciones { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 10px; 
-            margin-top: 12px; 
-            padding-top: 12px; 
-            border-top: 1px dashed #ddd;
-        }
-        .bebida-item { 
-            font-weight: 600; 
-            font-size: 0.9rem; 
-            color: #444; 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer { 
-            text-align: center; 
-            padding: 40px 20px; 
-            color: #777; 
-            font-size: 0.8rem; 
-            background: #fff; 
-            margin-top: 30px;
-            border-top: 1px solid #eee;
-        }
-        .footer p {
+        
+        .plato-desc {
+            font-size: 0.75rem;
+            color: #666;
             margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .plato-precio {
+            font-weight: 800;
+            color: var(--ROJO);
+            font-size: 1rem;
         }
 
-        /* Responsive para móviles pequeños */
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 8px;
-            }
-            
-            .header {
-                padding: 20px 15px;
-                margin-bottom: 15px;
-            }
-            
-            .logo {
-                max-width: 120px;
-            }
-            
-            .eslogan {
-                font-size: 1rem;
-            }
-            
-            h2 {
-                font-size: 1.4rem;
-                margin: 25px 0 12px;
-            }
-            
-            .nav-item {
-                padding: 7px 14px;
-                font-size: 0.8rem;
-            }
-            
-            .plato-img {
-                height: 200px;
-            }
-            
-            .plato-info {
-                padding: 15px;
-            }
-            
-            .plato-nombre {
-                font-size: 1rem;
-            }
-            
-            .plato-precio {
-                font-size: 1.1rem;
-            }
-            
-            .plato-desc {
-                font-size: 0.85rem;
-            }
+        /* ANIMACIÓN */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Ajustes para tablets */
-        @media (min-width: 768px) {
-            .container {
-                max-width: 700px;
-            }
-            
-            .plato-img {
-                height: 250px;
-            }
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #888;
         }
 
-        /* Asegurar que las imágenes no desborden */
-        img {
-            max-width: 100%;
-            height: auto;
-        }
     </style>
 </head>
 <body>
 
-<nav class="nav-categorias">
-    <a href="#entradas" class="nav-item">Entradas</a>
-    <a href="#cebiches" class="nav-item">Cebiches</a>
-    <a href="#combinaciones" class="nav-item">Combinaciones</a>
-    <a href="#rondas" class="nav-item">Rondas</a>
-    <a href="#chicharrones" class="nav-item">Chicharrones</a>
-    <a href="#pescados" class="nav-item">Pescados</a>
-    <a href="#sopas" class="nav-item">Sopas</a>
-    <a href="#fondos" class="nav-item">Fondos</a>
-    <a href="#guarniciones" class="nav-item">Guarniciones</a>
-    <a href="#bebidas" class="nav-item">Bebidas</a>
-</nav>
+    <div class="container">
+        <header class="header">
+            <img src="img/logo.png" alt="Tipo's" class="logo">
+            <div class="eslogan">PESCADOS & MARISCOS</div>
+        </header>
+    </div>
 
-<div class="container">
-    <header class="header">
-        <img src="img/logo.png" alt="Logo Tipo's" class="logo">
-        <div class="eslogan">PESCADOS & MARISCOS</div>
-        <p style="color:var(--ROJO); font-size:0.8rem; font-weight:bold; letter-spacing:0.5px; margin-top:5px;">PASIÓN POR LA BUENA COMIDA</p>
-    </header>
-
-    <!-- ENTRADAS -->
-    <section id="entradas">
-        <h2>Entradas</h2>
+    <div class="container">
         
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/tequenos.png" alt="Tequeños"></div>
-            <div class="plato-info">
-                <div class="plato-header">
+        <div id="inicio" class="pantalla activa">
+            <p style="text-align:center; margin-bottom:15px; color:#666; font-size:0.9rem;">¿Qué se te antoja hoy?</p>
+            
+            <div class="grid-categorias">
+                <div class="cat-btn" onclick="verSeccion('entradas')">
+                    <img src="img/tequenos.png" alt="Entradas" onerror="this.src='https://via.placeholder.com/300x300?text=Entradas'">
+                    <div class="cat-title">Entradas</div>
+                </div>
+
+                <div class="cat-btn" onclick="verSeccion('cebiches')">
+                    <img src="img/cebiche-pescado.png" alt="Cebiches" onerror="this.src='https://via.placeholder.com/300x300?text=Cebiches'">
+                    <div class="cat-title">Cebiches</div>
+                </div>
+
+                <div class="cat-btn" onclick="verSeccion('combinaciones')">
+                    <img src="img/combinado-1.png" alt="Combinaciones" onerror="this.src='https://via.placeholder.com/300x300?text=Combinados'">
+                    <div class="cat-title">Combinados</div>
+                </div>
+
+                <div class="cat-btn" onclick="verSeccion('rondas')">
+                    <img src="img/ronda-1.png" alt="Rondas" onerror="this.src='https://via.placeholder.com/300x300?text=Rondas'">
+                    <div class="cat-title">Rondas</div>
+                </div>
+
+                <div class="cat-btn" onclick="verSeccion('chicharrones')">
+                    <img src="img/jalea-mixta.png" alt="Chicharrones" onerror="this.src='https://via.placeholder.com/300x300?text=Chicharrones'">
+                    <div class="cat-title">Chicharrones</div>
+                </div>
+
+                <div class="cat-btn" onclick="verSeccion('pescados')">
+                    <img src="img/cabrilla-dorada.jpg" alt="Pescados" onerror="this.src='https://via.placeholder.com/300x300?text=Pescados'">
+                    <div class="cat-title">Pescados Enteros</div>
+                </div>
+
+                <div class="cat-btn" onclick="verSeccion('sopas')">
+                    <img src="img/parihuela.png" alt="Sopas" onerror="this.src='https://via.placeholder.com/300x300?text=Sopas'">
+                    <div class="cat-title">Sopas</div>
+                </div>
+
+                <div class="cat-btn" onclick="verSeccion('fondos')">
+                    <img src="img/arroz-mariscos.png" alt="Fondos" onerror="this.src='https://via.placeholder.com/300x300?text=Fondos'">
+                    <div class="cat-title">Platos de Fondo</div>
+                </div>
+
+                 <div class="cat-btn" onclick="verSeccion('guarniciones')">
+                    <img src="img/arroz-porcion.png" alt="Guarniciones" onerror="this.src='https://via.placeholder.com/300x300?text=Guarniciones'">
+                    <div class="cat-title">Guarniciones</div>
+                </div>
+
+                <div class="cat-btn" onclick="verSeccion('bebidas')">
+                    <img src="img/chicha.png" alt="Bebidas" onerror="this.src='https://via.placeholder.com/300x300?text=Bebidas'">
+                    <div class="cat-title">Bebidas</div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p>📍 Av. Brasil 2804, Pueblo Libre</p>
+                <p>Cevichería Tipo's © 2026</p>
+            </div>
+        </div>
+
+        <div id="entradas" class="pantalla">
+            <h2 class="titulo-seccion">Entradas</h2>
+            <div class="plato-card">
+                <img src="img/tequenos.png" class="plato-img-mini">
+                <div class="plato-info">
                     <div class="plato-nombre">Tequeños Jamón y Queso / Langostinos</div>
                     <div class="plato-precio">S/16</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/causa-cangrejo.png" alt="Causa Cangrejo"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Causa de pulpa de cangrejo</div>
+            <div class="plato-card">
+                <img src="img/causa-cangrejo.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Causa de Cangrejo</div>
+                    <div class="plato-desc">Rellena de pulpa de cangrejo.</div>
                     <div class="plato-precio">S/25</div>
                 </div>
-                <div class="plato-desc">La tradicional causa rellena de verduras, pulpa de cangrejo y mayonesa.</div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/causa-langostinos.png" alt="Causa Langostinos"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Causa de langostinos</div>
+             <div class="plato-card">
+                <img src="img/causa-langostinos.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Causa de Langostinos</div>
+                    <div class="plato-desc">Rellena de langostinos.</div>
                     <div class="plato-precio">S/25</div>
                 </div>
-                <div class="plato-desc">La tradicional causa rellena de verduras, pulpa de langostinos y mayonesa.</div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/causa-acebichada.png" alt="Causa Acebichada"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Causa acebichada</div>
+             <div class="plato-card">
+                <img src="img/causa-acebichada.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Causa Acebichada</div>
+                    <div class="plato-desc">Con cebiche de pescado.</div>
                     <div class="plato-precio">S/30</div>
                 </div>
-                <div class="plato-desc">El dúo perfecto. Deliciosa causa limeña de pulpa de cangrejo acompañada nuestro cebiche de pescado.</div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/causa-pollo.png" alt="Causa de Pollo"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Causa de pollo</div>
-                    <div class="plato-precio">S/23</div>
-                </div>
-                <div class="plato-desc">La tradicional causa rellena de verduras, pollo desmenuzado y mayonesa.</div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/poderoso.png" alt="Poderoso"></div>
-            <div class="plato-info">
-                <div class="plato-header">
+            <div class="plato-card">
+                <img src="img/poderoso.png" class="plato-img-mini">
+                <div class="plato-info">
                     <div class="plato-nombre">Poderoso</div>
+                    <div class="plato-desc">Leche de tigre, pescado, mariscos y chicharrón.</div>
                     <div class="plato-precio">S/18</div>
                 </div>
-                <div class="plato-desc">Nuestro energizante natural marino, leche de tigre con crema de ají amarillo, trozos de pescado, mixtura de mariscos y porción de nuestro tradicional chicharrón de pota.</div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/leche-pantera.png" alt="Leche de Pantera"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Leche de pantera</div>
-                    <div class="plato-precio">S/18</div>
-                </div>
-                <div class="plato-desc">Potente combinación de leche de tigre, conchas negras y porción de chicharrón de pota.</div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/leche-tigre.png" alt="Leche de tigre"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Leche de tigre</div>
+            <div class="plato-card">
+                <img src="img/leche-tigre.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Leche de Tigre</div>
+                    <div class="plato-desc">Clásica con chicharrón de pota.</div>
                     <div class="plato-precio">S/16</div>
                 </div>
-                <div class="plato-desc">Un clásico de tipos. El juguito de nuestro cebiche con trozos de pescado, cebolla, ají, choclo, y chicharrón de pota.</div>
             </div>
         </div>
-    </section>
 
-    <!-- CEBICHES -->
-    <section id="cebiches">
-        <h2>Cebiches</h2>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/cebiche-pescado.png" alt="Cebiche de Pescado"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Cebiche de pescado</div>
+        <div id="cebiches" class="pantalla">
+            <h2 class="titulo-seccion">Cebiches</h2>
+            <div class="plato-card">
+                <img src="img/cebiche-pescado.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cebiche de Pescado</div>
                     <div class="plato-precio">S/35</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/cebiche-mixto.png" alt="Cebiche Mixto"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Cebiche mixto</div>
+            <div class="plato-card">
+                <img src="img/cebiche-mixto.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cebiche Mixto</div>
+                    <div class="plato-desc">Pescado, pulpo y langostinos.</div>
                     <div class="plato-precio">S/38</div>
                 </div>
-                <div class="plato-desc">(Pescado, pulpo, langostino)</div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/cebiche-conchas.png" alt="Cebiche de Conchas"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Cebiche de conchas negras</div>
+             <div class="plato-card">
+                <img src="img/cebiche-conchas.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cebiche Conchas Negras</div>
                     <div class="plato-precio">S/36</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/cebiche-clasico.png" alt="Cebiche Clásico"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Cebiche clásico</div>
+             <div class="plato-card">
+                <img src="img/cebiche-clasico.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cebiche Clásico</div>
+                    <div class="plato-desc">Con conchas negras.</div>
                     <div class="plato-precio">S/48</div>
                 </div>
-                <div class="plato-desc">(Pescado, conchas negras, camote, canchita serrana)</div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/tiradito.png" alt="Tiradito"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Tiradito de pescado</div>
+            <div class="plato-card">
+                <img src="img/tiradito.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Tiradito de Pescado</div>
                     <div class="plato-precio">S/32</div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- COMBINACIONES -->
-    <section id="combinaciones">
-        <h2>Combinaciones</h2>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/combinado-1.png" alt="Combinado 1"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Combinado 1 (Cebiche + Chicharrón pota)</div>
+        <div id="combinaciones" class="pantalla">
+            <h2 class="titulo-seccion">Combinaciones</h2>
+            <div class="plato-card">
+                <img src="img/combinado-1.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Combinado 1</div>
+                    <div class="plato-desc">Cebiche + Chicharrón pota.</div>
                     <div class="plato-precio">S/32</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/combinado-2.png" alt="Combinado 2"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Combinado 2 (Cebiche + Chicharrón pescado)</div>
+            <div class="plato-card">
+                <img src="img/combinado-2.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Combinado 2</div>
+                    <div class="plato-desc">Cebiche + Chicharrón pescado.</div>
                     <div class="plato-precio">S/34</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/doble-marino.png" alt="Doble Marino"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Doble Marino (Cebiche + Arroz mariscos)</div>
+            <div class="plato-card">
+                <img src="img/doble-marino.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Doble Marino</div>
+                    <div class="plato-desc">Cebiche + Arroz mariscos.</div>
                     <div class="plato-precio">S/35</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/doble-marino-2.png" alt="Doble Marino 2"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Doble Marino 2 (Cebiche + Chaufa mariscos/pescado)</div>
-                    <div class="plato-precio">S/42</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/triple-1.png" alt="Triple Marino 1"></div>
-            <div class="plato-info">
-                <div class="plato-header">
+            <div class="plato-card">
+                <img src="img/triple-1.png" class="plato-img-mini">
+                <div class="plato-info">
                     <div class="plato-nombre">Triple Marino 1</div>
+                    <div class="plato-desc">Cebiche, arroz mariscos, chicharrón pota.</div>
                     <div class="plato-precio">S/34</div>
                 </div>
-                <div class="plato-desc">(Cebiche, arroz con mariscos y chicharrón de pota)</div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/triple-2.png" alt="Triple Marino 2"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Triple Marino 2</div>
-                    <div class="plato-precio">S/38</div>
-                </div>
-                <div class="plato-desc">(Cebiche, arroz con mariscos y chicharrón de pescado)</div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/triple-3.png" alt="Triple Marino 3"></div>
-            <div class="plato-info">
-                <div class="plato-header">
+             <div class="plato-card">
+                <img src="img/triple-3.png" class="plato-img-mini">
+                <div class="plato-info">
                     <div class="plato-nombre">Triple Marino 3</div>
+                    <div class="plato-desc">Cebiche, chaufa, chicharrón pota.</div>
                     <div class="plato-precio">S/38</div>
                 </div>
-                <div class="plato-desc">(Cebiche, chaufa de pescado/mariscos y chicharrón de pota)</div>
             </div>
         </div>
         
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/triple-4.png" alt="Triple Marino 4"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Triple Marino 4</div>
-                    <div class="plato-precio">S/42</div>
-                </div>
-                <div class="plato-desc">(Cebiche, chaufa de pescado/mariscos y chicharrón de pescado)</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- RONDAS MARINAS -->
-    <section id="rondas">
-        <h2>Rondas Marinas</h2>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/ronda-1.png" alt="Ronda Marina 1"></div>
-            <div class="plato-info">
-                <div class="plato-header">
+         <div id="rondas" class="pantalla">
+            <h2 class="titulo-seccion">Rondas Marinas</h2>
+            <div class="plato-card">
+                <img src="img/ronda-1.png" class="plato-img-mini">
+                <div class="plato-info">
                     <div class="plato-nombre">Ronda Marina 1</div>
+                    <div class="plato-desc">Causa, cebiche, tiradito, arroz, chicharrón pota.</div>
                     <div class="plato-precio">S/61</div>
                 </div>
-                <div class="plato-desc">(Causa, cebiche, tiradito, arroz c/mariscos y chicharrón de pota)</div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/ronda-2.png" alt="Ronda Marina 2"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Ronda Marina 2</div>
-                    <div class="plato-precio">S/64</div>
-                </div>
-                <div class="plato-desc">(Causa, cebiche, tiradito, arroz c/mariscos y chicharrón de pescado)</div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/ronda-3.png" alt="Ronda Marina 3"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Ronda Marina 3</div>
-                    <div class="plato-precio">S/66</div>
-                </div>
-                <div class="plato-desc">(Causa, cebiche, tiradito, chaufa c/mariscos y chicharrón de pota)</div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/ronda-4.png" alt="Ronda Marina 4"></div>
-            <div class="plato-info">
-                <div class="plato-header">
+             <div class="plato-card">
+                <img src="img/ronda-4.png" class="plato-img-mini">
+                <div class="plato-info">
                     <div class="plato-nombre">Ronda Marina 4</div>
+                    <div class="plato-desc">Causa, cebiche, chaufa, chicharrón pescado.</div>
                     <div class="plato-precio">S/69</div>
                 </div>
-                <div class="plato-desc">(Causa, cebiche, chaufa de pescado/mariscos y chicharrón de pescado)</div>
             </div>
         </div>
-    </section>
 
-    <!-- CHICHARRONES -->
-    <section id="chicharrones">
-        <h2>Chicharrones</h2>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/jalea-mixta.png" alt="Jalea Mixta"></div>
-            <div class="plato-info">
-                <div class="plato-header">
+        <div id="chicharrones" class="pantalla">
+            <h2 class="titulo-seccion">Chicharrones</h2>
+            <div class="plato-card">
+                <img src="img/jalea-mixta.png" class="plato-img-mini">
+                <div class="plato-info">
                     <div class="plato-nombre">Jalea Mixta</div>
                     <div class="plato-precio">S/38</div>
                 </div>
-                <div class="plato-desc">(Pescado, pota, langostino, yuyo, yuca, sarsa de cebolla)</div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/chicharron-pescado.png" alt="Chicharrón de Pescado"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Chicharrón de pescado</div>
+            <div class="plato-card">
+                <img src="img/chicharron-pescado.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Chicharrón de Pescado</div>
                     <div class="plato-precio">S/34</div>
                 </div>
-                <div class="plato-desc">(Chicharrón de pescado, yucas fritas y sarsa criolla)</div>
             </div>
         </div>
 
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/jalea-pescado.png" alt="Jalea de Pescado"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Jalea de pescado</div>
-                    <div class="plato-precio">S/40</div>
-                </div>
-                <div class="plato-desc">(Pescado, langostino, yuyo, yuca, sarsa de cebolla)</div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/chicharron-langostino.png" alt="Chicharrón de Langostinos"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Chicharrón de langostinos</div>
-                    <div class="plato-precio">S/46</div>
-                </div>
-                <div class="plato-desc">(Chicharrón de langostinos, yucas fritas y sarsa criolla)</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PESCADOS ENTEROS -->
-    <section id="pescados">
-        <h2>Pescados Enteros</h2>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/cabrilla-dorada.jpg" alt="Cabrilla Dorada"></div>
-            <div class="plato-info">
-                <div class="plato-header">
+        <div id="pescados" class="pantalla">
+            <h2 class="titulo-seccion">Pescados Enteros</h2>
+            <div class="plato-card">
+                <img src="img/cabrilla-dorada.jpg" class="plato-img-mini">
+                <div class="plato-info">
                     <div class="plato-nombre">Cabrilla Dorada</div>
                     <div class="plato-precio">S/40</div>
                 </div>
-                <div class="plato-desc">(Servido con arroz, yuca frita y sarsa criolla)</div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/cabrilla-lo-macho.png" alt="Cabrilla a lo Macho"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Cabrilla a lo macho</div>
+             <div class="plato-card">
+                <img src="img/trucha-dorada.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Trucha Dorada</div>
+                    <div class="plato-precio">S/30</div>
+                </div>
+            </div>
+             <div class="plato-card">
+                <img src="img/cabrilla-lo-macho.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Cabrilla a lo Macho</div>
                     <div class="plato-precio">S/48</div>
                 </div>
             </div>
         </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/trucha-dorada.png" alt="Trucha Dorada"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Trucha dorada</div>
-                    <div class="plato-precio">S/30</div>
-                </div>
-            </div>
-        </div>
 
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/cabrilla-ajo.png" alt="Cabrilla al Ajo"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Cabrilla al ajo</div>
-                    <div class="plato-precio">S/42</div>
-                </div>
-                <div class="plato-desc">(Servido con arroz, yuca frita y sarsa criolla)</div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/cabrilla-ajillo.png" alt="Cabrilla al Ajillo"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Cabrilla al ajillo</div>
-                    <div class="plato-precio">S/42</div>
-                </div>
-                <div class="plato-desc">(Servido con arroz, yuca frita)</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SOPAS -->
-    <section id="sopas">
-        <h2>Sopas y Sudados</h2>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/parihuela.png" alt="Parihuela"></div>
-            <div class="plato-info">
-                <div class="plato-header">
+        <div id="sopas" class="pantalla">
+            <h2 class="titulo-seccion">Sopas</h2>
+            <div class="plato-card">
+                <img src="img/parihuela.png" class="plato-img-mini">
+                <div class="plato-info">
                     <div class="plato-nombre">Parihuela</div>
                     <div class="plato-precio">S/35</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/chupe-pescado.png" alt="Chupe de Pescado"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Chupe de pescado</div>
+            <div class="plato-card">
+                <img src="img/chupe-pescado.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Chupe de Pescado</div>
                     <div class="plato-precio">S/34</div>
                 </div>
             </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/chupe-langostino.png" alt="Chupe de Langostinos"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Chupe de langostinos</div>
-                    <div class="plato-precio">S/36</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/sudado-filete.png" alt="Sudado de Pescado"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Sudado de pescado filete</div>
+             <div class="plato-card">
+                <img src="img/sudado-filete.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Sudado de Filete</div>
                     <div class="plato-precio">S/35</div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- PLATOS DE FONDO -->
-    <section id="fondos">
-        <h2>Platos de Fondo</h2>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/arroz-mariscos.png" alt="Arroz con Mariscos"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Arroz con mariscos</div>
+        <div id="fondos" class="pantalla">
+            <h2 class="titulo-seccion">Platos de Fondo</h2>
+            <div class="plato-card">
+                <img src="img/arroz-mariscos.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Arroz con Mariscos</div>
                     <div class="plato-precio">S/32</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/arroz-langostinos.png" alt="Arroz con langostinos"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Arroz con langostinos</div>
+            <div class="plato-card">
+                <img src="img/chaufa-mariscos.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Chaufa de Mariscos</div>
                     <div class="plato-precio">S/32</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/chaufa-mariscos.png" alt="Chaufa de Mariscos"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Chaufa de mariscos</div>
-                    <div class="plato-precio">S/32</div>
+             <div class="plato-card">
+                <img src="img/lomo-saltado.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Lomo Saltado</div>
+                    <div class="plato-precio">S/40</div>
                 </div>
             </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/chaufa-pollo.png" alt="Chaufa de Pollo"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Chaufa de pollo</div>
-                    <div class="plato-precio">S/28</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/chaufa-carne.png" alt="Chaufa de Carne"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Chaufa de carne</div>
-                    <div class="plato-precio">S/28</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/chaufa-pescado.jpg" alt="Chaufa de Pescado"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Chaufa de pescado</div>
-                    <div class="plato-precio">S/30</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/fetuccini-huancaina.png" alt="Fetuccini Huancaina"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Fetuccini a la huancaína con (Cuadril / Pollo)</div>
-                    <div class="plato-precio">S/35</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/lomo-saltado.png" alt="Lomo Saltado"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Lomo fino saltado</div>
+             <div class="plato-card">
+                <img src="img/fetuccini-huancaina.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Fetuccini Huancaína c/ Lomo</div>
                     <div class="plato-precio">S/40</div>
                 </div>
             </div>
         </div>
         
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/pescado-lo-macho.jpg" alt="Pescado a lo Macho"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Pescado a lo macho</div>
-                    <div class="plato-precio">S/38</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/filete-salsa.png" alt="Filete en Salsa"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Filete en salsa de langostinos</div>
-                    <div class="plato-precio">S/38</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/filete-plancha.png" alt="Filete de Pescado"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Filete de pescado a la plancha / frito</div>
-                    <div class="plato-precio">S/30</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/saltado.png" alt="Saltado"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Saltado de (Cuadril / Pollo)</div>
-                    <div class="plato-precio">S/30</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/bisteck.png" alt="Bisteck a lo Pobre"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Bisteck a lo pobre</div>
-                    <div class="plato-precio">S/36</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/pollo-plancha.png" alt="Pollo a la Plancha"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Pollo a la plancha con arroz y papas fritas</div>
-                    <div class="plato-precio">S/30</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/fetuccini-lomo.png" alt="Fetuccini con Lomo"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Fetuccini a la huancaína c/ lomo fino saltado</div>
-                    <div class="plato-precio">S/40</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/fetuccini-langos.png" alt="Fetuccini con Langostinos"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Fetuccini con Langostinos</div>
-                    <div class="plato-precio">S/32</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/picante-langostinos.png" alt="Picante de Langostinos"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Picante de langostinos</div>
-                    <div class="plato-precio">S/40</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GUARNICIONES -->
-    <section id="guarniciones">
-        <h2>Guarniciones (S/6)</h2>
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/arroz-porcion.png" alt="Porción de Arroz"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Porción de arroz</div>
+         <div id="guarniciones" class="pantalla">
+            <h2 class="titulo-seccion">Guarniciones</h2>
+            <div class="plato-card">
+                <img src="img/arroz-porcion.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Porción de Arroz</div>
                     <div class="plato-precio">S/6</div>
                 </div>
             </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/chifles.png" alt="Chifles"></div>
-            <div class="plato-info">
-                <div class="plato-header">
+            <div class="plato-card">
+                <img src="img/chifles.png" class="plato-img-mini">
+                <div class="plato-info">
                     <div class="plato-nombre">Chifles</div>
                     <div class="plato-precio">S/6</div>
                 </div>
             </div>
-        </div>
-
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/choclo.png" alt="Choclo"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Choclo</div>
+             <div class="plato-card">
+                <img src="img/yucas.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Yucas</div>
                     <div class="plato-precio">S/6</div>
                 </div>
             </div>
         </div>
 
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/canchita.png" alt="Canchita"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Canchita</div>
-                    <div class="plato-precio">S/6</div>
+        <div id="bebidas" class="pantalla">
+            <h2 class="titulo-seccion">Bebidas</h2>
+            <div class="plato-card">
+                <img src="img/chicha.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Chicha Morada (1L)</div>
+                    <div class="plato-precio">S/16</div>
+                </div>
+            </div>
+            <div class="plato-card">
+                <img src="img/limonada.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Limonada (1L)</div>
+                    <div class="plato-precio">S/16</div>
+                </div>
+            </div>
+            <div class="plato-card">
+                <img src="img/maracuya.png" class="plato-img-mini">
+                <div class="plato-info">
+                    <div class="plato-nombre">Maracuyá (1L)</div>
+                    <div class="plato-precio">S/16</div>
                 </div>
             </div>
         </div>
 
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/yucas.png" alt="Yucas"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Yucas Fritas / Sancochadas</div>
-                    <div class="plato-precio">S/6</div>
-                </div>
-            </div>
-        </div>
+    </div>
 
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/yuyo.png" alt="Yuyo"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Yuyo frito / sancochado</div>
-                    <div class="plato-precio">S/6</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <button id="btn-volver" class="btn-volver-float" onclick="volverInicio()">
+        ⬅ Volver al Menú
+    </button>
 
-    <!-- BEBIDAS -->
-    <section id="bebidas">
-        <h2>Bebidas</h2>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/chicha.png" alt="Chicha Morada"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Chicha Morada</div>
-                </div>
-                <div class="plato-desc">Refrescante bebida de maíz morado</div>
-                <div class="bebida-opciones">
-                    <div class="bebida-item">Litro: <span style="color:var(--ROJO); font-weight:800;">S/16</span></div>
-                    <div class="bebida-item">Copa: <span style="color:var(--ROJO); font-weight:800;">S/8</span></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/limonada.png" alt="Limonada"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Limonada</div>
-                </div>
-                <div class="bebida-opciones">
-                    <div class="bebida-item">Litro: <span style="color:var(--ROJO); font-weight:800;">S/16</span></div>
-                    <div class="bebida-item">Copa: <span style="color:var(--ROJO); font-weight:800;">S/8</span></div>
-                </div>
-            </div>
-        </div>
+    <script>
+        // Función para mostrar una sección específica y ocultar las demás
+        function verSeccion(idSeccion) {
+            // 1. Ocultar todas las pantallas
+            document.querySelectorAll('.pantalla').forEach(p => {
+                p.classList.remove('activa');
+            });
 
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/limonada-frozen.png" alt="Limonada Frozen"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Limonada frozen</div>
-                </div>
-                <div class="bebida-opciones">
-                    <div class="bebida-item">Litro: <span style="color:var(--ROJO); font-weight:800;">S/18</span></div>
-                    <div class="bebida-item">Copa: <span style="color:var(--ROJO); font-weight:800;">S/9</span></div>
-                </div>
-            </div>
-        </div>
+            // 2. Mostrar la sección seleccionada
+            const seccion = document.getElementById(idSeccion);
+            if(seccion) {
+                seccion.classList.add('activa');
+                // Hacer scroll al inicio suavemente
+                window.scrollTo({ top: 0, behavior: 'auto' });
+            }
 
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/maracuya.png" alt="Maracuyá"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Maracuyá</div>
-                </div>
-                <div class="bebida-opciones">
-                    <div class="bebida-item">Litro: <span style="color:var(--ROJO); font-weight:800;">S/16</span></div>
-                    <div class="bebida-item">Copa: <span style="color:var(--ROJO); font-weight:800;">S/8</span></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="plato-card">
-            <div class="plato-img"><img src="img/maracuya-frozen.png" alt="Maracuyá Frozen"></div>
-            <div class="plato-info">
-                <div class="plato-header">
-                    <div class="plato-nombre">Maracuyá Frozen</div>
-                </div>
-                <div class="bebida-opciones">
-                    <div class="bebida-item">Litro: <span style="color:var(--ROJO); font-weight:800;">S/18</span></div>
-                    <div class="bebida-item">Copa: <span style="color:var(--ROJO); font-weight:800;">S/9</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
+            // 3. Mostrar el botón de volver (si no estamos en inicio)
+            if (idSeccion !== 'inicio') {
+                document.getElementById('btn-volver').style.display = 'block';
+            } else {
+                document.getElementById('btn-volver').style.display = 'none';
+            }
+        }
 
-    <footer class="footer">
-        <p>📍 Av. Brasil 2804, Pueblo Libre</p>
-        <p>🕒 Atención: 11:00 am - 5:00 pm</p>
-        <p style="margin-top:15px; color:#666;">Cevichería Tipo's © 2026 | Creado por JJRY</p>
-    </footer>
-</div>
+        // Función para volver al grid principal
+        function volverInicio() {
+            verSeccion('inicio');
+        }
+    </script>
 
 </body>
 </html>
-
