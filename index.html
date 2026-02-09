@@ -1741,6 +1741,26 @@
 .animar-carrito {
     animation: rebote_carrito 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+        /*esta vaina hace interactue el carrito de compras xd*/
+@keyframes shake-cart {
+    0% { transform: scale(1) rotate(0deg); }
+    20% { transform: scale(1.2) rotate(-15deg); }
+    40% { transform: scale(1.2) rotate(15deg); }
+    60% { transform: scale(1.2) rotate(-15deg); }
+    80% { transform: scale(1.2) rotate(15deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.animar-sacudida {
+    animation: shake-cart 0.6s ease-in-out !important;
+}
+
+/* Estilo del botón cuando se presiona se vuelve rojito */
+.btn-enviando {
+    background-color: var(--ROJO) !important;
+    transform: scale(0.95);
+    transition: all 0.2s;
+}
     </style>
 </head>
 <body>
@@ -3246,6 +3266,15 @@ function cerrarCarrito() {
 }
 
 function agregarAlCarrito(nombre, precio, especificaciones = '') {
+    // 1. Identificar el botón que se presionó (opcional pero recomendado)
+    const botonPresionado = event.currentTarget;
+    const textoOriginal = botonPresionado.innerHTML;
+
+    // 2. Cambiar el color del botón a rojo y poner un check
+    botonPresionado.classList.add('btn-enviando');
+    botonPresionado.innerHTML = "✅ ¡LISTO!";
+
+    // 3. Lógica del carrito
     const itemExistente = carrito.find(item => 
         item.nombre === nombre && item.especificaciones === especificaciones
     );
@@ -3261,8 +3290,22 @@ function agregarAlCarrito(nombre, precio, especificaciones = '') {
         });
     }
     
+    // 4. Activar la sacudida del carrito flotante
+    const carritoFlotante = document.querySelector('.carrito-btn');
+    if (carritoFlotante) {
+        carritoFlotante.classList.remove('animar-sacudida');
+        void carritoFlotante.offsetWidth; // Reiniciar animación
+        carritoFlotante.classList.add('animar-sacudida');
+    }
+
+    // 5. Actualizar los datos del carrito
     actualizarCarrito();
-    mostrarNotificacionAgregado(nombre);
+
+    // 6. Regresar el botón a la normalidad después de 1 segundo
+    setTimeout(() => {
+        botonPresionado.classList.remove('btn-enviando');
+        botonPresionado.innerHTML = textoOriginal;
+    }, 1000);
 }
 
 function mostrarNotificacionAgregado(nombre) {
