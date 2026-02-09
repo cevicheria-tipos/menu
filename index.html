@@ -90,7 +90,7 @@
 
         .subtitulo {
             font-size: 1rem;
-            color: var(--ROJO);
+            color: var(--VERDE); /* Changed from ROJO to VERDE */
             font-style: italic;
             margin-bottom: 1.5rem;
         }
@@ -240,15 +240,15 @@
             margin-bottom: 0.2rem;
         }
 
-     .plato-precio {
-    background: none;
-    color: var(--VERDE); /* Verde de la marca */
-    padding: 2px 0;
-    font-weight: 700;
-    font-size: 1.15rem;
-    border-bottom: 2px solid var(--AMARILLO); 
-    display: inline-block;
-}
+        .plato-precio {
+            background: none;
+            color: var(--VERDE); /* Friendly green */
+            padding: 2px 0;
+            font-weight: 700;
+            font-size: 1.15rem;
+            border-bottom: 2px solid var(--AMARILLO); 
+            display: inline-block;
+        }
 
         .precio-doble {
             display: flex;
@@ -260,7 +260,7 @@
         .precio-opcion {
             display: flex;
             justify-content: space-between;
-            background: var(--ROJO);
+            background: var(--VERDE); /* Friendly green */
             color: var(--blanco);
             padding: 0.3rem 0.6rem;
             border-radius: 15px;
@@ -639,7 +639,7 @@
 
         .carrito-item-precio {
             font-weight: 600;
-            color: var(--ROJO);
+            color: var(--VERDE); /* Friendly green */
             font-size: 1rem;
             white-space: nowrap;
         }
@@ -863,7 +863,7 @@
         }
 
         .sugerencia-precio {
-            color: var(--ROJO);
+            color: var(--VERDE); /* Friendly green */
             font-weight: 600;
             font-size: 0.9rem;
         }
@@ -1284,7 +1284,7 @@
         }
 
         .sugerencia-precio {
-            color: var(--ROJO);
+            color: var(--VERDE); /* Friendly green */
             font-weight: 600;
             font-size: 0.9rem;
         }
@@ -1658,14 +1658,14 @@
         
  @media (max-width: 768px) {
     .btn-agregar {
-        width: 100% !important;     
-        padding: 16px !important;    
+        width: 100% !important;      
+        padding: 16px !important;     
         background-color: var(--VERDE) !important; /* Verde amigable */
         font-weight: 700 !important;  
         border-radius: 12px !important;
         box-shadow: 0 4px 10px rgba(28, 97, 37, 0.3) !important;
     }
-}           
+}            
             .plato-item {
                 padding: 15px;
             }
@@ -1851,7 +1851,7 @@
             
             <div class="botones-modal-personalizacion">
                 <button class="btn-cancelar-personalizacion" onclick="cerrarModalPersonalizacion()">Cancelar</button>
-                <button class="btn-confirmar-personalizacion" onclick="">Agregar al Carrito</button>
+                <button class="btn-confirmar-personalizacion" onclick="confirmarPersonalizacion()">Agregar al Carrito</button>
             </div>
         </div>
     </div>
@@ -2037,7 +2037,7 @@
                     Av. Brasil 2804, Pueblo Libre.
                 </p>
 
-                <a href="https://maps.app.goo.gl/DzDT7KyLXhH5m8AC6" target="_blank" class="btn-mapa-pro">
+                <a href="https://www.google.com/maps/search/?api=1&query=Av.+Brasil+2804,+Pueblo+Libre" target="_blank" class="btn-mapa-pro">
                     Ver Ubicación
                 </a>
             </div>
@@ -2123,7 +2123,6 @@
     <div id="entradas" class="pantalla">
         <div class="container">
             <h2>Entradas</h2>
-            
             <ul class="plato-lista">
                 <li class="plato-item">
                     <div class="plato-info">
@@ -2176,7 +2175,7 @@
                     </div>
                     <button class="btn-agregar" onclick="abrirModalPersonalizacion('Causa acebichada', 30, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
                 </li>
-                <li class="plato-item">
+                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
                             <div class="plato-nombre">Causa de pollo</div>
@@ -2229,11 +2228,8 @@
                     <button class="btn-agregar" onclick="abrirModalPersonalizacion('Leche de tigre', 16, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
                 </li>
             </ul>
-
             <div style="text-align: center;">
-                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
-                    Volver al Menú  
-                </button>
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">Volver al Menú</button>
             </div>
         </div>
     </div>
@@ -2241,7 +2237,6 @@
     <div id="cebiches" class="pantalla">
         <div class="container">
             <h2>Cebiches</h2>
-            
             <ul class="plato-lista">
                 <li class="plato-item">
                     <div class="plato-info">
@@ -2255,7 +2250,7 @@
                     </div>
                     <button class="btn-agregar" onclick="abrirModalPersonalizacion('Cebiche de pescado', 35, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
                 </li>
-                <li class="plato-item">
+                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
                             <div class="plato-nombre">Cebiche mixto</div>
@@ -2306,11 +2301,8 @@
                     <button class="btn-agregar" onclick="abrirModalPersonalizacion('Tiradito de pescado', 32, ['Sin ají', 'Poco ají', 'Picante'])">Agregar al pedido</button>
                 </li>
             </ul>
-            
             <div style="text-align: center;">
-                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
-                    Volver al Menú
-                </button>
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">Volver al Menú</button>
             </div>
         </div>
     </div>
@@ -2318,9 +2310,8 @@
     <div id="combinaciones" class="pantalla">
         <div class="container">
             <h2>Combinaciones</h2>
-            
             <ul class="plato-lista">
-                <li class="plato-item">
+                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
                             <div class="plato-nombre">Combinado 1</div>
@@ -2425,11 +2416,8 @@
                     <button class="btn-agregar" onclick="abrirModalCombinadoMarino('Triple Marino 4', 42)">Agregar al pedido</button>
                 </li>
             </ul>
-
             <div style="text-align: center;">
-                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
-                    Volver al Menú
-                </button>
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">Volver al Menú</button>
             </div>
         </div>
     </div>
@@ -2437,7 +2425,6 @@
     <div id="rondas" class="pantalla">
         <div class="container">
             <h2>Triples</h2>
-            
             <ul class="plato-lista">
                 <li class="plato-item">
                     <div class="plato-info">
@@ -2492,11 +2479,8 @@
                     <button class="btn-agregar" onclick="abrirModalCombinadoMarino('Ronda Marina 4', 69)">Agregar al pedido</button>
                 </li>
             </ul>
-            
             <div style="text-align: center;">
-                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
-                    Volver al Menú
-                </button>
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">Volver al Menú</button>
             </div>
         </div>
     </div>
@@ -2504,7 +2488,6 @@
     <div id="chicharrones" class="pantalla">
         <div class="container">
             <h2>Chicharrones</h2>
-            
             <ul class="plato-lista">
                 <li class="plato-item">
                     <div class="plato-info">
@@ -2559,11 +2542,8 @@
                     <button class="btn-agregar" onclick="agregarAlCarrito('Chicharrón de langostinos', 46)">Agregar al pedido</button>
                 </li>
             </ul>
-            
             <div style="text-align: center;">
-                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
-                    Volver al Menú
-                </button>
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">Volver al Menú</button>
             </div>
         </div>
     </div>
@@ -2571,7 +2551,6 @@
     <div id="pescados-enteros" class="pantalla">
         <div class="container">
             <h2>Pescados Enteros</h2>
-            
             <ul class="plato-lista">
                 <li class="plato-item">
                     <div class="plato-info">
@@ -2586,7 +2565,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Cabrilla dorada', 40)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2600,7 +2578,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Cabrilla al ajo', 42)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2614,7 +2591,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Cabrilla al ajillo', 42)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2628,7 +2604,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Cabrilla a lo macho', 48)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2643,11 +2618,8 @@
                     <button class="btn-agregar" onclick="agregarAlCarrito('Trucha dorada', 30)">Agregar al pedido</button>
                 </li>
             </ul>
-            
             <div style="text-align: center;">
-                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
-                    Volver al Menú
-                </button>
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">Volver al Menú</button>
             </div>
         </div>
     </div>
@@ -2655,7 +2627,6 @@
     <div id="sopas" class="pantalla">
         <div class="container">
             <h2>Sopas y Sudados</h2>
-            
             <ul class="plato-lista">
                 <li class="plato-item">
                     <div class="plato-info">
@@ -2706,11 +2677,8 @@
                     <button class="btn-agregar" onclick="agregarAlCarrito('Sudado de pescado filete', 35)">Agregar al pedido</button>
                 </li>
             </ul>
-            
             <div style="text-align: center;">
-                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
-                    Volver al Menú
-                </button>
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">Volver al Menú</button>
             </div>
         </div>
     </div>
@@ -2718,7 +2686,6 @@
     <div id="platos-de-fondo" class="pantalla">
         <div class="container">
             <h2>Platos de Fondo</h2>
-            
             <ul class="plato-lista">
                 <li class="plato-item">
                     <div class="plato-info">
@@ -2732,7 +2699,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Arroz con mariscos', 32)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2745,7 +2711,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Arroz con langostinos', 32)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2758,7 +2723,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Arroz chaufa de mariscos', 32)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2771,7 +2735,6 @@
                     </div>          
                     <button class="btn-agregar" onclick="agregarAlCarrito('Arroz chaufa de pollo', 28)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2784,7 +2747,6 @@
                     </div>          
                     <button class="btn-agregar" onclick="agregarAlCarrito('Arroz chaufa de carne', 28)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2797,7 +2759,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Arroz chaufa de pescado', 30)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2810,7 +2771,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Picante de langostinos', 40)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2823,7 +2783,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Pescado a lo macho', 38)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2836,7 +2795,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Filete en salsa de langostinos', 38)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2849,7 +2807,6 @@
                     </div>
                     <button class="btn-agregar" onclick="abrirModalPersonalizacion('Filete de pescado', 30, ['Plancha', 'Frito'])">Agregar al pedido</button>
                     </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2861,8 +2818,7 @@
                         <img src="img/saltado.png" alt="Saltado">
                     </div>
                     <button class="btn-agregar" onclick="abrirModalPersonalizacion('Saltado', 30, ['Cuadril', 'Pollo'])">Agregar al pedido</button>
-                </li>       
-                
+                </li>        
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2875,7 +2831,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Lomo fino saltado', 40)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2888,7 +2843,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Bisteck a lo pobre', 36)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2901,7 +2855,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Pollo a la plancha con arroz y papas fritas', 30)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2914,7 +2867,6 @@
                     </div>
                     <button class="btn-agregar" onclick="abrirModalPersonalizacion('Fetuccini a la huancaina con', 35, ['Cuadril', 'Pollo'])">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2927,7 +2879,6 @@
                     </div>
                       <button class="btn-agregar" onclick="agregarAlCarrito('Fetuccini a la huancaina con lomo fino', 40)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2936,24 +2887,20 @@
                         <div class="plato-precio">S/32</div>
                     </div>
                     <div class="plato-imagen">
-                        <img src="img/fetuccini-langos.png" alt="Fetuccini con Langostinos">       
+                        <img src="img/fetuccini-langos.png" alt="Fetuccini con Langostinos">        
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Fetuccini con Langostinos', 32)">Agregar al pedido</button>
                 </li>
             </ul>
-            
             <div style="text-align: center;">
-                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
-                    Volver al Menú
-                </button>
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">Volver al Menú</button>
             </div>
         </div>
     </div>
     
-    <div id="guardiciones" class="pantalla">
+    <div id="guarniciones" class="pantalla">
         <div class="container">
             <h2>GUARNICIONES</h2>
-            
             <ul class="plato-lista">
                 <li class="plato-item">
                     <div class="plato-info">
@@ -2967,7 +2914,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Porción de Arroz', 6)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2980,7 +2926,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Chifles', 6)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -2993,7 +2938,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Choclo', 6)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -3006,7 +2950,6 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Canchita', 6)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -3015,11 +2958,10 @@
                         <div class="plato-precio">S/6</div>
                     </div>
                     <div class="plato-imagen">
-                        <img src="img/yucas.png" alt="Yucas">       
+                        <img src="img/yucas.png" alt="Yucas">        
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Yucas Fritas/Sancochadas', 6)">Agregar al pedido</button>
                 </li>
-                
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -3033,11 +2975,8 @@
                     <button class="btn-agregar" onclick="agregarAlCarrito('Yuyo frito/sancochado', 6)">Agregar al pedido</button>
                 </li>
             </ul>
-
             <div style="text-align: center;">
-                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
-                    Volver al Menú
-                </button>
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">Volver al Menú</button>
             </div>
         </div>
     </div>
@@ -3045,11 +2984,9 @@
     <div id="bebidas" class="pantalla">
         <div class="container">
             <h2>Bebidas</h2>
-            
             <div class="info-pedidos">
                 <p class="horario">Horario: 11:00 am - 5:00 pm</p>
             </div>
-            
             <ul class="plato-lista">
                 <li class="plato-item">
                     <div class="plato-info">
@@ -3165,7 +3102,7 @@
                         </div>
                     </div>
                     <div class="plato-imagen">
-                        <img src="img/maracuya-frozen.png" alt="Maracuyá Frozen">       
+                        <img src="img/maracuya-frozen.png" alt="Maracuyá Frozen">        
                     </div>
                     <div style="display: flex; gap: 10px; margin-top: 10px;">
                         <button class="btn-agregar" onclick="agregarAlCarrito('Maracuyá Frozen - Litro', 18)">Litro</button>
@@ -3173,11 +3110,8 @@
                     </div>
                 </li>
             </ul>
-            
             <div style="text-align: center;">
-                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">
-                    Volver al Menú
-                </button>
+                <button class="btn btn-regresar" onclick="mostrarPantalla('menu')">Volver al Menú</button>
             </div>
         </div>
     </div>
@@ -3191,1205 +3125,759 @@
     </div>
 
     <script>
+        let carrito = JSON.parse(localStorage.getItem('carritoTipos')) || [];
+        let platoActual = null;
+        let precioActual = 0;
+        let opcionesSeleccionadas = {};
+        let opcionesModal = [];
+        let metodoPagoSeleccionado = 'efectivo';
 
-let carrito = JSON.parse(localStorage.getItem('carritoTipos')) || [];
-let platoActual = null;
-let precioActual = 0;
-let opcionesSeleccionadas = {};
-let opcionesModal = [];
-let metodoPagoSeleccionado = 'efectivo';
-
-
-function mostrarPantalla(id) {
-    document.querySelectorAll('.pantalla').forEach(p => {
-        p.classList.remove('activa');
-    });
-    document.getElementById(id).classList.add('activa');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-
-function mostrarCarrito() {
-    actualizarCarrito();
-    document.getElementById('carrito-modal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-function cerrarCarrito() {
-    document.getElementById('carrito-modal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-function agregarAlCarrito(nombre, precio, especificaciones = '') {
-    // 1. Identificar el botón que se presionó (opcional pero recomendado)
-    const botonPresionado = event.currentTarget;
-    const textoOriginal = botonPresionado.innerHTML;
-
-    // 2. Cambiar el color del botón a rojo y poner un check
-    botonPresionado.classList.add('btn-enviando');
-    botonPresionado.innerHTML = "✅ ¡LISTO!";
-
-    // 3. Lógica del carrito
-    const itemExistente = carrito.find(item => 
-        item.nombre === nombre && item.especificaciones === especificaciones
-    );
-    
-    if (itemExistente) {
-        itemExistente.cantidad += 1;
-    } else {
-        carrito.push({
-            nombre: nombre,
-            precio: precio,
-            cantidad: 1,
-            especificaciones: especificaciones
-        });
-    }
-    
-    // 4. Activar la sacudida del carrito flotante
-    const carritoFlotante = document.querySelector('.carrito-btn');
-    if (carritoFlotante) {
-        carritoFlotante.classList.remove('animar-sacudida');
-        void carritoFlotante.offsetWidth; // Reiniciar animación
-        carritoFlotante.classList.add('animar-sacudida');
-    }
-
-    // 5. Actualizar los datos del carrito
-    actualizarCarrito();
-
-    // 6. Regresar el botón a la normalidad después de 1 segundo
-    setTimeout(() => {
-        botonPresionado.classList.remove('btn-enviando');
-        botonPresionado.innerHTML = textoOriginal;
-    }, 1000);
-}
-
-function mostrarNotificacionAgregado(nombre) {
-    const notificacion = document.createElement('div');
-    notificacion.id = 'notificacion-agregado';
-    notificacion.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: var(--VERDE);
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        z-index: 10000;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    `;
-    notificacion.innerHTML = `
-        <span style="font-size: 1.2rem;">✅</span>
-        <span>${nombre} agregado</span>
-    `;
-    
-    document.body.appendChild(notificacion);
-    
-    setTimeout(() => {
-        if (notificacion.parentNode) notificacion.remove();
-    }, 2500);
-}
-
-function modificarCantidad(index, cambio) {
-    if (carrito[index]) {
-        const nuevaCantidad = carrito[index].cantidad + cambio;
-        
-        if (nuevaCantidad <= 0) {
-            // Eliminar inmediatamente sin confirmar
-            carrito.splice(index, 1);
-        } else {
-            carrito[index].cantidad = nuevaCantidad;
+        function mostrarPantalla(id) {
+            document.querySelectorAll('.pantalla').forEach(p => {
+                p.classList.remove('activa');
+            });
+            document.getElementById(id).classList.add('activa');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
-        actualizarCarrito();
-    }
-}
 
-function eliminarDelCarrito(index) {
-    carrito.splice(index, 1);
-    actualizarCarrito();
-}
-
-function vaciarCarrito() {
-    if (carrito.length === 0) return;
-    
-    carrito = [];
-    actualizarCarrito();
-}
-
-function obtenerImagenPlato(nombre) {
-    const imagenes = {
-        'tequeños': 'img/tequenos.png',
-        'causa de pulpa': 'img/causa-cangrejo.png',
-        'causa de langostino': 'img/causa-langostinos.png',
-        'causa acebichada': 'img/causa-acebichada.png',
-        'causa de pollo': 'img/causa-pollo.png',
-        'poderoso': 'img/poderoso.png',
-        'leche de tigre': 'img/leche-tigre.png',
-        'leche de pantera': 'img/leche-pantera.png',
-        'cebiche de pescado': 'img/cebiche-pescado.png',
-        'cebiche mixto': 'img/cebiche-mixto.png',
-        'cebiche de conchas': 'img/cebiche-conchas.png',
-        'cebiche clásico': 'img/cebiche-clasico.png',
-        'tiradito': 'img/tiradito.png',
-        'combinado 1': 'img/combinado-1.png',
-        'combinado 2': 'img/combinado-2.png',
-        'doble marino': 'img/doble-marino.png',
-        'triple marino 1': 'img/triple-1.png',
-        'triple marino 2': 'img/triple-2.png',
-        'triple marino 3': 'img/triple-3.png',
-        'triple marino 4': 'img/triple-4.png',
-        'ronda marina 1': 'img/ronda-1.png',
-        'ronda marina 2': 'img/ronda-2.png',
-        'ronda marina 3': 'img/ronda-3.png',
-        'ronda marina 4': 'img/ronda-4.png',
-        'jalea': 'img/jalea-mixta.png',
-        'chicharrón': 'img/chicharron-pescado.png',
-        'cabrilla': 'img/cabrilla-dorada.jpg',
-        'trucha': 'img/trucha-dorada.png',
-        'parihuela': 'img/parihuela.png',
-        'chupe': 'img/chupe-pescado.png',
-        'sudado': 'img/sudado-filete.png',
-        'arroz con mariscos': 'img/arroz-mariscos.png',
-        'arroz chaufa': 'img/chaufa-mariscos.png',
-        'picante': 'img/picante-langostinos.png',
-        'pescado a lo macho': 'img/pescado-lo-macho.jpg',
-        'filete': 'img/filete-plancha.png',
-        'saltado': 'img/saltado-cuadril.png',
-        'lomo fino': 'img/lomo-saltado.png',
-        'bisteck': 'img/bisteck-pobre.png',
-        'pollo': 'img/pollo-plancha.png',
-        'fetuccini': 'img/fetuccini-huancaina.png',
-        'arroz': 'img/arroz-porcion.png',
-        'chifles': 'img/chifles.png',
-        'choclo': 'img/choclo.png',
-        'canchita': 'img/canchita.png',
-        'yucas': 'img/yucas.png',
-        'yuyo': 'img/yuyo.png',
-        'chicha': 'img/chicha.png',
-        'limonada': 'img/limonada.png',
-        'maracuyá': 'img/maracuya.png'
-    };
-    
-    const nombreLimpio = nombre.toLowerCase();
-    
-    for (const [key, value] of Object.entries(imagenes)) {
-        if (nombreLimpio.includes(key)) {
-            return value;
+        function mostrarCarrito() {
+            actualizarCarrito();
+            document.getElementById('carrito-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
-    }
-    
-    return 'img/banner-inicio.png';
-}
 
-function actualizarCarrito() {
-    const carritoItems = document.getElementById('carrito-items');
-    const carritoVacio = document.getElementById('carrito-vacio');
-    const carritoResumen = document.getElementById('carrito-resumen');
-    const carritoBotones = document.getElementById('carrito-botones');
-    const sugerenciasContainer = document.getElementById('sugerencias-container');
-    const carritoContador = document.getElementById('carrito-contador');
-    const subtotalCarrito = document.getElementById('subtotal-carrito');
-    const totalCarrito = document.getElementById('total-carrito');
-    const envioCarrito = document.getElementById('envio-carrito');
-    
-    const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
-    carritoContador.textContent = totalItems;
-    
-    if (carrito.length === 0) {
-        carritoVacio.style.display = 'block';
-        carritoItems.innerHTML = '';
-        carritoResumen.style.display = 'none';
-        carritoBotones.style.display = 'none';
-        sugerenciasContainer.style.display = 'none';
-    } else {
-        carritoVacio.style.display = 'none';
-        carritoResumen.style.display = 'block';
-        carritoBotones.style.display = 'flex';
-        
-        let html = '';
-        let subtotal = 0;
-        
-        carrito.forEach((item, index) => {
-            const subtotalItem = item.precio * item.cantidad;
-            subtotal += subtotalItem;
-            
-            html += `
-                <div class="carrito-item">
-                    <div class="carrito-item-imagen">
-                        <img src="${obtenerImagenPlato(item.nombre)}" alt="${item.nombre}">
-                    </div>
-                    <div class="carrito-item-info">
-                        <div class="carrito-item-nombre">${item.nombre}</div>
-                        ${item.especificaciones ? `<div class="especificaciones-carrito">${item.especificaciones}</div>` : ''}
-                        <div class="carrito-item-precio">S/ ${item.precio.toFixed(2)} c/u</div>
-                    </div>
-                    <div class="carrito-item-cantidad">
-                        <button class="cantidad-btn restar" onclick="modificarCantidad(${index}, -1)">-</button>
-                        <span class="carrito-cantidad-numero">${item.cantidad}</span>
-                        <button class="cantidad-btn" onclick="modificarCantidad(${index}, 1)">+</button>
-                    </div>
-                    <div class="carrito-item-subtotal">S/ ${subtotalItem.toFixed(2)}</div>
-                    <button class="carrito-item-eliminar" onclick="eliminarDelCarrito(${index})">✕</button>
-                </div>
-            `;
-        });
-        
-        carritoItems.innerHTML = html;
-        subtotalCarrito.textContent = `S/ ${subtotal.toFixed(2)}`;
-        envioCarrito.textContent = 'S/ 0.00';
-        totalCarrito.textContent = `S/ ${subtotal.toFixed(2)}`;
-        
-        mostrarSugerencias();
-    }
-    
-    localStorage.setItem('carritoTipos', JSON.stringify(carrito));
-    // Activar animación de rebote en el botón flotante del carrito
-const carritoFlotante = document.querySelector('.carrito-btn');
-if (carritoFlotante) {
-    carritoFlotante.classList.remove('animar-carrito');
-    void carritoFlotante.offsetWidth; // Truco para reiniciar la animación
-    carritoFlotante.classList.add('animar-carrito');
-}
-}
+        function cerrarCarrito() {
+            document.getElementById('carrito-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-// ================================================
-// FUNCIONES DE SUGERENCIAS
-// ================================================
-function mostrarSugerencias() {
-    const sugerenciasContainer = document.getElementById('sugerencias-container');
-    const sugerenciasGrid = document.querySelector('.sugerencias-grid');
-    
-    if (sugerenciasGrid) {
-        const tieneAcompañamientos = carrito.some(item => 
-            item.nombre.includes('Arroz') || 
-            item.nombre.includes('Chifles') || 
-            item.nombre.includes('Choclo') || 
-            item.nombre.includes('Canchita') ||
-            item.nombre.includes('Yucas')
-        );
-        
-        const tieneBebidas = carrito.some(item => 
-            item.nombre.includes('Chicha') || 
-            item.nombre.includes('Limonada') || 
-            item.nombre.includes('Maracuyá')
-        );
-        
-        if (!tieneAcompañamientos || !tieneBebidas) {
-            sugerenciasContainer.style.display = 'block';
-            
-            let sugerenciasHTML = '';
-            const sugerencias = [];
-            
-            if (!tieneAcompañamientos) {
-                sugerencias.push(
-                {nombre: 'Porción de Arroz', precio: 6, imagen: 'img/arroz-porcion.png'}, 
-        {nombre: 'Chifles', precio: 6, imagen: 'img/chifles.png'}
-                );
+        function agregarAlCarrito(nombre, precio, especificaciones = '') {
+            const botonPresionado = event.currentTarget;
+            if (botonPresionado && botonPresionado.classList.contains('btn-agregar')) {
+                const textoOriginal = botonPresionado.innerHTML;
+                botonPresionado.classList.add('btn-enviando');
+                botonPresionado.innerHTML = "✅ ¡LISTO!";
+                setTimeout(() => {
+                    botonPresionado.classList.remove('btn-enviando');
+                    botonPresionado.innerHTML = textoOriginal;
+                }, 1000);
             }
-            
-            if (!tieneBebidas) {
-                sugerencias.push(
-                  {nombre: 'Chicha Morada - 1 Litro', precio: 16, imagen: 'img/chicha.png'},
-        {nombre: 'Limonada - 1 Litro', precio: 16, imagen: 'img/limonada.png'},
-        {nombre: 'Maracuyá - 1 Litro', precio: 16, imagen: 'img/maracuya.png'}
-                );
-            }
-            
-            const tieneCebiche = carrito.some(item => 
-                item.nombre.toLowerCase().includes('cebiche')
+
+            const itemExistente = carrito.find(item => 
+                item.nombre === nombre && item.especificaciones === especificaciones
             );
             
-            if (tieneCebiche && !carrito.some(item => item.nombre.includes('Leche de tigre'))) {
-                sugerencias.push(
-                    {nombre: 'Leche de tigre', precio: 16, imagen: 'img/leche-tigre.png'}
-                );
+            if (itemExistente) {
+                itemExistente.cantidad += 1;
+            } else {
+                carrito.push({
+                    nombre: nombre,
+                    precio: precio,
+                    cantidad: 1,
+                    especificaciones: especificaciones
+                });
             }
             
-            sugerencias.forEach((sugerencia) => {
-                sugerenciasHTML += `
-                    <div class="sugerencia-item" onclick="agregarSugerencia('${sugerencia.nombre}', ${sugerencia.precio})">
-                        <div style="width: 60px; height: 60px; border-radius: 8px; overflow: hidden; flex-shrink: 0;">
-                            <img src="${sugerencia.imagen}" alt="${sugerencia.nombre}" style="width: 100%; height: 100%; object-fit: cover;">
+            const carritoFlotante = document.querySelector('.carrito-btn');
+            if (carritoFlotante) {
+                carritoFlotante.classList.remove('animar-sacudida');
+                void carritoFlotante.offsetWidth; 
+                carritoFlotante.classList.add('animar-sacudida');
+            }
+
+            actualizarCarrito();
+        }
+
+        function modificarCantidad(index, cambio) {
+            if (carrito[index]) {
+                const nuevaCantidad = carrito[index].cantidad + cambio;
+                if (nuevaCantidad <= 0) {
+                    carrito.splice(index, 1);
+                } else {
+                    carrito[index].cantidad = nuevaCantidad;
+                }
+                actualizarCarrito();
+            }
+        }
+
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+
+        function vaciarCarrito() {
+            if (carrito.length === 0) return;
+            carrito = [];
+            actualizarCarrito();
+        }
+
+        function obtenerImagenPlato(nombre) {
+            const imagenes = {
+                'tequeños': 'img/tequenos.png',
+                'causa de pulpa': 'img/causa-cangrejo.png',
+                'causa de langostino': 'img/causa-langostinos.png',
+                'causa acebichada': 'img/causa-acebichada.png',
+                'causa de pollo': 'img/causa-pollo.png',
+                'poderoso': 'img/poderoso.png',
+                'leche de tigre': 'img/leche-tigre.png',
+                'leche de pantera': 'img/leche-pantera.png',
+                'cebiche de pescado': 'img/cebiche-pescado.png',
+                'cebiche mixto': 'img/cebiche-mixto.png',
+                'cebiche de conchas': 'img/cebiche-conchas.png',
+                'cebiche clásico': 'img/cebiche-clasico.png',
+                'tiradito': 'img/tiradito.png',
+                'combinado 1': 'img/combinado-1.png',
+                'combinado 2': 'img/combinado-2.png',
+                'doble marino': 'img/doble-marino.png',
+                'triple marino 1': 'img/triple-1.png',
+                'triple marino 2': 'img/triple-2.png',
+                'triple marino 3': 'img/triple-3.png',
+                'triple marino 4': 'img/triple-4.png',
+                'ronda marina 1': 'img/ronda-1.png',
+                'ronda marina 2': 'img/ronda-2.png',
+                'ronda marina 3': 'img/ronda-3.png',
+                'ronda marina 4': 'img/ronda-4.png',
+                'jalea': 'img/jalea-mixta.png',
+                'chicharrón': 'img/chicharron-pescado.png',
+                'cabrilla': 'img/cabrilla-dorada.jpg',
+                'trucha': 'img/trucha-dorada.png',
+                'parihuela': 'img/parihuela.png',
+                'chupe': 'img/chupe-pescado.png',
+                'sudado': 'img/sudado-filete.png',
+                'arroz con mariscos': 'img/arroz-mariscos.png',
+                'arroz chaufa': 'img/chaufa-mariscos.png',
+                'picante': 'img/picante-langostinos.png',
+                'pescado a lo macho': 'img/pescado-lo-macho.jpg',
+                'filete': 'img/filete-plancha.png',
+                'saltado': 'img/saltado.png',
+                'lomo fino': 'img/lomo-saltado.png',
+                'bisteck': 'img/bisteck.png',
+                'pollo': 'img/pollo-plancha.png',
+                'fetuccini': 'img/fetuccini-huancaina.png',
+                'arroz': 'img/arroz-porcion.png',
+                'chifles': 'img/chifles.png',
+                'choclo': 'img/choclo.png',
+                'canchita': 'img/canchita.png',
+                'yucas': 'img/yucas.png',
+                'yuyo': 'img/yuyo.png',
+                'chicha': 'img/chicha.png',
+                'limonada': 'img/limonada.png',
+                'maracuyá': 'img/maracuya.png'
+            };
+            const nombreLimpio = nombre.toLowerCase();
+            for (const [key, value] of Object.entries(imagenes)) {
+                if (nombreLimpio.includes(key)) return value;
+            }
+            return 'img/banner-inicio.png';
+        }
+
+        function actualizarCarrito() {
+            const carritoItems = document.getElementById('carrito-items');
+            const carritoVacio = document.getElementById('carrito-vacio');
+            const carritoResumen = document.getElementById('carrito-resumen');
+            const carritoBotones = document.getElementById('carrito-botones');
+            const sugerenciasContainer = document.getElementById('sugerencias-container');
+            const carritoContador = document.getElementById('carrito-contador');
+            const subtotalCarrito = document.getElementById('subtotal-carrito');
+            const totalCarrito = document.getElementById('total-carrito');
+            const envioCarrito = document.getElementById('envio-carrito');
+            
+            const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
+            carritoContador.textContent = totalItems;
+            
+            if (carrito.length === 0) {
+                carritoVacio.style.display = 'block';
+                carritoItems.innerHTML = '';
+                carritoResumen.style.display = 'none';
+                carritoBotones.style.display = 'none';
+                sugerenciasContainer.style.display = 'none';
+            } else {
+                carritoVacio.style.display = 'none';
+                carritoResumen.style.display = 'block';
+                carritoBotones.style.display = 'flex';
+                
+                let html = '';
+                let subtotal = 0;
+                
+                carrito.forEach((item, index) => {
+                    const subtotalItem = item.precio * item.cantidad;
+                    subtotal += subtotalItem;
+                    
+                    html += `
+                        <div class="carrito-item">
+                            <div class="carrito-item-imagen">
+                                <img src="${obtenerImagenPlato(item.nombre)}" alt="${item.nombre}">
+                            </div>
+                            <div class="carrito-item-info">
+                                <div class="carrito-item-nombre">${item.nombre}</div>
+                                ${item.especificaciones ? `<div class="especificaciones-carrito">${item.especificaciones}</div>` : ''}
+                                <div class="carrito-item-precio">S/ ${item.precio.toFixed(2)} c/u</div>
+                            </div>
+                            <div class="carrito-item-cantidad">
+                                <button class="cantidad-btn restar" onclick="modificarCantidad(${index}, -1)">-</button>
+                                <span class="carrito-cantidad-numero">${item.cantidad}</span>
+                                <button class="cantidad-btn" onclick="modificarCantidad(${index}, 1)">+</button>
+                            </div>
+                            <div class="carrito-item-subtotal">S/ ${subtotalItem.toFixed(2)}</div>
+                            <button class="carrito-item-eliminar" onclick="eliminarDelCarrito(${index})">✕</button>
                         </div>
-                        <div class="sugerencia-info">
-                            <div class="sugerencia-nombre">${sugerencia.nombre}</div>
-                            <div class="sugerencia-precio">S/ ${sugerencia.precio.toFixed(2)}</div>
+                    `;
+                });
+                
+                carritoItems.innerHTML = html;
+                subtotalCarrito.textContent = `S/ ${subtotal.toFixed(2)}`;
+                envioCarrito.textContent = 'S/ 0.00';
+                totalCarrito.textContent = `S/ ${subtotal.toFixed(2)}`;
+                
+                mostrarSugerencias();
+            }
+            localStorage.setItem('carritoTipos', JSON.stringify(carrito));
+            const carritoFlotante = document.querySelector('.carrito-btn');
+            if (carritoFlotante) {
+                carritoFlotante.classList.remove('animar-carrito');
+                void carritoFlotante.offsetWidth;
+                carritoFlotante.classList.add('animar-carrito');
+            }
+        }
+
+        function mostrarSugerencias() {
+            const sugerenciasContainer = document.getElementById('sugerencias-container');
+            const sugerenciasGrid = document.querySelector('.sugerencias-grid');
+            
+            if (sugerenciasGrid) {
+                const tieneAcompañamientos = carrito.some(item => 
+                    item.nombre.includes('Arroz') || 
+                    item.nombre.includes('Chifles') || 
+                    item.nombre.includes('Choclo') || 
+                    item.nombre.includes('Canchita') ||
+                    item.nombre.includes('Yucas')
+                );
+                
+                const tieneBebidas = carrito.some(item => 
+                    item.nombre.includes('Chicha') || 
+                    item.nombre.includes('Limonada') || 
+                    item.nombre.includes('Maracuyá')
+                );
+                
+                if (!tieneAcompañamientos || !tieneBebidas) {
+                    sugerenciasContainer.style.display = 'block';
+                    let sugerenciasHTML = '';
+                    const sugerencias = [];
+                    
+                    if (!tieneAcompañamientos) {
+                        sugerencias.push(
+                            {nombre: 'Porción de Arroz', precio: 6, imagen: 'img/arroz-porcion.png'}, 
+                            {nombre: 'Chifles', precio: 6, imagen: 'img/chifles.png'}
+                        );
+                    }
+                    if (!tieneBebidas) {
+                        sugerencias.push(
+                            {nombre: 'Chicha Morada - 1 Litro', precio: 16, imagen: 'img/chicha.png'},
+                            {nombre: 'Limonada - 1 Litro', precio: 16, imagen: 'img/limonada.png'}
+                        );
+                    }
+                    
+                    const tieneCebiche = carrito.some(item => item.nombre.toLowerCase().includes('cebiche'));
+                    if (tieneCebiche && !carrito.some(item => item.nombre.includes('Leche de tigre'))) {
+                        sugerencias.push({nombre: 'Leche de tigre', precio: 16, imagen: 'img/leche-tigre.png'});
+                    }
+                    
+                    sugerencias.forEach((sugerencia) => {
+                        sugerenciasHTML += `
+                            <div class="sugerencia-item" onclick="agregarSugerencia('${sugerencia.nombre}', ${sugerencia.precio})">
+                                <div style="width: 60px; height: 60px; border-radius: 8px; overflow: hidden; flex-shrink: 0;">
+                                    <img src="${sugerencia.imagen}" alt="${sugerencia.nombre}" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="sugerencia-info">
+                                    <div class="sugerencia-nombre">${sugerencia.nombre}</div>
+                                    <div class="sugerencia-precio">S/ ${sugerencia.precio.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    sugerenciasGrid.innerHTML = sugerenciasHTML;
+                } else {
+                    sugerenciasContainer.style.display = 'none';
+                }
+            }
+        }
+
+        function agregarSugerencia(nombre, precio) {
+            agregarAlCarrito(nombre, precio);
+            const sugerenciaItem = event.target.closest('.sugerencia-item');
+            if (sugerenciaItem) {
+                sugerenciaItem.style.background = 'var(--verde-claro)';
+                sugerenciaItem.style.borderColor = 'var(--VERDE)';
+                sugerenciaItem.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.8rem; width: 100%;">
+                        <div style="color: var(--VERDE); font-size: 1.5rem;">✓</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--VERDE);">¡Agregado!</div>
+                            <div style="font-size: 0.9rem; color: #666;">${nombre}</div>
                         </div>
                     </div>
                 `;
-            });
-            
-            sugerenciasGrid.innerHTML = sugerenciasHTML;
-        } else {
-            sugerenciasContainer.style.display = 'none';
+                setTimeout(() => mostrarSugerencias(), 1500);
+            }
         }
-    }
-}
 
-function agregarSugerencia(nombre, precio) {
-    agregarAlCarrito(nombre, precio);
-    
-    const sugerenciaItem = event.target.closest('.sugerencia-item');
-    if (sugerenciaItem) {
-        sugerenciaItem.style.background = 'var(--verde-claro)';
-        sugerenciaItem.style.borderColor = 'var(--VERDE)';
-        sugerenciaItem.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 0.8rem; width: 100%;">
-                <div style="color: var(--VERDE); font-size: 1.5rem;">✓</div>
-                <div style="flex: 1;">
-                    <div style="font-weight: 600; color: var(--VERDE);">¡Agregado!</div>
-                    <div style="font-size: 0.9rem; color: #666;">${nombre}</div>
-                </div>
-            </div>
-        `;
-        
-        setTimeout(() => mostrarSugerencias(), 1500);
-    }
-}
+        // --- FUNCIONES CORREGIDAS PARA EL MODAL DE PERSONALIZACIÓN ---
 
+        function abrirModalPersonalizacion(nombre, precio, opciones) {
+            platoActual = nombre;
+            precioActual = precio;
+            opcionesModal = opciones || [];
+            opcionesSeleccionadas = {}; 
 
-function abrirModalPersonalizacion(nombre, precio, opciones) {
-    platoActual = nombre;
-    precioActual = precio;
-    opcionesModal = opciones || [];
-    opcionesSeleccionadas = {};
-    
-    document.getElementById('titulo-personalizacion').textContent = `Personaliza: ${nombre}`;
-    document.getElementById('especificaciones-personalizacion').value = '';
-    
-    const opcionesContainer = document.getElementById('opciones-container');
-    if (opcionesContainer) {
-        opcionesContainer.innerHTML = '';
-        
-        if (opcionesModal.length > 0) {
-            const categorias = {
-                'Picante': {opciones: ['Sin ají', 'Poco ají', 'Picante'], emojis: ['🚫', '🌶️', '🔥']},
-                'Cocción': {opciones: ['Plancha', 'Frito'], emojis: ['🍳', '🍟']},
-                'Tipo': {opciones: ['Cuadril', 'Pollo'], emojis: ['🥩', '🍗']}
-            };
-            
-            Object.keys(categorias).forEach(categoriaNombre => {
-                const categoria = categorias[categoriaNombre];
-                const mostrarCategoria = opcionesModal.some(opcion => 
-                    categoria.opciones.some(opcionCat => 
-                        opcion.toLowerCase().includes(opcionCat.toLowerCase())
-                    )
-                );
+            document.getElementById('titulo-personalizacion').textContent = `Personaliza: ${nombre}`;
+            document.getElementById('especificaciones-personalizacion').value = '';
+
+            const opcionesContainer = document.getElementById('opciones-container');
+            if (opcionesContainer) {
+                opcionesContainer.innerHTML = '';
                 
-                if (mostrarCategoria) {
-                    const seccion = document.createElement('div');
-                    seccion.style.marginBottom = '20px';
-                    seccion.style.paddingBottom = '10px';
-                    seccion.style.borderBottom = '1px solid #eee';
+                if (opcionesModal.length > 0) {
+                    const categorias = {
+                        'Picante': {opciones: ['Sin ají', 'Poco ají', 'Picante'], emojis: ['🚫', '🌶️', '🔥']},
+                        'Cocción': {opciones: ['Plancha', 'Frito'], emojis: ['🍳', '🍟']},
+                        'Tipo': {opciones: ['Cuadril', 'Pollo'], emojis: ['🥩', '🍗']}
+                    };
                     
-                    const tituloCategoria = document.createElement('div');
-                    tituloCategoria.style.fontSize = '0.95rem';
-                    tituloCategoria.style.fontWeight = '700';
-                    tituloCategoria.style.color = 'var(--VERDE)';
-                    tituloCategoria.style.marginBottom = '8px';
-                    tituloCategoria.textContent = categoriaNombre + ':';
-                    
-                    const opcionesContainerCat = document.createElement('div');
-                    opcionesContainerCat.style.display = 'flex';
-                    opcionesContainerCat.style.gap = '10px';
-                    opcionesContainerCat.style.flexWrap = 'wrap';
-                    
-                    categoria.opciones.forEach((opcion, index) => {
-                        if (opcionesModal.some(op => op.toLowerCase().includes(opcion.toLowerCase()))) {
-                            const opcionElement = document.createElement('div');
-                            opcionElement.className = 'opcion-personalizacion';
-                            opcionElement.dataset.categoria = categoriaNombre;
+                    Object.keys(categorias).forEach(categoriaNombre => {
+                        const categoria = categorias[categoriaNombre];
+                        const mostrarCategoria = opcionesModal.some(opcion => 
+                            categoria.opciones.some(opcionCat => 
+                                opcion.toLowerCase().includes(opcionCat.toLowerCase())
+                            )
+                        );
+                        
+                        if (mostrarCategoria) {
+                            const seccion = document.createElement('div');
+                            seccion.style.marginBottom = '20px';
+                            seccion.innerHTML = `<div class="categoria-titulo">${categoriaNombre}:</div>`;
                             
-                            const emoji = categoria.emojis && categoria.emojis[index] ? categoria.emojis[index] : '';
+                            const containerCat = document.createElement('div');
+                            containerCat.className = 'opciones-personalizacion';
                             
-                            opcionElement.style.flex = '1';
-                            opcionElement.style.minWidth = '100px';
-                            opcionElement.style.padding = '12px 8px';
-                            opcionElement.style.textAlign = 'center';
-                            
-                            opcionElement.innerHTML = `
-                                ${emoji ? `<div style="font-size: 1.3rem; margin-bottom: 5px;">${emoji}</div>` : ''}
-                                <div style="font-weight: 600; font-size: 0.9rem;">${opcion}</div>
-                            `;
-                            
-                            opcionElement.onclick = () => {
-                                document.querySelectorAll(`.opcion-personalizacion[data-categoria="${categoriaNombre}"]`).forEach(el => {
-                                    el.classList.remove('seleccionado');
-                                });
-                                opcionElement.classList.add('seleccionado');
-                                opcionesSeleccionadas[categoriaNombre] = opcion;
-                            };
-                            
-                            opcionesContainerCat.appendChild(opcionElement);
+                            categoria.opciones.forEach((opcion, index) => {
+                                if (opcionesModal.some(op => op.toLowerCase().includes(opcion.toLowerCase()))) {
+                                    const btn = document.createElement('div');
+                                    btn.className = 'opcion-personalizacion';
+                                    btn.innerText = (categoria.emojis[index] || '') + ' ' + opcion;
+                                    
+                                    btn.onclick = () => {
+                                        containerCat.querySelectorAll('.opcion-personalizacion').forEach(b => b.classList.remove('seleccionado'));
+                                        btn.classList.add('seleccionado');
+                                        opcionesSeleccionadas[categoriaNombre] = opcion;
+                                    };
+                                    containerCat.appendChild(btn);
+                                }
+                            });
+                            seccion.appendChild(containerCat);
+                            opcionesContainer.appendChild(seccion);
                         }
                     });
-                    
-                    seccion.appendChild(tituloCategoria);
-                    seccion.appendChild(opcionesContainerCat);
-                    opcionesContainer.appendChild(seccion);
                 }
-            });
-        }
-    }
-    
-    document.getElementById('modal-personalizacion').style.display = 'flex';
-}
-
-    
-    const requiereNivelAji = platoActual.toLowerCase().includes('cebiche') || 
-                            platoActual.toLowerCase().includes('acebichada') ||
-                            platoActual.toLowerCase().includes('tiradito') ||
-                            platoActual.toLowerCase().includes('leche de') ||
-                            platoActual.toLowerCase().includes('combinado') ||
-                            platoActual.toLowerCase().includes('triple') ||
-                            platoActual.toLowerCase().includes('ronda') ||
-                            platoActual.toLowerCase().includes('poderoso'); 
-    
-    if (requiereNivelAji && (!opcionesSeleccionadas['Picante'] || opcionesSeleccionadas['Picante'].trim() === '')) {
-        alert('⚠ Por favor, selecciona el nivel de ají:\n• Sin ají\n• Poco ají\n• Picante');
-        return;
- 
-    const especificacionesInput = document.getElementById('especificaciones-personalizacion').value;
-    let personalizacionTexto = '';
-    
-    // Solo agregar las opciones principales
-    if (opcionesSeleccionadas['Picante']) {
-        personalizacionTexto = opcionesSeleccionadas['Picante'];
-    }
-    if (opcionesSeleccionadas['Cocción']) {
-        if (personalizacionTexto) personalizacionTexto += ', ';
-        personalizacionTexto += opcionesSeleccionadas['Cocción'];
-    }
-    if (opcionesSeleccionadas['Tipo']) {
-        if (personalizacionTexto) personalizacionTexto += ', ';
-        personalizacionTexto += opcionesSeleccionadas['Tipo'];
-    }
-
-    // CORRECCIÓN: Agregar chaufa al texto final
-    if (opcionesSeleccionadas['Chaufa']) {
-        if (personalizacionTexto) personalizacionTexto += ', ';
-        personalizacionTexto += opcionesSeleccionadas['Chaufa'];
-    }
-    
-    if (especificacionesInput) {
-        if (personalizacionTexto) {
-            personalizacionTexto += ' | ' + especificacionesInput;
-        } else {
-            personalizacionTexto = especificacionesInput;
-        }
-    }
-    
-    agregarAlCarrito(platoActual, precioActual, personalizacionTexto);
-    cerrarModalPersonalizacion();
-}
-
-function cerrarModalPersonalizacion() {
-    document.getElementById('modal-personalizacion').style.display = 'none';
-    platoActual = null;
-    precioActual = 0;
-    opcionesSeleccionadas = {};
-    opcionesModal = [];
-}
-
-
-
-function abrirModalCombinadoMarino(nombre, precio) {
-    platoActual = nombre;
-    precioActual = precio;
-    opcionesSeleccionadas = {};
-
-    document.getElementById('titulo-personalizacion').textContent = `Personaliza: ${nombre}`;
-    document.getElementById('especificaciones-personalizacion').value = '';
-
-    const opcionesContainer = document.getElementById('opciones-container');
-    if (opcionesContainer) {
-        opcionesContainer.innerHTML = '';
-
-        // VARIABLE PARA SABER SI SE DEBE SELECCIONAR "CHAUFA DE MARISCOS" POR DEFECTO
-        const seleccionarMariscosPorDefecto = nombre.includes('chaufa') || 
-                                               nombre.includes('Chaufa') || 
-                                               nombre === 'Doble Marino 2' || 
-                                               nombre === 'Triple Marino 3' || 
-                                               nombre === 'Triple Marino 4' || 
-                                               nombre === 'Ronda Marina 3' || 
-                                               nombre === 'Ronda Marina 4';
-        
-        if (seleccionarMariscosPorDefecto) {
-            
-            const seccionChaufa = document.createElement('div');
-            seccionChaufa.style.marginBottom = '20px';
-            
-            const tituloChaufa = document.createElement('div');
-            tituloChaufa.style.fontSize = '0.95rem';
-            tituloChaufa.style.fontWeight = '700';
-            tituloChaufa.style.color = 'var(--VERDE)';
-            tituloChaufa.style.marginBottom = '8px';
-            tituloChaufa.innerHTML = `🍚 Tipo de Chaufa <span style="color: var(--ROJO);">*</span>`;
-            
-            const opcionesChaufaContainer = document.createElement('div');
-            opcionesChaufaContainer.style.display = 'flex';
-            opcionesChaufaContainer.style.flexWrap = 'wrap';
-            opcionesChaufaContainer.style.gap = '10px';
-            
-            const opcionesChaufa = [
-                {texto: 'Chaufa de Pescado', emoji: '🐟'},
-                {texto: 'Chaufa de Mariscos', emoji: '🦐'}
-            ];
-            
-            opcionesChaufa.forEach((opcion) => {
-                const opcionElement = document.createElement('div');
-                opcionElement.className = 'opcion-personalizacion';
-                opcionElement.dataset.categoria = 'Chaufa';
-                opcionElement.style.flex = '1';
-                opcionElement.style.minWidth = '140px';
-                opcionElement.style.padding = '12px 5px';
-                opcionElement.style.textAlign = 'center';
-                
-                opcionElement.innerHTML = `
-                    <div style="font-size: 1.2rem;">${opcion.emoji}</div>
-                    <div style="font-weight: 600; font-size: 0.85rem;">${opcion.texto}</div>
-                `;
-                
-                if (opcion.texto === 'Chaufa de Mariscos') {
-                    opcionElement.classList.add('seleccionado');
-                    opcionesSeleccionadas['Chaufa'] = 'Chaufa de Mariscos';
-                }
-                
-                opcionElement.onclick = () => {
-                    document.querySelectorAll('.opcion-personalizacion[data-categoria="Chaufa"]').forEach(el => {
-                        el.classList.remove('seleccionado');
-                    });
-                    opcionElement.classList.add('seleccionado');
-                    opcionesSeleccionadas['Chaufa'] = opcion.texto;
-                };
-                
-                opcionesChaufaContainer.appendChild(opcionElement);
-            });
-            
-            seccionChaufa.appendChild(tituloChaufa);
-            seccionChaufa.appendChild(opcionesChaufaContainer);
-            opcionesContainer.appendChild(seccionChaufa);
-        }
-
-        const seccionAji = document.createElement('div');
-        seccionAji.style.marginBottom = '20px';
-        
-        const tituloAji = document.createElement('div');
-        tituloAji.style.fontSize = '0.95rem';
-        tituloAji.style.fontWeight = '700';
-        tituloAji.style.color = 'var(--VERDE)';
-        tituloAji.style.marginBottom = '8px';
-        tituloAji.innerHTML = `🌶️ Nivel de Ají <span style="color: var(--ROJO);">*</span>`;
-        
-        const opcionesAjiContainer = document.createElement('div');
-        opcionesAjiContainer.style.display = 'flex';
-        opcionesAjiContainer.style.flexWrap = 'wrap';
-        opcionesAjiContainer.style.gap = '10px';
-        
-        const opcionesAji = [
-            {texto: 'Sin ají', emoji: '🚫', desc: 'Sin picante'},
-            {texto: 'Poco ají', emoji: '🌶️', desc: 'Suave'},
-            {texto: 'Picante', emoji: '🔥', desc: 'Bien picante'}
-        ];
-        
-        opcionesAji.forEach((opcion) => {
-            const opcionElement = document.createElement('div');
-            opcionElement.className = 'opcion-personalizacion';
-            opcionElement.dataset.categoria = 'Picante';
-            opcionElement.style.flex = '1';
-            opcionElement.style.minWidth = '100px';
-            opcionElement.style.padding = '10px 5px';
-            opcionElement.style.textAlign = 'center';
-            
-            opcionElement.innerHTML = `
-                <div style="font-size: 1.2rem;">${opcion.emoji}</div>
-                <div style="font-weight: 600; font-size: 0.8rem;">${opcion.texto}</div>
-                <div style="font-size: 0.7rem; color: #666;">${opcion.desc}</div>
-            `;
-            
-            opcionElement.onclick = () => {
-                document.querySelectorAll('.opcion-personalizacion[data-categoria="Picante"]').forEach(el => {
-                    el.classList.remove('seleccionado');
-                });
-                opcionElement.classList.add('seleccionado');
-                opcionesSeleccionadas['Picante'] = opcion.texto;
-            };
-            
-            opcionesAjiContainer.appendChild(opcionElement);
-            
-            // SELECCIONAR "Poco ají" POR DEFECTO
-            if (opcion.texto === 'Poco ají') {
-                setTimeout(() => {
-                    opcionElement.classList.add('seleccionado');
-                    opcionesSeleccionadas['Picante'] = 'Poco ají';
-                }, 100);
             }
-        });
-        
-        seccionAji.appendChild(tituloAji);
-        seccionAji.appendChild(opcionesAjiContainer);
-        opcionesContainer.appendChild(seccionAji);
-    }
-    
-    document.getElementById('modal-personalizacion').style.display = 'flex';
-}
-
-
-function mostrarFormularioPedido() {
-    if (carrito.length === 0) {
-        alert('✗ Tu carrito está vacío');
-        return;
-    }
-    
-    cerrarCarrito();
-    actualizarResumenPedido();
-    resetearFormularioPedido();
-    
-    const modalForm = document.getElementById('modal-formulario-pedido');
-    if (modalForm) {
-        modalForm.style.display = 'block';
-    }
-}
-
-function cerrarFormularioPedido() {
-    const modalForm = document.getElementById('modal-formulario-pedido');
-    if (modalForm) {
-        modalForm.style.display = 'none';
-    }
-    limpiarErrores();
-}
-
-function actualizarResumenPedido() {
-    const detallesResumen = document.getElementById('detalles-resumen');
-    const subtotalElement = document.getElementById('subtotal-pedido');
-    
-    if (detallesResumen && subtotalElement) {
-        let html = '';
-        let subtotal = 0;
-        
-        carrito.forEach(item => {
-            const itemTotal = item.precio * item.cantidad;
-            subtotal += itemTotal;
-            
-            html += `
-                <div style="margin-bottom: 5px;">
-                    <div style="display: flex; justify-content: space-between;">
-                        <span>${item.cantidad} x ${item.nombre}</span>
-                        <span>S/ ${itemTotal.toFixed(2)}</span>
-                    </div>
-                    ${item.especificaciones ? `<div style="font-size: 0.8rem; color: #666; padding-left: 1rem;">→ ${item.especificaciones}</div>` : ''}
-                </div>
-            `;
-        });
-        
-        detallesResumen.innerHTML = html;
-        subtotalElement.textContent = `S/ ${subtotal.toFixed(2)}`;
-        
-        actualizarTotalPedido();
-    }
-}
-
-function actualizarTotalPedido() {
-    const subtotalElement = document.getElementById('subtotal-pedido');
-    const totalElement = document.getElementById('total-pedido');
-    const costoDeliveryElement = document.getElementById('costo-delivery');
-    
-    if (subtotalElement && totalElement && costoDeliveryElement) {
-        const subtotalText = subtotalElement.textContent.replace('S/ ', '');
-        const subtotal = parseFloat(subtotalText) || 0;
-        
-        const deliveryText = costoDeliveryElement.textContent || costoDeliveryElement.innerText;
-        
-        if (deliveryText.toUpperCase().includes('CONSULTAR')) {
-            totalElement.innerHTML = `S/ ${subtotal.toFixed(2)} <span style="color: #d32f2f; font-size: 0.9em; font-weight: bold;">+ delivery a consultar</span>`;
-        } else {
-            const match = deliveryText.match(/(\d+(\.\d+)?)/);
-            const delivery = match ? parseFloat(match[1]) : 0;
-            const total = subtotal + delivery;
-            totalElement.innerHTML = `S/ ${total.toFixed(2)}`;
-        }
-    }
-}
-
-function actualizarCostoDelivery() {
-    const seccionDelivery = document.getElementById('seccion-delivery');
-    if (seccionDelivery && seccionDelivery.style.display === 'none') {
-        const costoElement = document.getElementById('costo-delivery');
-        if (costoElement) costoElement.textContent = 'S/ 0.00';
-        actualizarTotalPedido();
-        return; 
-    }
-    
-    const distritoSelect = document.getElementById('cliente-distrito');
-    const costoElement = document.getElementById('costo-delivery');
-    
-    if (distritoSelect && costoElement) {
-        const valorSeleccionado = distritoSelect.value;
-        let costo = 0;
-
-        if (valorSeleccionado.includes('S/')) {
-            const partes = valorSeleccionado.split('S/');
-            costo = parseFloat(partes[1].trim());
-            costoElement.innerText = `S/ ${costo.toFixed(2)}`;
-        } 
-        else if (valorSeleccionado.includes('consultar')) {
-            costoElement.innerText = "A consultar";
-        } else {
-            costoElement.innerText = 'S/ 0.00';
+            document.getElementById('modal-personalizacion').style.display = 'flex';
         }
 
-        actualizarTotalPedido(); 
-    }
-}
+        function confirmarPersonalizacion() {
+            const requiereNivelAji = platoActual.toLowerCase().includes('cebiche') || 
+                                     platoActual.toLowerCase().includes('acebichada') ||
+                                     platoActual.toLowerCase().includes('tiradito') ||
+                                     platoActual.toLowerCase().includes('leche') ||
+                                     platoActual.toLowerCase().includes('combinado') ||
+                                     platoActual.toLowerCase().includes('triple') ||
+                                     platoActual.toLowerCase().includes('ronda') ||
+                                     platoActual.toLowerCase().includes('poderoso'); 
 
-function resetearFormularioPedido() {
-    const nombreInput = document.getElementById('cliente-nombre');
-    const telefonoInput = document.getElementById('cliente-telefono');
-    const distritoSelect = document.getElementById('cliente-distrito');
-    const direccionInput = document.getElementById('cliente-direccion'); 
-    const instruccionesInput = document.getElementById('instrucciones');
-    const montoEfectivoInput = document.getElementById('monto-efectivo');
-    
-    if (nombreInput) nombreInput.value = '';
-    if (telefonoInput) telefonoInput.value = '';
-    if (distritoSelect) distritoSelect.value = '';
-    if (direccionInput) direccionInput.value = ''; 
-    if (instruccionesInput) instruccionesInput.value = '';
-    if (montoEfectivoInput) montoEfectivoInput.value = '';
-    
-    seleccionarTipoPedido('recoger'); 
-    seleccionarMetodoPago('efectivo');
-    limpiarErrores();
-}
-function seleccionarTipoPedido(tipo) {
-    const btnDelivery = document.getElementById('btn-delivery');
-    const btnRecoger = document.getElementById('btn-recoger');
-    
-    if (btnDelivery && btnRecoger) {
-        if (tipo === 'delivery') {
-            btnDelivery.style.background = 'var(--VERDE)';
-            btnDelivery.style.color = 'white';
-            btnRecoger.style.background = 'var(--gris-claro)';
-            btnRecoger.style.color = '#333';
-            const seccionDelivery = document.getElementById('seccion-delivery');
-            if (seccionDelivery) seccionDelivery.style.display = 'block';
-        } else {
-            btnRecoger.style.background = 'var(--VERDE)';
-            btnRecoger.style.color = 'white';
-            btnDelivery.style.background = 'var(--gris-claro)';
-            btnDelivery.style.color = '#333';
-            const seccionDelivery = document.getElementById('seccion-delivery');
-            if (seccionDelivery) seccionDelivery.style.display = 'none';
-            const costoElement = document.getElementById('costo-delivery');
-            if (costoElement) costoElement.textContent = 'S/ 0.00';
-        }
-        
-        actualizarTotalPedido();
-    }
-}
-
-function seleccionarMetodoPago(metodo) {
-    metodoPagoSeleccionado = metodo;
-    
-    document.querySelectorAll('.metodo-pago-opcion').forEach(el => {
-        el.classList.remove('seleccionado');
-    });
-    
-    const opciones = document.querySelectorAll('.metodo-pago-opcion');
-    if (opciones.length >= 4) {
-        if (metodo === 'efectivo') opciones[0].classList.add('seleccionado');
-        if (metodo === 'yape') opciones[1].classList.add('seleccionado');
-        if (metodo === 'plin') opciones[2].classList.add('seleccionado');
-        if (metodo === 'tarjeta') opciones[3].classList.add('seleccionado');
-    }
-    
-    const campoEfectivo = document.getElementById('campo-efectivo');
-    const campoYape = document.getElementById('campo-yape');
-    const campoPlin = document.getElementById('campo-plin');
-    const campoTarjeta = document.getElementById('campo-tarjeta');
-    
-    if (campoEfectivo) campoEfectivo.style.display = 'none';
-    if (campoYape) campoYape.style.display = 'none';
-    if (campoPlin) campoPlin.style.display = 'none';
-    if (campoTarjeta) campoTarjeta.style.display = 'none';
-    
-    if (metodo === 'efectivo' && campoEfectivo) {
-        campoEfectivo.style.display = 'block';
-    } else if (metodo === 'yape' && campoYape) {
-        campoYape.style.display = 'block';
-    } else if (metodo === 'plin' && campoPlin) {
-        campoPlin.style.display = 'block';
-    } else if (metodo === 'tarjeta' && campoTarjeta) {
-        campoTarjeta.style.display = 'block';
-    }
-}
-
-function calcularVuelto() {
-    const montoEfectivoInput = document.getElementById('monto-efectivo');
-    const totalElement = document.getElementById('total-pedido');
-    const vueltoInfo = document.getElementById('vuelto-info');
-    const montoVuelto = document.getElementById('monto-vuelto');
-    const vueltoTexto = document.getElementById('vuelto-texto');
-    const advertenciaFalta = document.getElementById('advertencia-falta');
-    
-    if (montoEfectivoInput && totalElement && vueltoInfo && montoVuelto && vueltoTexto && advertenciaFalta) {
-        const montoEfectivo = parseFloat(montoEfectivoInput.value) || 0;
-        const totalText = totalElement.textContent.replace('S/ ', '');
-        const totalPedido = parseFloat(totalText) || 0;
-        
-        if (montoEfectivo > 0) {
-            const vuelto = montoEfectivo - totalPedido;
-            
-            if (vuelto >= 0) {
-                vueltoTexto.textContent = 'Vuelto:';
-                montoVuelto.textContent = `S/ ${vuelto.toFixed(2)}`;
-                vueltoInfo.style.display = 'block';
-                vueltoInfo.style.background = 'var(--verde-claro)';
-                vueltoInfo.style.borderColor = 'var(--VERDE)';
-                montoVuelto.style.color = 'var(--VERDE)';
-                advertenciaFalta.style.display = 'none';
-            } else {
-                const falta = Math.abs(vuelto);
-                vueltoTexto.textContent = 'Falta:';
-                montoVuelto.textContent = `S/ ${falta.toFixed(2)}`;
-                vueltoInfo.style.display = 'block';
-                vueltoInfo.style.background = '#ffe6e6';
-                vueltoInfo.style.borderColor = 'var(--ROJO)';
-                montoVuelto.style.color = 'var(--ROJO)';
-                advertenciaFalta.style.display = 'block';
+            if (requiereNivelAji && (!opcionesSeleccionadas['Picante'])) {
+                alert('⚠ Por favor, selecciona el nivel de ají (Sin ají, Poco ají o Picante).');
+                return;
             }
-        } else {
-            vueltoInfo.style.display = 'none';
-        }
-    }
-}
 
-function limpiarErrores() {
-    document.querySelectorAll('.error-mensaje').forEach(el => {
-        el.style.display = 'none';
-    });
-    const errorDistrito = document.getElementById('error-distrito');
-    if (errorDistrito) errorDistrito.style.display = 'none';
-}
+            let detalles = [];
+            if (opcionesSeleccionadas['Picante']) detalles.push(opcionesSeleccionadas['Picante']);
+            if (opcionesSeleccionadas['Cocción']) detalles.push(opcionesSeleccionadas['Cocción']);
+            if (opcionesSeleccionadas['Tipo']) detalles.push(opcionesSeleccionadas['Tipo']);
+            if (opcionesSeleccionadas['Chaufa']) detalles.push(opcionesSeleccionadas['Chaufa']);
 
-function mostrarError(id, mensaje) {
-    const errorElement = document.getElementById(id);
-    if (errorElement) {
-        errorElement.textContent = mensaje;
-        errorElement.style.display = 'block';
-    }
-}
+            const extra = document.getElementById('especificaciones-personalizacion').value;
+            if (extra) detalles.push(extra);
 
-function validarFormulario() {
-    let valido = true;
-    limpiarErrores();
-    
-    const nombreInput = document.getElementById('cliente-nombre');
-    const telefonoInput = document.getElementById('cliente-telefono');
-    const seccionDelivery = document.getElementById('seccion-delivery');
-    
-    // Validar nombre
-    if (!nombreInput || !nombreInput.value.trim()) {
-        mostrarError('error-nombre', 'Por favor ingresa tu nombre');
-        valido = false;
-    }
-    
-    // Validar teléfono
-    if (!telefonoInput || !telefonoInput.value.trim()) {
-        mostrarError('error-telefono', 'Por favor ingresa tu WhatsApp');
-        valido = false;
-    } else if (!/^\d{9}$/.test(telefonoInput.value.trim().replace(/\D/g, ''))) {
-        mostrarError('error-telefono', 'Por favor ingresa un WhatsApp válido (9 dígitos)');
-        valido = false;
-    }
-    
-    // Validaciones exclusivas de Delivery
-    if (seccionDelivery && seccionDelivery.style.display === 'block') {
-        const distritoSelect = document.getElementById('cliente-distrito');
-        const direccionInput = document.getElementById('cliente-direccion'); 
-        
-        // Validar Distrito
-        if (!distritoSelect || !distritoSelect.value.trim()) {
-            let errorDistrito = document.getElementById('error-distrito');
-            if (!errorDistrito) {
-                errorDistrito = document.createElement('div');
-                errorDistrito.id = 'error-distrito';
-                errorDistrito.className = 'error-mensaje';
-                distritoSelect.parentNode.appendChild(errorDistrito);
-            }
-            errorDistrito.textContent = 'Por favor selecciona tu distrito';
-            errorDistrito.style.display = 'block';
-            valido = false;
-        }
-
-        // Validar Dirección Exacta (NUEVO)
-        if (!direccionInput || !direccionInput.value.trim()) {
-            mostrarError('error-direccion', 'Por favor ingresa tu dirección exacta');
-            valido = false;
-        }
-    }
-    
-    return valido;
-}
-function validarYEnviarPedido() {
-    if (!validarFormulario()) {
-        return;
-    }
-    
-    const botonEnviar = event.target;
-    const textoOriginal = botonEnviar.textContent;
-    
-    if (!botonEnviar.dataset.confirmando) {
-        botonEnviar.textContent = '👉 ¿CONFIRMAR ENVÍO? 👈';
-        botonEnviar.style.background = 'var(--AMARILLO)';
-        botonEnviar.style.color = 'var(--NEGRO)';
-        botonEnviar.style.fontWeight = 'bold';
-        botonEnviar.dataset.confirmando = 'true';
-        
-        setTimeout(() => {
-            if (botonEnviar.dataset.confirmando === 'true') {
-                botonEnviar.textContent = textoOriginal;
-                botonEnviar.style.background = '';
-                botonEnviar.style.color = '';
-                botonEnviar.style.fontWeight = '';
-                delete botonEnviar.dataset.confirmando;
-            }
-        }, 4000);
-        
-        return;
-    }
-    
-    botonEnviar.textContent = 'Enviando...';
-    botonEnviar.disabled = true;
-    
-    enviarPedidoWhatsApp();
-}
-
-function enviarPedidoWhatsApp() {
-    const nombreInput = document.getElementById('cliente-nombre');
-    const telefonoInput = document.getElementById('cliente-telefono');
-    const distritoSelect = document.getElementById('cliente-distrito');
-    const direccionInput = document.getElementById('cliente-direccion'); 
-    const instruccionesInput = document.getElementById('instrucciones');
-    const subtotalElement = document.getElementById('subtotal-pedido');
-    const costoDeliveryElement = document.getElementById('costo-delivery');
-    const totalElement = document.getElementById('total-pedido');
-    
-    if (!nombreInput || !telefonoInput || !subtotalElement || !totalElement) {
-        alert('Error al obtener datos del formulario');
-        return;
-    }
-    
-    const nombre = nombreInput.value.trim();
-    const telefono = telefonoInput.value.trim();
-    const instrucciones = instruccionesInput ? instruccionesInput.value.trim() : '';
-    
-    const tipoPedido = document.getElementById('seccion-delivery') && 
-                       document.getElementById('seccion-delivery').style.display === 'block' ? 
-                       'delivery' : 'recoger';
-    
-    const subtotal = parseFloat(subtotalElement.textContent.replace('S/ ', '')) || 0;
-    const delivery = parseFloat(costoDeliveryElement.textContent.replace('S/ ', '')) || 0;
-    const total = parseFloat(totalElement.textContent.replace('S/ ', '')) || 0;
-    
-    let mensaje = `🍽 *NUEVO PEDIDO - CEVICHERÍA TIPOS* 🦐\n\n`;
-    mensaje += `*CLIENTE:*\nNombre: ${nombre}\nWhatsApp: ${telefono}\n\n`;
-    mensaje += `*MODALIDAD:* ${tipoPedido === 'delivery' ? 'Delivery 🚚' : 'Recoger en tienda 🏃'}\n`;
-    
-    // AGREGAR DISTRITO Y DIRECCIÓN AL MENSAJE
-    if (tipoPedido === 'delivery') {
-        if (distritoSelect && distritoSelect.value) {
-            mensaje += `Distrito: ${distritoSelect.value.split(' - ')[0]}\n`;
-        }
-        if (direccionInput && direccionInput.value) {
-            mensaje += `*Dirección:* ${direccionInput.value.trim()}\n`;
-        }
-    }
-    
-    mensaje += `\n*PEDIDO:*\n────────\n`;
-    
-    carrito.forEach(item => {
-        const itemTotal = item.precio * item.cantidad;
-        mensaje += `• ${item.cantidad} x ${item.nombre} — S/ ${itemTotal.toFixed(2)}\n`;
-        if (item.especificaciones) {
-            mensaje += `  → ${item.especificaciones}\n`;
-        }
-    });
-    
-    mensaje += `\n*RESUMEN DE PAGO:*\n`;
-    mensaje += `Sub-total: S/ ${subtotal.toFixed(2)}\n`;
-    
-    if (delivery > 0) {
-        mensaje += `Delivery: S/ ${delivery.toFixed(2)}\n`;
-    }
-    
-    mensaje += `*TOTAL: S/ ${total.toFixed(2)}*\n\n`;
-    mensaje += `*MÉTODO DE PAGO: ${metodoPagoSeleccionado.toUpperCase()}*\n`;
-    
-    if (metodoPagoSeleccionado === 'efectivo') {
-        const montoEfectivoInput = document.getElementById('monto-efectivo');
-        if (montoEfectivoInput) {
-            const montoEfectivo = parseFloat(montoEfectivoInput.value) || 0;
-            const vuelto = montoEfectivo - total;
-            mensaje += `Paga con: S/ ${montoEfectivo.toFixed(2)}\n`;
-            if (vuelto >= 0) {
-                mensaje += `Vuelto: S/ ${vuelto.toFixed(2)}\n`;
-            } else {
-                mensaje += `⚠ Faltan: S/ ${Math.abs(vuelto).toFixed(2)}\n`;
-            }
-        }
-    } else if (metodoPagoSeleccionado === 'yape') {
-        mensaje += `\n📱 *PAGO CON YAPE:*\nEl repartidor compartirá el número de Yape por WhatsApp.\n`;
-    } else if (metodoPagoSeleccionado === 'plin') {
-        mensaje += `\n📱 *PAGO CON PLIN:*\nEl repartidor compartirá el número de Plin por WhatsApp.\n`;
-    } else if (metodoPagoSeleccionado === 'tarjeta') {
-        mensaje += `\n💳 *PAGO CON TARJETA:*\nEl repartidor llevará POS para pago con tarjeta.\n`;
-    }
-    
-    if (instrucciones) {
-        mensaje += `\n*NOTAS:* ${instrucciones}\n`;
-    }
-    
-    const numeroWhatsApp = '51977420834';
-    const mensajeCodificado = encodeURIComponent(mensaje);
-    
-    window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, '_blank');
-    
-    setTimeout(() => {
-        carrito = [];
-        actualizarCarrito();
-        cerrarFormularioPedido();
-        mostrarPantalla('bienvenida');
-        alert('✅ Pedido enviado. Revisa WhatsApp para confirmar.');
-    }, 1000);
-}
-
-// ================================================
-// FUNCIÓN PARA RESERVAS
-// ================================================
-function enviarReservaWhatsApp() {
-    const nombreInput = document.getElementById('reserva-nombre');
-    const telefonoInput = document.getElementById('reserva-telefono');
-    const personasInput = document.getElementById('reserva-personas');
-    const fechaInput = document.getElementById('reserva-fecha');
-    const horaInput = document.getElementById('reserva-hora');
-
-    if (!nombreInput || !telefonoInput || !personasInput || !fechaInput || !horaInput) {
-        alert('✗ Por favor, completa todos los campos');
-        return;
-    }
-
-    const nombre = nombreInput.value;
-    const telefono = telefonoInput.value;
-    const personas = personasInput.value;
-    const fecha = fechaInput.value;
-    const hora = horaInput.value;
-
-    if (!nombre || !telefono || !personas || !fecha || !hora) {
-        alert('✗ Por favor, completa todos los campos');
-        return;
-    }
-
-    const fechaObj = new Date(fecha);
-    const fechaFormateada = fechaObj.toLocaleDateString('es-ES', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-
-    let mensaje = `¡Hola! 👋 Quisiera hacer una reserva:\n\n`;
-    mensaje += `*📋 DATOS DE LA RESERVA:*\n`;
-    mensaje += `────────────────\n`;
-    mensaje += `👤 *Nombre:* ${nombre}\n`;
-    mensaje += `📞 *WhatsApp:* ${telefono}\n`;
-    mensaje += `👥 *Personas:* ${personas}\n`;
-    mensaje += `📅 *Fecha:* ${fechaFormateada}\n`;
-    mensaje += `⏰ *Hora:* ${hora}\n\n`;
-    mensaje += `Por favor, confírmenme la disponibilidad. ¡Gracias!`;
-
-    const mensajeCodificado = encodeURIComponent(mensaje);
-    const numeroWhatsApp = '51977420834';
-    
-    window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, '_blank');
-    
-    setTimeout(() => {
-        if (nombreInput) nombreInput.value = '';
-        if (telefonoInput) telefonoInput.value = '';
-        if (personasInput) personasInput.value = '2';
-        if (fechaInput) fechaInput.value = '';
-        if (horaInput) horaInput.value = '';
-        mostrarPantalla('bienvenida');
-        alert('✅ Solicitud de reserva enviada. Revisa WhatsApp para confirmar.');
-    }, 1000);
-}
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar carrito
-    actualizarCarrito();
-    
-    const hoy = new Date();
-    const manana = new Date(hoy);
-    manana.setDate(hoy.getDate() + 1);
-    const fechaMinima = manana.toISOString().split('T')[0];
-    
-    const campoFechaReserva = document.getElementById('reserva-fecha');
-    const campoHoraReserva = document.getElementById('reserva-hora');
-    
-    if (campoFechaReserva) {
-        campoFechaReserva.setAttribute('min', fechaMinima);
-        const maxFecha = new Date(hoy);
-        maxFecha.setDate(hoy.getDate() + 30);
-        campoFechaReserva.setAttribute('max', maxFecha.toISOString().split('T')[0]);
-    }
-    
-    if (campoHoraReserva) {
-        campoHoraReserva.setAttribute('min', '11:00');
-        campoHoraReserva.setAttribute('max', '17:00');
-        campoHoraReserva.value = '12:00';
-    }
-    
-    const distritoSelect = document.getElementById('cliente-distrito');
-    if (distritoSelect) {
-        distritoSelect.addEventListener('change', actualizarCostoDelivery);
-    }
-    
-    const montoEfectivoInput = document.getElementById('monto-efectivo');
-    if (montoEfectivoInput) {
-        montoEfectivoInput.addEventListener('input', calcularVuelto);
-    }
-    
-    seleccionarTipoPedido('recoger');
-    seleccionarMetodoPago('efectivo');
-    
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            cerrarCarrito();
+            agregarAlCarrito(platoActual, precioActual, detalles.join(', '));
             cerrarModalPersonalizacion();
-            cerrarFormularioPedido();
         }
-    });
-});
 
+        function abrirModalCombinadoMarino(nombre, precio) {
+            platoActual = nombre;
+            precioActual = precio;
+            opcionesSeleccionadas = {};
 
-document.addEventListener('DOMContentLoaded', function() {
-    const carritoBtn = document.querySelector('.carrito-btn');
-    if (carritoBtn) {
-        carritoBtn.addEventListener('click', mostrarCarrito);
-    }
-});
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.btn-agregar').forEach(boton => {
-        if (boton.innerText.trim() === "Agregar al pedido") {
-            boton.innerHTML = "🛒 AGREGAR A MI PEDIDO";
+            document.getElementById('titulo-personalizacion').textContent = `Personaliza: ${nombre}`;
+            document.getElementById('especificaciones-personalizacion').value = '';
+
+            const opcionesContainer = document.getElementById('opciones-container');
+            if (opcionesContainer) {
+                opcionesContainer.innerHTML = '';
+
+                // Chaufa
+                const seccionChaufa = document.createElement('div');
+                seccionChaufa.style.marginBottom = '20px';
+                seccionChaufa.innerHTML = `<div class="categoria-titulo">🍚 Tipo de Chaufa <span style="color: var(--ROJO);">*</span></div>`;
+                const containerChaufa = document.createElement('div');
+                containerChaufa.className = 'opciones-personalizacion';
+                
+                ['Chaufa de Pescado', 'Chaufa de Mariscos'].forEach(opcion => {
+                    const btn = document.createElement('div');
+                    btn.className = 'opcion-personalizacion';
+                    btn.innerText = (opcion.includes('Pescado') ? '🐟' : '🦐') + ' ' + opcion;
+                    
+                    if (opcion === 'Chaufa de Mariscos') {
+                        btn.classList.add('seleccionado');
+                        opcionesSeleccionadas['Chaufa'] = 'Chaufa de Mariscos';
+                    }
+                    
+                    btn.onclick = () => {
+                        containerChaufa.querySelectorAll('.opcion-personalizacion').forEach(b => b.classList.remove('seleccionado'));
+                        btn.classList.add('seleccionado');
+                        opcionesSeleccionadas['Chaufa'] = opcion;
+                    };
+                    containerChaufa.appendChild(btn);
+                });
+                seccionChaufa.appendChild(containerChaufa);
+                opcionesContainer.appendChild(seccionChaufa);
+
+                // Ají
+                const seccionAji = document.createElement('div');
+                seccionAji.style.marginBottom = '20px';
+                seccionAji.innerHTML = `<div class="categoria-titulo">🌶️ Nivel de Ají <span style="color: var(--ROJO);">*</span></div>`;
+                const containerAji = document.createElement('div');
+                containerAji.className = 'opciones-personalizacion';
+                
+                ['Sin ají', 'Poco ají', 'Picante'].forEach(opcion => {
+                    const btn = document.createElement('div');
+                    btn.className = 'opcion-personalizacion';
+                    btn.innerText = (opcion === 'Sin ají' ? '🚫' : (opcion === 'Poco ají' ? '🌶️' : '🔥')) + ' ' + opcion;
+                    
+                    if (opcion === 'Poco ají') {
+                        btn.classList.add('seleccionado');
+                        opcionesSeleccionadas['Picante'] = 'Poco ají';
+                    }
+                    
+                    btn.onclick = () => {
+                        containerAji.querySelectorAll('.opcion-personalizacion').forEach(b => b.classList.remove('seleccionado'));
+                        btn.classList.add('seleccionado');
+                        opcionesSeleccionadas['Picante'] = opcion;
+                    };
+                    containerAji.appendChild(btn);
+                });
+                seccionAji.appendChild(containerAji);
+                opcionesContainer.appendChild(seccionAji);
+            }
+            document.getElementById('modal-personalizacion').style.display = 'flex';
         }
-    });
-});
+
+        function cerrarModalPersonalizacion() {
+            document.getElementById('modal-personalizacion').style.display = 'none';
+            platoActual = null;
+            precioActual = 0;
+            opcionesSeleccionadas = {};
+            opcionesModal = [];
+        }
+
+        // --- FIN CORRECCIONES MODAL ---
+
+        function mostrarFormularioPedido() {
+            if (carrito.length === 0) {
+                alert('✗ Tu carrito está vacío');
+                return;
+            }
+            cerrarCarrito();
+            actualizarResumenPedido();
+            resetearFormularioPedido();
+            document.getElementById('modal-formulario-pedido').style.display = 'block';
+        }
+
+        function cerrarFormularioPedido() {
+            document.getElementById('modal-formulario-pedido').style.display = 'none';
+            limpiarErrores();
+        }
+
+        function actualizarResumenPedido() {
+            const detallesResumen = document.getElementById('detalles-resumen');
+            let html = '';
+            let subtotal = 0;
+            
+            carrito.forEach(item => {
+                const itemTotal = item.precio * item.cantidad;
+                subtotal += itemTotal;
+                html += `
+                    <div style="margin-bottom: 5px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>${item.cantidad} x ${item.nombre}</span>
+                            <span>S/ ${itemTotal.toFixed(2)}</span>
+                        </div>
+                        ${item.especificaciones ? `<div style="font-size: 0.8rem; color: #666; padding-left: 1rem;">→ ${item.especificaciones}</div>` : ''}
+                    </div>
+                `;
+            });
+            detallesResumen.innerHTML = html;
+            document.getElementById('subtotal-pedido').textContent = `S/ ${subtotal.toFixed(2)}`;
+            actualizarTotalPedido();
+        }
+
+        function actualizarTotalPedido() {
+            const subtotalText = document.getElementById('subtotal-pedido').textContent.replace('S/ ', '');
+            const subtotal = parseFloat(subtotalText) || 0;
+            const deliveryText = document.getElementById('costo-delivery').innerText;
+            
+            const totalElement = document.getElementById('total-pedido');
+            
+            if (deliveryText.toUpperCase().includes('CONSULTAR')) {
+                totalElement.innerHTML = `S/ ${subtotal.toFixed(2)} <span style="color: #d32f2f; font-size: 0.9em; font-weight: bold;">+ delivery</span>`;
+            } else {
+                const match = deliveryText.match(/(\d+(\.\d+)?)/);
+                const delivery = match ? parseFloat(match[1]) : 0;
+                totalElement.innerHTML = `S/ ${(subtotal + delivery).toFixed(2)}`;
+            }
+        }
+
+        function actualizarCostoDelivery() {
+            const seccionDelivery = document.getElementById('seccion-delivery');
+            const costoElement = document.getElementById('costo-delivery');
+            
+            if (seccionDelivery.style.display === 'none') {
+                costoElement.textContent = 'S/ 0.00';
+                actualizarTotalPedido();
+                return;
+            }
+            
+            const valorSeleccionado = document.getElementById('cliente-distrito').value;
+            if (valorSeleccionado.includes('S/')) {
+                const partes = valorSeleccionado.split('S/');
+                const costo = parseFloat(partes[1].trim());
+                costoElement.innerText = `S/ ${costo.toFixed(2)}`;
+            } else if (valorSeleccionado.includes('consultar')) {
+                costoElement.innerText = "A consultar";
+            } else {
+                costoElement.innerText = 'S/ 0.00';
+            }
+            actualizarTotalPedido();
+        }
+
+        function resetearFormularioPedido() {
+            document.getElementById('cliente-nombre').value = '';
+            document.getElementById('cliente-telefono').value = '';
+            document.getElementById('cliente-distrito').value = '';
+            document.getElementById('cliente-direccion').value = '';
+            document.getElementById('instrucciones').value = '';
+            document.getElementById('monto-efectivo').value = '';
+            seleccionarTipoPedido('recoger');
+            seleccionarMetodoPago('efectivo');
+            limpiarErrores();
+        }
+
+        function seleccionarTipoPedido(tipo) {
+            const btnDelivery = document.getElementById('btn-delivery');
+            const btnRecoger = document.getElementById('btn-recoger');
+            const seccionDelivery = document.getElementById('seccion-delivery');
+            
+            if (tipo === 'delivery') {
+                btnDelivery.style.background = 'var(--VERDE)';
+                btnDelivery.style.color = 'white';
+                btnRecoger.style.background = 'var(--gris-claro)';
+                btnRecoger.style.color = '#333';
+                seccionDelivery.style.display = 'block';
+            } else {
+                btnRecoger.style.background = 'var(--VERDE)';
+                btnRecoger.style.color = 'white';
+                btnDelivery.style.background = 'var(--gris-claro)';
+                btnDelivery.style.color = '#333';
+                seccionDelivery.style.display = 'none';
+                document.getElementById('costo-delivery').textContent = 'S/ 0.00';
+            }
+            actualizarTotalPedido();
+        }
+
+        function seleccionarMetodoPago(metodo) {
+            metodoPagoSeleccionado = metodo;
+            document.querySelectorAll('.metodo-pago-opcion').forEach(el => el.classList.remove('seleccionado'));
+            
+            const opciones = document.querySelectorAll('.metodo-pago-opcion');
+            const index = {'efectivo': 0, 'yape': 1, 'plin': 2, 'tarjeta': 3}[metodo];
+            if(opciones[index]) opciones[index].classList.add('seleccionado');
+            
+            document.querySelectorAll('.campo-pago').forEach(el => el.style.display = 'none');
+            const campo = document.getElementById(`campo-${metodo}`);
+            if(campo) campo.style.display = 'block';
+        }
+
+        function calcularVuelto() {
+            const monto = parseFloat(document.getElementById('monto-efectivo').value) || 0;
+            const totalText = document.getElementById('total-pedido').textContent.replace('S/ ', '').split(' ')[0];
+            const total = parseFloat(totalText) || 0;
+            
+            const vueltoInfo = document.getElementById('vuelto-info');
+            
+            if (monto > 0) {
+                const diff = monto - total;
+                vueltoInfo.style.display = 'block';
+                if (diff >= 0) {
+                    document.getElementById('vuelto-texto').textContent = 'Vuelto:';
+                    document.getElementById('monto-vuelto').textContent = `S/ ${diff.toFixed(2)}`;
+                    document.getElementById('monto-vuelto').style.color = 'var(--VERDE)';
+                    vueltoInfo.style.background = 'var(--verde-claro)';
+                    document.getElementById('advertencia-falta').style.display = 'none';
+                } else {
+                    document.getElementById('vuelto-texto').textContent = 'Falta:';
+                    document.getElementById('monto-vuelto').textContent = `S/ ${Math.abs(diff).toFixed(2)}`;
+                    document.getElementById('monto-vuelto').style.color = 'var(--ROJO)';
+                    vueltoInfo.style.background = '#ffe6e6';
+                    document.getElementById('advertencia-falta').style.display = 'block';
+                }
+            } else {
+                vueltoInfo.style.display = 'none';
+            }
+        }
+
+        function limpiarErrores() {
+            document.querySelectorAll('.error-mensaje').forEach(el => el.style.display = 'none');
+        }
+
+        function validarYEnviarPedido() {
+            // Validaciones básicas
+            let valido = true;
+            limpiarErrores();
+            
+            const nombre = document.getElementById('cliente-nombre').value.trim();
+            const telefono = document.getElementById('cliente-telefono').value.trim();
+            
+            if (!nombre) {
+                document.getElementById('error-nombre').style.display = 'block';
+                valido = false;
+            }
+            if (!telefono || telefono.length < 9) {
+                document.getElementById('error-telefono').style.display = 'block';
+                valido = false;
+            }
+            
+            const esDelivery = document.getElementById('seccion-delivery').style.display === 'block';
+            if (esDelivery) {
+                if (!document.getElementById('cliente-distrito').value) {
+                    // Crear error distrito dinámicamente si no existe o usar alert
+                    alert('Por favor selecciona un distrito');
+                    valido = false;
+                }
+                if (!document.getElementById('cliente-direccion').value.trim()) {
+                    document.getElementById('error-direccion').style.display = 'block';
+                    valido = false;
+                }
+            }
+            
+            if (!valido) return;
+
+            // Confirmación botón
+            const btn = event.target;
+            if (!btn.dataset.confirmando) {
+                const originalText = btn.textContent;
+                btn.textContent = '👉 ¿CONFIRMAR ENVÍO? 👈';
+                btn.style.background = 'var(--AMARILLO)';
+                btn.style.color = 'var(--NEGRO)';
+                btn.dataset.confirmando = 'true';
+                
+                setTimeout(() => {
+                    if (btn.dataset.confirmando) {
+                        btn.textContent = originalText;
+                        btn.style.background = '';
+                        btn.style.color = '';
+                        delete btn.dataset.confirmando;
+                    }
+                }, 4000);
+                return;
+            }
+
+            enviarPedidoWhatsApp();
+        }
+
+        function enviarPedidoWhatsApp() {
+            const nombre = document.getElementById('cliente-nombre').value;
+            const telefono = document.getElementById('cliente-telefono').value;
+            const esDelivery = document.getElementById('seccion-delivery').style.display === 'block';
+            
+            let mensaje = `🍽 *NUEVO PEDIDO - CEVICHERÍA TIPOS* 🦐\n\n`;
+            mensaje += `*CLIENTE:*\nNombre: ${nombre}\nWhatsApp: ${telefono}\n\n`;
+            mensaje += `*MODALIDAD:* ${esDelivery ? 'Delivery 🚚' : 'Recoger en tienda 🏃'}\n`;
+            
+            if (esDelivery) {
+                mensaje += `Distrito: ${document.getElementById('cliente-distrito').value.split(' - ')[0]}\n`;
+                mensaje += `*Dirección:* ${document.getElementById('cliente-direccion').value}\n`;
+            }
+            
+            mensaje += `\n*PEDIDO:*\n────────\n`;
+            carrito.forEach(item => {
+                mensaje += `• ${item.cantidad} x ${item.nombre} — S/ ${(item.precio * item.cantidad).toFixed(2)}\n`;
+                if(item.especificaciones) mensaje += `  → ${item.especificaciones}\n`;
+            });
+            
+            const total = document.getElementById('total-pedido').innerText;
+            mensaje += `\n*TOTAL A PAGAR: ${total}*\n`;
+            mensaje += `*MÉTODO DE PAGO: ${metodoPagoSeleccionado.toUpperCase()}*\n`;
+            
+            if (metodoPagoSeleccionado === 'efectivo') {
+                const monto = document.getElementById('monto-efectivo').value;
+                mensaje += `Paga con: S/ ${monto}\n`;
+            }
+            
+            const notas = document.getElementById('instrucciones').value;
+            if (notas) mensaje += `\n*NOTAS:* ${notas}\n`;
+            
+            const numero = '51977420834';
+            window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, '_blank');
+            
+            setTimeout(() => {
+                vaciarCarrito();
+                cerrarFormularioPedido();
+                mostrarPantalla('bienvenida');
+            }, 1000);
+        }
+
+        // Función para enviar reserva (simple)
+        function enviarReservaWhatsApp() {
+            const nombre = document.getElementById('reserva-nombre').value;
+            const fecha = document.getElementById('reserva-fecha').value;
+            const hora = document.getElementById('reserva-hora').value;
+            const personas = document.getElementById('reserva-personas').value;
+            
+            if(!nombre || !fecha || !hora) {
+                alert('Por favor completa los datos de la reserva');
+                return;
+            }
+            
+            let mensaje = `¡Hola! 👋 Quisiera hacer una reserva:\n\n`;
+            mensaje += `👤 Nombre: ${nombre}\n`;
+            mensaje += `👥 Personas: ${personas}\n`;
+            mensaje += `📅 Fecha: ${fecha}\n`;
+            mensaje += `⏰ Hora: ${hora}`;
+            
+            window.open(`https://wa.me/51977420834?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            actualizarCarrito();
+            
+            // Configurar fechas mínimas
+            const hoy = new Date().toISOString().split('T')[0];
+            document.getElementById('reserva-fecha').setAttribute('min', hoy);
+            
+            // Reemplazar texto de botones
+            document.querySelectorAll('.btn-agregar').forEach(boton => {
+                if (boton.innerText.trim() === "Agregar al pedido") {
+                    boton.innerHTML = "🛒 AGREGAR A MI PEDIDO";
+                }
+            });
+        });
     </script>
 </body>
 </html>
