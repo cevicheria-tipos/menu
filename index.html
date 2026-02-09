@@ -1851,7 +1851,7 @@
             
             <div class="botones-modal-personalizacion">
                 <button class="btn-cancelar-personalizacion" onclick="cerrarModalPersonalizacion()">Cancelar</button>
-                <button class="btn-confirmar-personalizacion" onclick="confirmarPersonalizacion()">Agregar al Carrito</button>
+                <button class="btn-confirmar-personalizacion" onclick="">Agregar al Carrito</button>
             </div>
         </div>
     </div>
@@ -3639,26 +3639,20 @@ function abrirModalPersonalizacion(nombre, precio, opciones) {
     document.getElementById('modal-personalizacion').style.display = 'flex';
 }
 
-function confirmarPersonalizacion() {
-    if (!platoActual || !precioActual) {
-        alert('Error: No hay plato seleccionado');
-        return;
-    }
     
-    const requiereNivelAji = platoActual.includes('Cebiche') || 
-                            platoActual.includes('cebiche') ||
-                            platoActual.includes('Tiradito') ||
-                            platoActual.includes('tiradito') ||
-                            platoActual.includes('Leche de') ||
-                            platoActual.includes('Combinado') ||
-                            platoActual.includes('Triple') ||
-                            platoActual.includes('Ronda');
+    const requiereNivelAji = platoActual.toLowerCase().includes('cebiche') || 
+                            platoActual.toLowerCase().includes('acebichada') ||
+                            platoActual.toLowerCase().includes('tiradito') ||
+                            platoActual.toLowerCase().includes('leche de') ||
+                            platoActual.toLowerCase().includes('combinado') ||
+                            platoActual.toLowerCase().includes('triple') ||
+                            platoActual.toLowerCase().includes('ronda') ||
+                            platoActual.toLowerCase().includes('poderoso'); 
     
     if (requiereNivelAji && (!opcionesSeleccionadas['Picante'] || opcionesSeleccionadas['Picante'].trim() === '')) {
         alert('⚠ Por favor, selecciona el nivel de ají:\n• Sin ají\n• Poco ají\n• Picante');
         return;
-    }
-    
+ 
     const especificacionesInput = document.getElementById('especificaciones-personalizacion').value;
     let personalizacionTexto = '';
     
