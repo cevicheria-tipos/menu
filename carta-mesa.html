@@ -12,7 +12,7 @@
             --AMARILLO: #CED914;
             --blanco: #ffffff;
             --fondo: #f8f9fa;
-            --sombra: 0 4px 12px rgba(0,0,0,0.08);
+            --sombra: 0 4px 15px rgba(0,0,0,0.08);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
@@ -20,7 +20,7 @@
             background-color: var(--fondo); 
             color: #333; 
             overflow-x: hidden;
-            padding-bottom: 80px; /* Espacio para el carrito flotante */
+            padding-bottom: 40px; 
         }
 
         .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
@@ -28,22 +28,28 @@
         /* --- HEADER --- */
         .header {
             text-align: center;
-            padding: 15px 0;
+            padding: 20px 0;
             background: white;
-            border-radius: 0 0 20px 20px;
+            border-radius: 0 0 25px 25px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             position: sticky;
             top: 0;
             z-index: 100;
         }
-        .logo { max-width: 100px; height: auto; }
-        .eslogan { font-family: 'Playfair Display', serif; color: var(--VERDE); font-weight: 700; font-size: 1.2rem; }
+        .logo { max-width: 130px; height: auto; }
+        .eslogan { 
+            font-family: 'Playfair Display', serif; 
+            color: var(--VERDE); 
+            font-weight: 700; 
+            font-size: 1.2rem; 
+            margin-top: 5px;
+        }
 
-        /* --- SISTEMA DE PANTALLAS (APP) --- */
+        /* --- SISTEMA DE PANTALLAS --- */
         .pantalla {
             display: none;
-            animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.4s ease-out;
         }
         .pantalla.activa {
             display: block;
@@ -63,241 +69,124 @@
             box-shadow: var(--sombra);
             cursor: pointer;
             position: relative;
-            height: 120px;
+            height: 130px;
             border: 1px solid #eee;
+            transition: transform 0.2s;
         }
-        .cat-btn:active { transform: scale(0.98); }
+        .cat-btn:active { transform: scale(0.96); }
+        
         .cat-btn img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.65);
+            filter: brightness(0.7); /* Oscurecer un poco para leer el texto */
         }
         .cat-title {
             position: absolute;
             bottom: 0; left: 0; width: 100%;
-            padding: 8px;
+            padding: 10px;
             color: white;
             font-weight: 700;
             text-align: center;
-            font-size: 0.95rem;
+            font-size: 1rem;
             text-transform: uppercase;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
         }
 
-        /* --- TARJETAS DE PLATOS --- */
+        /* --- VISTA DE PLATOS (LISTA LIMPIA) --- */
         .titulo-seccion {
             font-family: 'Playfair Display', serif;
             color: var(--VERDE);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
             border-bottom: 3px solid var(--AMARILLO);
             display: inline-block;
+            width: 100%;
+            text-align: center;
         }
         
         .plato-card {
             background: white;
             border-radius: 15px;
-            margin-bottom: 15px;
-            padding: 12px;
+            margin-bottom: 20px;
+            padding: 0; /* Sin padding para que la imagen llegue al borde si quieres, o con padding */
             display: flex;
-            gap: 12px;
-            align-items: center;
+            overflow: hidden;
             box-shadow: var(--sombra);
-            border-left: 4px solid var(--VERDE);
+            border: 1px solid #eee;
         }
         
-        .plato-img-mini {
-            width: 90px;
-            height: 90px;
-            border-radius: 10px;
-            object-fit: cover;
+        .plato-img-container {
+            width: 120px;
+            height: 120px;
             flex-shrink: 0;
         }
         
-        .plato-info { flex: 1; }
+        .plato-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .plato-info { 
+            flex: 1; 
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
         
         .plato-nombre {
             font-weight: 700;
             color: var(--VERDE);
-            font-size: 1rem;
+            font-size: 1.05rem;
             line-height: 1.2;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
         
         .plato-desc {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #666;
             margin-bottom: 8px;
-            line-height: 1.2;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            line-height: 1.3;
         }
         
-        .plato-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 5px;
-        }
-
         .plato-precio {
             font-weight: 800;
-            color: var(--VERDE); /* Verde amigable */
-            font-size: 1.1rem;
-        }
-
-        .btn-add-mini {
-            background: var(--VERDE);
-            color: white;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
+            color: var(--VERDE); /* Verde se ve más amigable que rojo */
             font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
+            text-align: right;
         }
-        .btn-add-mini:active { transform: scale(0.9); background: var(--ROJO); }
 
         /* --- BOTÓN VOLVER FLOTANTE --- */
         .btn-volver-float {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
             background: var(--ROJO);
             color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            padding: 12px 25px;
+            border-radius: 50px;
             display: none; /* Se activa con JS */
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(174, 32, 18, 0.4);
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             z-index: 990;
             cursor: pointer;
-            border: 2px solid white;
-        }
-
-        /* --- CARRITO FLOTANTE --- */
-        .carrito-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--VERDE);
-            color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(28, 97, 37, 0.4);
-            z-index: 1000;
-            cursor: pointer;
-            border: 3px solid white;
-        }
-        .carrito-cantidad {
-            position: absolute;
-            top: -5px; right: -5px;
-            background: var(--ROJO);
-            width: 25px; height: 25px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border: 2px solid white;
-        }
-
-        /* --- MODALES (CARRITO Y PERSONALIZACIÓN) --- */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-        }
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 450px;
-            border-radius: 20px;
-            padding: 20px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-        .cerrar-modal {
-            position: absolute;
-            top: 15px; right: 15px;
-            background: none; border: none;
-            font-size: 1.5rem; color: #999;
-            cursor: pointer;
-        }
-        
-        /* Estilos básicos para el carrito dentro del modal */
-        .carrito-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .btn-wssp {
-            background: #25d366;
-            color: white;
-            width: 100%;
-            padding: 15px;
             border: none;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-        
-        /* Opciones personalización */
-        .opcion-tag {
-            display: inline-block;
-            padding: 8px 15px;
-            background: #f0f0f0;
-            border-radius: 20px;
-            margin: 5px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border: 1px solid #ddd;
-        }
-        .opcion-tag.selected {
-            background: var(--VERDE);
-            color: white;
-            border-color: var(--VERDE);
+            gap: 8px;
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* Animación carrito */
-        @keyframes shake {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            75% { transform: rotate(-5deg); }
-            100% { transform: rotate(0deg); }
-        }
-        .shake { animation: shake 0.4s ease-in-out; }
 
     </style>
 </head>
@@ -310,45 +199,47 @@
         </header>
 
         <div id="pantalla-inicio" class="pantalla activa">
+            <p style="text-align:center; margin-bottom:20px; color:#666; font-size:0.9rem;">Selecciona una categoría para ver los platos:</p>
+            
             <div class="grid-categorias">
                 <div class="cat-btn" onclick="verSeccion('entradas')">
-                    <img src="img/tequenos.png" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="img/tequenos.png" onerror="this.src='https://via.placeholder.com/300x300?text=Entradas'">
                     <div class="cat-title">Entradas</div>
                 </div>
                 <div class="cat-btn" onclick="verSeccion('cebiches')">
-                    <img src="img/cebiche-pescado.png" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="img/cebiche-pescado.png" onerror="this.src='https://via.placeholder.com/300x300?text=Cebiches'">
                     <div class="cat-title">Cebiches</div>
                 </div>
                 <div class="cat-btn" onclick="verSeccion('combinaciones')">
-                    <img src="img/combinado-1.png" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="img/combinado-1.png" onerror="this.src='https://via.placeholder.com/300x300?text=Combinados'">
                     <div class="cat-title">Combinados</div>
                 </div>
                 <div class="cat-btn" onclick="verSeccion('rondas')">
-                    <img src="img/ronda-1.png" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="img/ronda-1.png" onerror="this.src='https://via.placeholder.com/300x300?text=Rondas'">
                     <div class="cat-title">Rondas</div>
                 </div>
                 <div class="cat-btn" onclick="verSeccion('chicharrones')">
-                    <img src="img/jalea-mixta.png" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="img/jalea-mixta.png" onerror="this.src='https://via.placeholder.com/300x300?text=Chicharrones'">
                     <div class="cat-title">Chicharrones</div>
                 </div>
                 <div class="cat-btn" onclick="verSeccion('pescados')">
-                    <img src="img/cabrilla-dorada.jpg" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="img/cabrilla-dorada.jpg" onerror="this.src='https://via.placeholder.com/300x300?text=Pescados'">
                     <div class="cat-title">Pescados Enteros</div>
                 </div>
                 <div class="cat-btn" onclick="verSeccion('sopas')">
-                    <img src="img/parihuela.png" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="img/parihuela.png" onerror="this.src='https://via.placeholder.com/300x300?text=Sopas'">
                     <div class="cat-title">Sopas</div>
                 </div>
                 <div class="cat-btn" onclick="verSeccion('fondos')">
-                    <img src="img/arroz-mariscos.png" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="img/arroz-mariscos.png" onerror="this.src='https://via.placeholder.com/300x300?text=Fondos'">
                     <div class="cat-title">Platos de Fondo</div>
                 </div>
                 <div class="cat-btn" onclick="verSeccion('guarniciones')">
-                    <img src="img/arroz-porcion.png" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="img/arroz-porcion.png" onerror="this.src='https://via.placeholder.com/300x300?text=Guarniciones'">
                     <div class="cat-title">Guarniciones</div>
                 </div>
                 <div class="cat-btn" onclick="verSeccion('bebidas')">
-                    <img src="img/chicha.png" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="img/chicha.png" onerror="this.src='https://via.placeholder.com/300x300?text=Bebidas'">
                     <div class="cat-title">Bebidas</div>
                 </div>
             </div>
@@ -357,7 +248,8 @@
 
         <div id="sec-entradas" class="pantalla">
             <h2 class="titulo-seccion">Entradas</h2>
-            <div id="lista-entradas"></div> </div>
+            <div id="lista-entradas"></div> 
+        </div>
 
         <div id="sec-cebiches" class="pantalla">
             <h2 class="titulo-seccion">Cebiches</h2>
@@ -407,137 +299,101 @@
     </div>
 
     <button id="btn-volver" class="btn-volver-float" onclick="verSeccion('inicio')">
-        ⬅
+        ⬅ Volver al Menú
     </button>
 
-    <div class="carrito-btn" onclick="abrirCarrito()">
-        <span style="font-size: 24px;">🛒</span>
-        <div class="carrito-cantidad" id="cart-count">0</div>
-    </div>
-
-    <div id="modal-carrito" class="modal-overlay">
-        <div class="modal-content">
-            <button class="cerrar-modal" onclick="cerrarCarrito()">×</button>
-            <h2 style="color:var(--VERDE); margin-bottom:15px;">Tu Pedido</h2>
-            <div id="items-carrito" style="margin-bottom:20px;">
-                <p style="text-align:center; color:#999;">El carrito está vacío</p>
-            </div>
-            <div style="border-top:2px solid #eee; padding-top:10px; display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem;">
-                <span>Total:</span>
-                <span id="total-carrito">S/ 0.00</span>
-            </div>
-            <button class="btn-wssp" onclick="enviarPedido()">Hacer Pedido por WhatsApp 📱</button>
-        </div>
-    </div>
-
-    <div id="modal-opciones" class="modal-overlay">
-        <div class="modal-content">
-            <button class="cerrar-modal" onclick="cerrarOpciones()">×</button>
-            <h3 id="titulo-opciones" style="color:var(--VERDE); margin-bottom:15px;">Personalizar</h3>
-            
-            <div id="container-opciones"></div>
-
-            <textarea id="nota-opcional" placeholder="Nota adicional (ej: Sin cebolla)" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:10px; margin-top:15px; font-family:inherit;"></textarea>
-            
-            <button class="btn-wssp" style="background:var(--VERDE); margin-top:15px;" onclick="confirmarAgregar()">¡Listo! Agregar</button>
-        </div>
-    </div>
-
     <script>
-        // --- BASE DE DATOS DE PLATOS (TODA TU CARTA COMPLETA) ---
+        // --- DATOS DE LA CARTA (SOLO VISUALIZACIÓN) ---
         const menuData = {
             entradas: [
-                { id: 1, nombre: "Tequeños Jamón y Queso / Langostinos", precio: 16, img: "img/tequenos.png", desc: "Clásicos o rellenos de langostinos." },
-                { id: 2, nombre: "Causa de Cangrejo", precio: 25, img: "img/causa-cangrejo.png", desc: "Rellena de pulpa de cangrejo." },
-                { id: 3, nombre: "Causa de Langostinos", precio: 25, img: "img/causa-langostinos.png", desc: "Rellena de langostinos y palta." },
-                { id: 4, nombre: "Causa Acebichada", precio: 30, img: "img/causa-acebichada.png", desc: "Coronada con cebiche de pescado.", opciones: ["Picante"] },
-                { id: 5, nombre: "Causa de Pollo", precio: 23, img: "img/causa-pollo.png", desc: "Clásica de pollo deshilachado." },
-                { id: 6, nombre: "Poderoso", precio: 18, img: "img/poderoso.png", desc: "Leche de tigre, pescado, mariscos y chicharrón.", opciones: ["Picante"] },
-                { id: 7, nombre: "Leche de Pantera", precio: 18, img: "img/leche-pantera.png", desc: "Con conchas negras.", opciones: ["Picante"] },
-                { id: 8, nombre: "Leche de Tigre", precio: 16, img: "img/leche-tigre.png", desc: "Clásica con chicharrón.", opciones: ["Picante"] }
+                { nombre: "Tequeños Jamón y Queso / Langostinos", precio: 16, img: "img/tequenos.png", desc: "Clásicos o rellenos de langostinos." },
+                { nombre: "Causa de Cangrejo", precio: 25, img: "img/causa-cangrejo.png", desc: "Rellena de pulpa de cangrejo." },
+                { nombre: "Causa de Langostinos", precio: 25, img: "img/causa-langostinos.png", desc: "Rellena de langostinos y palta." },
+                { nombre: "Causa Acebichada", precio: 30, img: "img/causa-acebichada.png", desc: "Coronada con cebiche de pescado." },
+                { nombre: "Causa de Pollo", precio: 23, img: "img/causa-pollo.png", desc: "Clásica de pollo deshilachado." },
+                { nombre: "Poderoso", precio: 18, img: "img/poderoso.png", desc: "Leche de tigre, pescado, mariscos y chicharrón." },
+                { nombre: "Leche de Pantera", precio: 18, img: "img/leche-pantera.png", desc: "Con conchas negras." },
+                { nombre: "Leche de Tigre", precio: 16, img: "img/leche-tigre.png", desc: "Clásica con chicharrón." }
             ],
             cebiches: [
-                { id: 9, nombre: "Cebiche de Pescado", precio: 35, img: "img/cebiche-pescado.png", desc: "Fresco del día.", opciones: ["Picante"] },
-                { id: 10, nombre: "Cebiche Mixto", precio: 38, img: "img/cebiche-mixto.png", desc: "Pescado y mariscos selectos.", opciones: ["Picante"] },
-                { id: 11, nombre: "Cebiche Conchas Negras", precio: 36, img: "img/cebiche-conchas.png", desc: "Directo de Tumbes.", opciones: ["Picante"] },
-                { id: 12, nombre: "Cebiche Clásico", precio: 48, img: "img/cebiche-clasico.png", desc: "Con conchas negras.", opciones: ["Picante"] },
-                { id: 13, nombre: "Tiradito de Pescado", precio: 32, img: "img/tiradito.png", desc: "En crema de ají amarillo.", opciones: ["Picante"] }
+                { nombre: "Cebiche de Pescado", precio: 35, img: "img/cebiche-pescado.png", desc: "Fresco del día." },
+                { nombre: "Cebiche Mixto", precio: 38, img: "img/cebiche-mixto.png", desc: "Pescado y mariscos selectos." },
+                { nombre: "Cebiche Conchas Negras", precio: 36, img: "img/cebiche-conchas.png", desc: "Directo de Tumbes." },
+                { nombre: "Cebiche Clásico", precio: 48, img: "img/cebiche-clasico.png", desc: "Con conchas negras." },
+                { nombre: "Tiradito de Pescado", precio: 32, img: "img/tiradito.png", desc: "En crema de ají amarillo." }
             ],
             combinaciones: [
-                { id: 14, nombre: "Combinado 1", precio: 32, img: "img/combinado-1.png", desc: "Cebiche + Chicharrón de Pota.", opciones: ["Picante"] },
-                { id: 15, nombre: "Combinado 2", precio: 34, img: "img/combinado-2.png", desc: "Cebiche + Chicharrón de Pescado.", opciones: ["Picante"] },
-                { id: 16, nombre: "Doble Marino", precio: 35, img: "img/doble-marino.png", desc: "Cebiche + Arroz con Mariscos.", opciones: ["Picante"] },
-                { id: 17, nombre: "Doble Marino 2", precio: 42, img: "img/doble-marino-2.png", desc: "Cebiche + Chaufa (Pescado o Mariscos).", opciones: ["Picante", "Chaufa"] },
-                { id: 18, nombre: "Triple Marino 1", precio: 34, img: "img/triple-1.png", desc: "Cebiche + Arroz Mariscos + Chicharrón Pota.", opciones: ["Picante"] },
-                { id: 19, nombre: "Triple Marino 2", precio: 38, img: "img/triple-2.png", desc: "Cebiche + Arroz Mariscos + Chicharrón Pescado.", opciones: ["Picante"] },
-                { id: 20, nombre: "Triple Marino 3", precio: 38, img: "img/triple-3.png", desc: "Cebiche + Chaufa (Pes/Mar) + Chicharrón Pota.", opciones: ["Picante", "Chaufa"] },
-                { id: 21, nombre: "Triple Marino 4", precio: 42, img: "img/triple-4.png", desc: "Cebiche + Chaufa (Pes/Mar) + Chicharrón Pescado.", opciones: ["Picante", "Chaufa"] }
+                { nombre: "Combinado 1", precio: 32, img: "img/combinado-1.png", desc: "Cebiche + Chicharrón de Pota." },
+                { nombre: "Combinado 2", precio: 34, img: "img/combinado-2.png", desc: "Cebiche + Chicharrón de Pescado." },
+                { nombre: "Doble Marino", precio: 35, img: "img/doble-marino.png", desc: "Cebiche + Arroz con Mariscos." },
+                { nombre: "Doble Marino 2", precio: 42, img: "img/doble-marino-2.png", desc: "Cebiche + Chaufa (Pescado o Mariscos)." },
+                { nombre: "Triple Marino 1", precio: 34, img: "img/triple-1.png", desc: "Cebiche + Arroz Mariscos + Chicharrón Pota." },
+                { nombre: "Triple Marino 2", precio: 38, img: "img/triple-2.png", desc: "Cebiche + Arroz Mariscos + Chicharrón Pescado." },
+                { nombre: "Triple Marino 3", precio: 38, img: "img/triple-3.png", desc: "Cebiche + Chaufa (Pes/Mar) + Chicharrón Pota." },
+                { nombre: "Triple Marino 4", precio: 42, img: "img/triple-4.png", desc: "Cebiche + Chaufa (Pes/Mar) + Chicharrón Pescado." }
             ],
             rondas: [
-                { id: 22, nombre: "Ronda Marina 1", precio: 61, img: "img/ronda-1.png", desc: "Causa, Cebiche, Tiradito, Arroz Mariscos, Chicharrón Pota.", opciones: ["Picante"] },
-                { id: 23, nombre: "Ronda Marina 2", precio: 64, img: "img/ronda-2.png", desc: "Igual que la 1 pero con Chicharrón de Pescado.", opciones: ["Picante"] },
-                { id: 24, nombre: "Ronda Marina 3", precio: 66, img: "img/ronda-3.png", desc: "Causa, Cebiche, Tiradito, Chaufa, Chicharrón Pota.", opciones: ["Picante", "Chaufa"] },
-                { id: 25, nombre: "Ronda Marina 4", precio: 69, img: "img/ronda-4.png", desc: "Causa, Cebiche, Tiradito, Chaufa, Chicharrón Pescado.", opciones: ["Picante", "Chaufa"] }
+                { nombre: "Ronda Marina 1", precio: 61, img: "img/ronda-1.png", desc: "Causa, Cebiche, Tiradito, Arroz Mariscos, Chicharrón Pota." },
+                { nombre: "Ronda Marina 2", precio: 64, img: "img/ronda-2.png", desc: "Igual que la 1 pero con Chicharrón de Pescado." },
+                { nombre: "Ronda Marina 3", precio: 66, img: "img/ronda-3.png", desc: "Causa, Cebiche, Tiradito, Chaufa, Chicharrón Pota." },
+                { nombre: "Ronda Marina 4", precio: 69, img: "img/ronda-4.png", desc: "Causa, Cebiche, Tiradito, Chaufa, Chicharrón Pescado." }
             ],
             chicharrones: [
-                { id: 26, nombre: "Jalea Mixta", precio: 38, img: "img/jalea-mixta.png", desc: "Pescado y mariscos fritos con yuca y sarsa." },
-                { id: 27, nombre: "Jalea de Pescado", precio: 40, img: "img/jalea-pescado.png", desc: "Solo pescado." },
-                { id: 28, nombre: "Chicharrón de Pescado", precio: 34, img: "img/chicharron-pescado.png", desc: "Trozos crujientes." },
-                { id: 29, nombre: "Chicharrón de Langostinos", precio: 46, img: "img/chicharron-langostino.png", desc: "Langostinos empanizados." }
+                { nombre: "Jalea Mixta", precio: 38, img: "img/jalea-mixta.png", desc: "Pescado y mariscos fritos con yuca y sarsa." },
+                { nombre: "Jalea de Pescado", precio: 40, img: "img/jalea-pescado.png", desc: "Solo pescado." },
+                { nombre: "Chicharrón de Pescado", precio: 34, img: "img/chicharron-pescado.png", desc: "Trozos crujientes." },
+                { nombre: "Chicharrón de Langostinos", precio: 46, img: "img/chicharron-langostino.png", desc: "Langostinos empanizados." }
             ],
             pescados: [
-                { id: 30, nombre: "Cabrilla Dorada", precio: 40, img: "img/cabrilla-dorada.jpg", desc: "Frita entera con arroz y yuca." },
-                { id: 31, nombre: "Cabrilla al Ajo", precio: 42, img: "img/cabrilla-ajo.png", desc: "En salsa de ajo crocante." },
-                { id: 32, nombre: "Cabrilla al Ajillo", precio: 42, img: "img/cabrilla-ajillo.png", desc: "Salsa al ajillo." },
-                { id: 33, nombre: "Cabrilla a lo Macho", precio: 48, img: "img/cabrilla-lo-macho.png", desc: "Bañada en salsa de mariscos.", opciones: ["Picante"] },
-                { id: 34, nombre: "Trucha Dorada", precio: 30, img: "img/trucha-dorada.png", desc: "Frita con guarniciones." }
+                { nombre: "Cabrilla Dorada", precio: 40, img: "img/cabrilla-dorada.jpg", desc: "Frita entera con arroz y yuca." },
+                { nombre: "Cabrilla al Ajo", precio: 42, img: "img/cabrilla-ajo.png", desc: "En salsa de ajo crocante." },
+                { nombre: "Cabrilla al Ajillo", precio: 42, img: "img/cabrilla-ajillo.png", desc: "Salsa al ajillo." },
+                { nombre: "Cabrilla a lo Macho", precio: 48, img: "img/cabrilla-lo-macho.png", desc: "Bañada en salsa de mariscos." },
+                { nombre: "Trucha Dorada", precio: 30, img: "img/trucha-dorada.png", desc: "Frita con guarniciones." }
             ],
             sopas: [
-                { id: 35, nombre: "Parihuela", precio: 35, img: "img/parihuela.png", desc: "Concentrado de mariscos." },
-                { id: 36, nombre: "Chupe de Pescado", precio: 34, img: "img/chupe-pescado.png", desc: "Con leche, huevo y queso." },
-                { id: 37, nombre: "Chupe de Langostinos", precio: 36, img: "img/chupe-langostino.png", desc: "Cremoso." },
-                { id: 38, nombre: "Sudado de Filete", precio: 35, img: "img/sudado-filete.png", desc: "Jugoso pescado sudado." }
+                { nombre: "Parihuela", precio: 35, img: "img/parihuela.png", desc: "Concentrado de mariscos." },
+                { nombre: "Chupe de Pescado", precio: 34, img: "img/chupe-pescado.png", desc: "Con leche, huevo y queso." },
+                { nombre: "Chupe de Langostinos", precio: 36, img: "img/chupe-langostino.png", desc: "Cremoso." },
+                { nombre: "Sudado de Filete", precio: 35, img: "img/sudado-filete.png", desc: "Jugoso pescado sudado." }
             ],
             fondos: [
-                { id: 39, nombre: "Arroz con Mariscos", precio: 32, img: "img/arroz-mariscos.png", desc: "El clásico." },
-                { id: 40, nombre: "Arroz con Langostinos", precio: 32, img: "img/arroz-langostinos.png", desc: "Con colitas selectas." },
-                { id: 41, nombre: "Chaufa de Mariscos", precio: 32, img: "img/chaufa-mariscos.png", desc: "Sabor oriental." },
-                { id: 42, nombre: "Chaufa de Pollo", precio: 28, img: "img/chaufa-pollo.png", desc: "" },
-                { id: 43, nombre: "Chaufa de Carne", precio: 28, img: "img/chaufa-carne.png", desc: "" },
-                { id: 44, nombre: "Chaufa de Pescado", precio: 30, img: "img/chaufa-pescado.jpg", desc: "" },
-                { id: 45, nombre: "Picante de Langostinos", precio: 40, img: "img/picante-langostinos.png", desc: "En salsa de la casa.", opciones: ["Picante"] },
-                { id: 46, nombre: "Pescado a lo Macho", precio: 38, img: "img/pescado-lo-macho.jpg", desc: "Filete en salsa de mariscos.", opciones: ["Picante"] },
-                { id: 47, nombre: "Filete Salsa Langostinos", precio: 38, img: "img/filete-salsa.png", desc: "", opciones: ["Picante"] },
-                { id: 48, nombre: "Filete Plancha / Frito", precio: 30, img: "img/filete-plancha.png", desc: "Elige tu cocción.", opciones: ["Coccion"] },
-                { id: 49, nombre: "Saltado", precio: 30, img: "img/saltado.png", desc: "Elige Cuadril o Pollo.", opciones: ["TipoCarne"] },
-                { id: 50, nombre: "Lomo Fino Saltado", precio: 40, img: "img/lomo-saltado.png", desc: "Carne suave y jugosa." },
-                { id: 51, nombre: "Bisteck a lo Pobre", precio: 36, img: "img/bisteck.png", desc: "Con huevo, plátano y papas." },
-                { id: 52, nombre: "Pollo a la Plancha", precio: 30, img: "img/pollo-plancha.png", desc: "" },
-                { id: 53, nombre: "Fetuccini Huancaína", precio: 35, img: "img/fetuccini-huancaina.png", desc: "Con Cuadril o Pollo.", opciones: ["TipoCarne"] },
-                { id: 54, nombre: "Fetuccini Huancaína Lomo", precio: 40, img: "img/fetuccini-lomo.png", desc: "Con lomo fino saltado." },
-                { id: 55, nombre: "Fetuccini Langostinos", precio: 32, img: "img/fetuccini-langos.png", desc: "En salsa blanca." }
+                { nombre: "Arroz con Mariscos", precio: 32, img: "img/arroz-mariscos.png", desc: "El clásico." },
+                { nombre: "Arroz con Langostinos", precio: 32, img: "img/arroz-langostinos.png", desc: "Con colitas selectas." },
+                { nombre: "Chaufa de Mariscos", precio: 32, img: "img/chaufa-mariscos.png", desc: "Sabor oriental." },
+                { nombre: "Chaufa de Pollo", precio: 28, img: "img/chaufa-pollo.png", desc: "" },
+                { nombre: "Chaufa de Carne", precio: 28, img: "img/chaufa-carne.png", desc: "" },
+                { nombre: "Chaufa de Pescado", precio: 30, img: "img/chaufa-pescado.jpg", desc: "" },
+                { nombre: "Picante de Langostinos", precio: 40, img: "img/picante-langostinos.png", desc: "En salsa de la casa." },
+                { nombre: "Pescado a lo Macho", precio: 38, img: "img/pescado-lo-macho.jpg", desc: "Filete en salsa de mariscos." },
+                { nombre: "Filete Salsa Langostinos", precio: 38, img: "img/filete-salsa.png", desc: "" },
+                { nombre: "Filete Plancha / Frito", precio: 30, img: "img/filete-plancha.png", desc: "Elige tu cocción." },
+                { nombre: "Saltado", precio: 30, img: "img/saltado.png", desc: "Elige Cuadril o Pollo." },
+                { nombre: "Lomo Fino Saltado", precio: 40, img: "img/lomo-saltado.png", desc: "Carne suave y jugosa." },
+                { nombre: "Bisteck a lo Pobre", precio: 36, img: "img/bisteck.png", desc: "Con huevo, plátano y papas." },
+                { nombre: "Pollo a la Plancha", precio: 30, img: "img/pollo-plancha.png", desc: "" },
+                { nombre: "Fetuccini Huancaína", precio: 35, img: "img/fetuccini-huancaina.png", desc: "Con Cuadril o Pollo." },
+                { nombre: "Fetuccini Huancaína Lomo", precio: 40, img: "img/fetuccini-lomo.png", desc: "Con lomo fino saltado." },
+                { nombre: "Fetuccini Langostinos", precio: 32, img: "img/fetuccini-langos.png", desc: "En salsa blanca." }
             ],
             guarniciones: [
-                { id: 56, nombre: "Porción de Arroz", precio: 6, img: "img/arroz-porcion.png" },
-                { id: 57, nombre: "Chifles", precio: 6, img: "img/chifles.png" },
-                { id: 58, nombre: "Choclo", precio: 6, img: "img/choclo.png" },
-                { id: 59, nombre: "Canchita", precio: 6, img: "img/canchita.png" },
-                { id: 60, nombre: "Yucas Fritas/Sancochadas", precio: 6, img: "img/yucas.png" },
-                { id: 61, nombre: "Yuyo Frito", precio: 6, img: "img/yuyo.png" }
+                { nombre: "Porción de Arroz", precio: 6, img: "img/arroz-porcion.png" },
+                { nombre: "Chifles", precio: 6, img: "img/chifles.png" },
+                { nombre: "Choclo", precio: 6, img: "img/choclo.png" },
+                { nombre: "Canchita", precio: 6, img: "img/canchita.png" },
+                { nombre: "Yucas Fritas/Sancochadas", precio: 6, img: "img/yucas.png" },
+                { nombre: "Yuyo Frito", precio: 6, img: "img/yuyo.png" }
             ],
             bebidas: [
-                { id: 62, nombre: "Chicha Morada (1L)", precio: 16, img: "img/chicha.png" },
-                { id: 63, nombre: "Chicha Morada (Copa)", precio: 8, img: "img/chicha.png" },
-                { id: 64, nombre: "Limonada (1L)", precio: 16, img: "img/limonada.png" },
-                { id: 65, nombre: "Limonada (Copa)", precio: 8, img: "img/limonada.png" },
-                { id: 66, nombre: "Limonada Frozen (1L)", precio: 18, img: "img/limonada-frozen.png" },
-                { id: 67, nombre: "Maracuyá (1L)", precio: 16, img: "img/maracuya.png" },
-                { id: 68, nombre: "Maracuyá Frozen (1L)", precio: 18, img: "img/maracuya-frozen.png" }
+                { nombre: "Chicha Morada (1L)", precio: 16, img: "img/chicha.png" },
+                { nombre: "Chicha Morada (Copa)", precio: 8, img: "img/chicha.png" },
+                { nombre: "Limonada (1L)", precio: 16, img: "img/limonada.png" },
+                { nombre: "Limonada (Copa)", precio: 8, img: "img/limonada.png" },
+                { nombre: "Limonada Frozen (1L)", precio: 18, img: "img/limonada-frozen.png" },
+                { nombre: "Maracuyá (1L)", precio: 16, img: "img/maracuya.png" },
+                { nombre: "Maracuyá Frozen (1L)", precio: 18, img: "img/maracuya-frozen.png" }
             ]
         };
-
-        let carrito = [];
-        let itemTemporal = null; // Para guardar lo que se está personalizando
 
         // --- RENDERIZADO DE PLATOS ---
         function renderizarMenu() {
@@ -549,14 +405,13 @@
                     const card = document.createElement('div');
                     card.className = 'plato-card';
                     card.innerHTML = `
-                        <img src="${plato.img}" class="plato-img-mini" onerror="this.src='https://via.placeholder.com/150'">
+                        <div class="plato-img-container">
+                            <img src="${plato.img}" onerror="this.src='https://via.placeholder.com/150?text=Plato'">
+                        </div>
                         <div class="plato-info">
                             <div class="plato-nombre">${plato.nombre}</div>
                             ${plato.desc ? `<div class="plato-desc">${plato.desc}</div>` : ''}
-                            <div class="plato-footer">
-                                <div class="plato-precio">S/ ${plato.precio}</div>
-                                <button class="btn-add-mini" onclick="prepararAgregar(${plato.id}, '${categoria}')">+</button>
-                            </div>
+                            <div class="plato-precio">S/ ${plato.precio}</div>
                         </div>
                     `;
                     contenedor.appendChild(card);
@@ -576,162 +431,6 @@
                 document.getElementById('btn-volver').style.display = 'flex';
             }
             window.scrollTo(0,0);
-        }
-
-        // --- LÓGICA DEL CARRITO ---
-        
-        function prepararAgregar(idPlato, categoria) {
-            const plato = menuData[categoria].find(p => p.id === idPlato);
-            
-            // Si tiene opciones (picante, cocción, chaufa), abrir modal
-            if (plato.opciones && plato.opciones.length > 0) {
-                abrirModalOpciones(plato);
-            } else {
-                // Si es simple, agregar directo
-                agregarAlCarrito(plato);
-            }
-        }
-
-        function abrirModalOpciones(plato) {
-            itemTemporal = plato;
-            document.getElementById('titulo-opciones').innerText = plato.nombre;
-            const container = document.getElementById('container-opciones');
-            container.innerHTML = '';
-            document.getElementById('nota-opcional').value = '';
-
-            // Generar botones de opciones
-            plato.opciones.forEach(tipo => {
-                const wrapper = document.createElement('div');
-                wrapper.style.marginBottom = "15px";
-                
-                let titulo = "";
-                let opciones = [];
-
-                if (tipo === "Picante") {
-                    titulo = "🌶️ Nivel de Ají:";
-                    opciones = ["Sin ají", "Poco ají", "Picante"];
-                } else if (tipo === "Coccion") {
-                    titulo = "🔥 Cocción:";
-                    opciones = ["A la Plancha", "Frito"];
-                } else if (tipo === "TipoCarne") {
-                    titulo = "🥩 Tipo:";
-                    opciones = ["Cuadril", "Pollo"];
-                } else if (tipo === "Chaufa") {
-                    titulo = "🍚 Chaufa:";
-                    opciones = ["De Pescado", "De Mariscos"];
-                }
-
-                wrapper.innerHTML = `<div style="font-weight:bold; margin-bottom:5px; color:var(--VERDE);">${titulo}</div>`;
-                
-                opciones.forEach(op => {
-                    const tag = document.createElement('span');
-                    tag.className = 'opcion-tag';
-                    tag.innerText = op;
-                    tag.onclick = function() {
-                        // Desmarcar hermanos
-                        wrapper.querySelectorAll('.opcion-tag').forEach(t => t.classList.remove('selected'));
-                        // Marcar este
-                        tag.classList.add('selected');
-                    };
-                    wrapper.appendChild(tag);
-                });
-                container.appendChild(wrapper);
-            });
-
-            document.getElementById('modal-opciones').style.display = 'flex';
-        }
-
-        function cerrarOpciones() {
-            document.getElementById('modal-opciones').style.display = 'none';
-        }
-
-        function confirmarAgregar() {
-            // Recolectar opciones seleccionadas
-            const seleccionados = document.querySelectorAll('.opcion-tag.selected');
-            const requeridos = itemTemporal.opciones.length;
-            
-            if (seleccionados.length < requeridos) {
-                alert("Por favor selecciona todas las opciones.");
-                return;
-            }
-
-            let detalles = Array.from(seleccionados).map(s => s.innerText).join(", ");
-            const nota = document.getElementById('nota-opcional').value;
-            if (nota) detalles += ` (${nota})`;
-
-            agregarAlCarrito(itemTemporal, detalles);
-            cerrarOpciones();
-        }
-
-        function agregarAlCarrito(plato, detalles = "") {
-            carrito.push({ ...plato, detalles });
-            actualizarUI();
-            
-            // Animación visual del carrito flotante
-            const btnCart = document.querySelector('.carrito-btn');
-            btnCart.classList.add('shake');
-            setTimeout(() => btnCart.classList.remove('shake'), 400);
-        }
-
-        function actualizarUI() {
-            document.getElementById('cart-count').innerText = carrito.length;
-            
-            const container = document.getElementById('items-carrito');
-            if (carrito.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#999;">El carrito está vacío</p>';
-                document.getElementById('total-carrito').innerText = "S/ 0.00";
-                return;
-            }
-
-            let html = '';
-            let total = 0;
-
-            carrito.forEach((item, index) => {
-                total += item.precio;
-                html += `
-                    <div class="carrito-item">
-                        <div>
-                            <div style="font-weight:bold; color:var(--VERDE);">${item.nombre}</div>
-                            <div style="font-size:0.8rem; color:#666;">${item.detalles || ''}</div>
-                            <div style="font-weight:bold;">S/ ${item.precio}</div>
-                        </div>
-                        <button onclick="eliminarItem(${index})" style="background:none; border:none; color:#f00; font-weight:bold; cursor:pointer;">✕</button>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-            document.getElementById('total-carrito').innerText = "S/ " + total.toFixed(2);
-        }
-
-        function eliminarItem(index) {
-            carrito.splice(index, 1);
-            actualizarUI();
-        }
-
-        function abrirCarrito() {
-            document.getElementById('modal-carrito').style.display = 'flex';
-        }
-        function cerrarCarrito() {
-            document.getElementById('modal-carrito').style.display = 'none';
-        }
-
-        function enviarPedido() {
-            if (carrito.length === 0) return;
-
-            let mensaje = "Hola TIPO'S, quiero hacer un pedido: \n\n";
-            let total = 0;
-
-            carrito.forEach(item => {
-                total += item.precio;
-                mensaje += `▪️ ${item.nombre} - S/${item.precio}\n`;
-                if (item.detalles) mensaje += `   (${item.detalles})\n`;
-            });
-
-            mensaje += `\n*TOTAL: S/ ${total.toFixed(2)}*`;
-            
-            const numero = "51977420834"; 
-            window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
 
         // Inicializar
