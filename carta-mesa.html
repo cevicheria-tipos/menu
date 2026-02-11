@@ -79,7 +79,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.7); /* Oscurecer un poco para leer el texto */
+            filter: brightness(0.7);
         }
         .cat-title {
             position: absolute;
@@ -95,7 +95,7 @@
             background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
         }
 
-        /* --- VISTA DE PLATOS (LISTA LIMPIA) --- */
+        /* --- VISTA DE PLATOS --- */
         .titulo-seccion {
             font-family: 'Playfair Display', serif;
             color: var(--VERDE);
@@ -112,7 +112,7 @@
             background: white;
             border-radius: 15px;
             margin-bottom: 20px;
-            padding: 0; /* Sin padding para que la imagen llegue al borde si quieres, o con padding */
+            padding: 0;
             display: flex;
             overflow: hidden;
             box-shadow: var(--sombra);
@@ -121,13 +121,16 @@
         
         .plato-img-container {
             width: 120px;
-            height: 120px;
+            min-height: 120px; /* Asegura altura mínima */
             flex-shrink: 0;
+            position: relative;
         }
         
         .plato-img-container img {
             width: 100%;
             height: 100%;
+            position: absolute;
+            top: 0; left: 0;
             object-fit: cover;
         }
         
@@ -156,9 +159,28 @@
         
         .plato-precio {
             font-weight: 800;
-            color: var(--VERDE); /* Verde se ve más amigable que rojo */
+            color: var(--VERDE);
             font-size: 1.2rem;
             text-align: right;
+        }
+
+        /* --- ESTILOS NUEVOS PARA LISTA DE PRECIOS (BEBIDAS) --- */
+        .precio-lista {
+            margin-top: 5px;
+            width: 100%;
+        }
+        .precio-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #555;
+            padding: 3px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        .precio-item:last-child { border-bottom: none; }
+        .precio-item span:last-child {
+            font-weight: 700;
+            color: var(--VERDE);
         }
 
         /* --- BOTÓN VOLVER FLOTANTE --- */
@@ -171,7 +193,7 @@
             color: white;
             padding: 12px 25px;
             border-radius: 50px;
-            display: none; /* Se activa con JS */
+            display: none; 
             align-items: center;
             justify-content: center;
             font-size: 1rem;
@@ -246,55 +268,16 @@
             <p style="text-align:center; color:#999; font-size:0.8rem; margin-top:20px;">Cevichería Tipo's © 2026</p>
         </div>
 
-        <div id="sec-entradas" class="pantalla">
-            <h2 class="titulo-seccion">Entradas</h2>
-            <div id="lista-entradas"></div> 
-        </div>
-
-        <div id="sec-cebiches" class="pantalla">
-            <h2 class="titulo-seccion">Cebiches</h2>
-            <div id="lista-cebiches"></div>
-        </div>
-
-        <div id="sec-combinaciones" class="pantalla">
-            <h2 class="titulo-seccion">Combinaciones</h2>
-            <div id="lista-combinaciones"></div>
-        </div>
-
-        <div id="sec-rondas" class="pantalla">
-            <h2 class="titulo-seccion">Rondas Marinas</h2>
-            <div id="lista-rondas"></div>
-        </div>
-
-        <div id="sec-chicharrones" class="pantalla">
-            <h2 class="titulo-seccion">Chicharrones</h2>
-            <div id="lista-chicharrones"></div>
-        </div>
-
-        <div id="sec-pescados" class="pantalla">
-            <h2 class="titulo-seccion">Pescados Enteros</h2>
-            <div id="lista-pescados"></div>
-        </div>
-
-        <div id="sec-sopas" class="pantalla">
-            <h2 class="titulo-seccion">Sopas y Sudados</h2>
-            <div id="lista-sopas"></div>
-        </div>
-
-        <div id="sec-fondos" class="pantalla">
-            <h2 class="titulo-seccion">Platos de Fondo</h2>
-            <div id="lista-fondos"></div>
-        </div>
-
-        <div id="sec-guarniciones" class="pantalla">
-            <h2 class="titulo-seccion">Guarniciones</h2>
-            <div id="lista-guarniciones"></div>
-        </div>
-
-        <div id="sec-bebidas" class="pantalla">
-            <h2 class="titulo-seccion">Bebidas</h2>
-            <div id="lista-bebidas"></div>
-        </div>
+        <div id="sec-entradas" class="pantalla"><h2 class="titulo-seccion">Entradas</h2><div id="lista-entradas"></div></div>
+        <div id="sec-cebiches" class="pantalla"><h2 class="titulo-seccion">Cebiches</h2><div id="lista-cebiches"></div></div>
+        <div id="sec-combinaciones" class="pantalla"><h2 class="titulo-seccion">Combinaciones</h2><div id="lista-combinaciones"></div></div>
+        <div id="sec-rondas" class="pantalla"><h2 class="titulo-seccion">Rondas Marinas</h2><div id="lista-rondas"></div></div>
+        <div id="sec-chicharrones" class="pantalla"><h2 class="titulo-seccion">Chicharrones</h2><div id="lista-chicharrones"></div></div>
+        <div id="sec-pescados" class="pantalla"><h2 class="titulo-seccion">Pescados Enteros</h2><div id="lista-pescados"></div></div>
+        <div id="sec-sopas" class="pantalla"><h2 class="titulo-seccion">Sopas y Sudados</h2><div id="lista-sopas"></div></div>
+        <div id="sec-fondos" class="pantalla"><h2 class="titulo-seccion">Platos de Fondo</h2><div id="lista-fondos"></div></div>
+        <div id="sec-guarniciones" class="pantalla"><h2 class="titulo-seccion">Guarniciones</h2><div id="lista-guarniciones"></div></div>
+        <div id="sec-bebidas" class="pantalla"><h2 class="titulo-seccion">Bebidas</h2><div id="lista-bebidas"></div></div>
 
     </div>
 
@@ -303,7 +286,6 @@
     </button>
 
     <script>
-        // --- DATOS DE LA CARTA (SOLO VISUALIZACIÓN) ---
         const menuData = {
             entradas: [
                 { nombre: "Tequeños Jamón y Queso / Langostinos", precio: 16, img: "img/tequenos.png", desc: "Clásicos o rellenos de langostinos." },
@@ -384,24 +366,78 @@
                 { nombre: "Yucas Fritas/Sancochadas", precio: 6, img: "img/yucas.png" },
                 { nombre: "Yuyo Frito", precio: 6, img: "img/yuyo.png" }
             ],
+            // AQUÍ ESTÁ EL CAMBIO PRINCIPAL
             bebidas: [
-                { nombre: "Chicha Morada (1L)", precio: 16, img: "img/chicha.png" },
-                { nombre: "Chicha Morada (Copa)", precio: 8, img: "img/chicha.png" },
-                { nombre: "Limonada (1L)", precio: 16, img: "img/limonada.png" },
-                { nombre: "Limonada (Copa)", precio: 8, img: "img/limonada.png" },
-                { nombre: "Limonada Frozen (1L)", precio: 18, img: "img/limonada-frozen.png" },
-                { nombre: "Maracuyá (1L)", precio: 16, img: "img/maracuya.png" },
-                { nombre: "Maracuyá Frozen (1L)", precio: 18, img: "img/maracuya-frozen.png" }
+                { 
+                    nombre: "Chicha Morada", 
+                    img: "img/chicha.png",
+                    variedades: [
+                        { nombre: "Jarra (1 Litro)", precio: 16 },
+                        { nombre: "Copa / Vaso", precio: 8 }
+                    ]
+                },
+                { 
+                    nombre: "Limonada Clásica", 
+                    img: "img/limonada.png",
+                    variedades: [
+                        { nombre: "Jarra (1 Litro)", precio: 16 },
+                        { nombre: "Copa / Vaso", precio: 8 }
+                    ]
+                },
+                { 
+                    nombre: "Limonada Frozen", 
+                    img: "img/limonada-frozen.png",
+                    variedades: [
+                        { nombre: "Jarra (1 Litro)", precio: 18 },
+                        // Si quisieras agregar copa, descomenta la siguiente línea:
+                        // { nombre: "Copa Frozen", precio: 10 }
+                    ]
+                },
+                { 
+                    nombre: "Maracuyá", 
+                    img: "img/maracuya.png",
+                    variedades: [
+                        { nombre: "Jarra (1 Litro)", precio: 16 },
+                        // Asumiendo que maracuyá normal también tiene vaso:
+                        { nombre: "Copa / Vaso", precio: 8 } 
+                    ]
+                },
+                { 
+                    nombre: "Maracuyá Frozen", 
+                    img: "img/maracuya-frozen.png",
+                    variedades: [
+                        { nombre: "Jarra (1 Litro)", precio: 18 }
+                    ]
+                }
             ]
         };
 
-        // --- RENDERIZADO DE PLATOS ---
         function renderizarMenu() {
             for (const [categoria, platos] of Object.entries(menuData)) {
                 const contenedor = document.getElementById(`lista-${categoria}`);
                 if (!contenedor) continue;
 
                 platos.forEach(plato => {
+                    // Lógica para mostrar precio único O lista de precios
+                    let contenidoPrecio = '';
+                    
+                    if (plato.variedades) {
+                        // Si tiene variedades (bebidas)
+                        contenidoPrecio = `<div class="precio-lista">`;
+                        plato.variedades.forEach(v => {
+                            contenidoPrecio += `
+                                <div class="precio-item">
+                                    <span>${v.nombre}</span>
+                                    <span>S/ ${v.precio}</span>
+                                </div>
+                            `;
+                        });
+                        contenidoPrecio += `</div>`;
+                    } else {
+                        // Si es un plato normal
+                        contenidoPrecio = `<div class="plato-precio">S/ ${plato.precio}</div>`;
+                    }
+
                     const card = document.createElement('div');
                     card.className = 'plato-card';
                     card.innerHTML = `
@@ -411,7 +447,7 @@
                         <div class="plato-info">
                             <div class="plato-nombre">${plato.nombre}</div>
                             ${plato.desc ? `<div class="plato-desc">${plato.desc}</div>` : ''}
-                            <div class="plato-precio">S/ ${plato.precio}</div>
+                            ${contenidoPrecio}
                         </div>
                     `;
                     contenedor.appendChild(card);
@@ -419,7 +455,6 @@
             }
         }
 
-        // --- NAVEGACIÓN ---
         function verSeccion(id) {
             document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
             
@@ -433,9 +468,7 @@
             window.scrollTo(0,0);
         }
 
-        // Inicializar
         renderizarMenu();
-
     </script>
 </body>
 </html>
