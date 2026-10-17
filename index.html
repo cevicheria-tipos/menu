@@ -239,8 +239,60 @@
 
         .error-mensaje { color: var(--ROJO); font-size: 0.8rem; margin-top: 5px; display: none; }
 
-        .whatsapp-btn { position: fixed; width: 60px; height: 60px; bottom: 20px; left: 20px; background-color: #25d366; color: #FFF; border-radius: 50%; text-align: center; font-size: 24px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; border: 3px solid white; z-index: 9000 !important; }
-        .whatsapp-btn:hover { transform: scale(1.1); background-color: #1da851; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6); }
+        /* FIX: Estilo de botón WhatsApp flotante con texto, icono y pulso sutil */
+        .whatsapp-btn {
+            position: fixed;
+            height: 52px;
+            bottom: 20px;
+            left: 20px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 18px 0 14px;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+            z-index: 9000 !important;
+            animation: pulso-whatsapp 3s infinite ease-in-out;
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.06);
+            background-color: #1da851;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            animation: none;
+        }
+        .whatsapp-btn .whatsapp-icon {
+            font-size: 24px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+        }
+        .whatsapp-btn .whatsapp-texto {
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+            color: #ffffff;
+            letter-spacing: 0.2px;
+        }
+
+        /* FIX: Animación sutil de pulso para el botón de WhatsApp */
+        @keyframes pulso-whatsapp {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 22px rgba(37, 211, 102, 0.65);
+            }
+        }
 
         .carrito-btn { position: fixed; width: 70px; height: 70px; bottom: 20px; right: 20px; background-color: var(--ROJO); color: white; border-radius: 50%; text-align: center; box-shadow: 0 4px 15px rgba(174, 32, 18, 0.4); z-index: 9000 !important; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; border: 3px solid white; }
         .carrito-btn:hover { transform: scale(1.1); background-color: #c62828; box-shadow: 0 6px 20px rgba(174, 32, 18, 0.6); }
@@ -283,7 +335,9 @@
             .carrito-header h2 { font-size: 1.5rem; }
             .carrito-resumen { padding: 1.5rem; }
             .metodo-pago { flex-direction: column; }
-            .whatsapp-btn { width: 55px; height: 55px; bottom: 15px; left: 15px; font-size: 22px; }
+            /* FIX: En móvil ocultar texto del botón WhatsApp y mantener icono circular para no estorbar */
+            .whatsapp-btn { width: 55px; height: 55px; padding: 0; border-radius: 50%; bottom: 15px; left: 15px; font-size: 22px; }
+            .whatsapp-btn .whatsapp-texto { display: none; }
             .carrito-btn { width: 60px; height: 60px; bottom: 15px; right: 15px; }
             .carrito-cantidad { width: 24px; height: 24px; font-size: 0.8rem; }
             .modal-personalizacion-contenido { width: 95%; padding: 1.5rem; max-height: 85vh; overflow-y: auto; }
@@ -317,7 +371,9 @@
             .carrito-item-subtotal { font-size: 1rem; }
             .btn-agregar, .btn { padding: 12px 15px; font-size: 0.9rem; }
             .cantidad-btn { width: 36px; height: 36px; }
-            .whatsapp-btn { width: 50px; height: 50px; bottom: 10px; left: 10px; font-size: 20px; }
+            /* FIX: En pantallas pequeñas mantener WhatsApp compacto circular */
+            .whatsapp-btn { width: 50px; height: 50px; padding: 0; border-radius: 50%; bottom: 10px; left: 10px; font-size: 20px; }
+            .whatsapp-btn .whatsapp-texto { display: none; }
             .carrito-btn { width: 55px; height: 55px; bottom: 10px; right: 10px; }
             .carrito-cantidad { width: 22px; height: 22px; font-size: 0.75rem; }
         }
@@ -339,8 +395,10 @@
         </div>
     </div>
     
-    <a href="https://wa.me/51977420834" class="whatsapp-btn" target="_blank">
-        <span style="font-size: 24px;">📱</span>
+    <!-- FIX: Botón flotante de WhatsApp con texto '¿Dudas? Escríbenos' y adaptable a móvil -->
+    <a href="https://wa.me/51977420834" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
+        <span class="whatsapp-icon">📱</span>
+        <span class="whatsapp-texto">¿Dudas? Escríbenos</span>
     </a>
 
     <div class="carrito-btn" onclick="mostrarCarrito()">
@@ -443,8 +501,10 @@
                 
                 <div class="form-group">
                     <label for="cliente-telefono">WhatsApp *</label>
-                    <input type="tel" id="cliente-telefono" placeholder="Ej: 987654321" required>
-                    <div class="error-mensaje" id="error-telefono">Por favor ingresa tu WhatsApp</div>
+                    <!-- FIX: Campo de celular peruano con placeholder y límite de 9 dígitos -->
+                    <input type="tel" id="cliente-telefono" placeholder="Ej: 987654321" maxlength="9" required>
+                    <!-- FIX: Mensaje de error específico para celular peruano -->
+                    <div class="error-mensaje" id="error-telefono">Ingresa un celular válido de 9 dígitos que empiece con 9 (ej: 987654321)</div>
                 </div>
                 
                 <div class="form-group">
@@ -1100,6 +1160,20 @@
                     </div>
                     <button class="btn-agregar" onclick="agregarAlCarrito('Chicharrón de pescado', 34)">Agregar al pedido</button>
                 </li>
+                <!-- FIX: Se agrega el plato individual 'Chicharrón de pota' a S/25 con respaldo de imagen por si no existe chicharron-pota.png -->
+                <li class="plato-item">
+                    <div class="plato-info">
+                        <div class="plato-texto">
+                            <div class="plato-nombre">Chicharrón de pota</div>
+                            <div class="plato-desc">(Chicharrón de pota, yucas fritas y de sarsa criolla)</div>
+                        </div>
+                        <div class="plato-precio">S/25</div>
+                    </div>
+                    <div class="plato-imagen">
+                        <img src="img/chicharron-pota.png" onerror="this.onerror=null; this.src='img/chicharron-pescado.png';" alt="Chicharrón de pota">
+                    </div>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('Chicharrón de pota', 25)">Agregar al pedido</button>
+                </li>
                 <li class="plato-item">
                     <div class="plato-info">
                         <div class="plato-texto">
@@ -1580,6 +1654,7 @@
                     <div class="plato-imagen">
                         <img src="img/chicha.png" alt="Chicha Morada">
                     </div>
+                    <!-- FIX: Verificados precios de Chicha Morada (Litro: S/18, Copa: S/9) -->
                     <div style="display: flex; gap: 10px; margin-top: 10px;">
                         <button class="btn-agregar" onclick="agregarAlCarrito('Chicha Morada - Litro', 18)">Litro</button>
                         <button class="btn-agregar" onclick="agregarAlCarrito('Chicha Morada - Copa', 9)">Copa</button>
@@ -1604,6 +1679,7 @@
                     <div class="plato-imagen">
                         <img src="img/limonada.png" alt="Limonada">
                     </div>
+                    <!-- FIX: Verificados precios de Limonada (Litro: S/18, Copa: S/9) -->
                     <div style="display: flex; gap: 10px; margin-top: 10px;">
                         <button class="btn-agregar" onclick="agregarAlCarrito('Limonada - Litro', 18)">Litro</button>
                         <button class="btn-agregar" onclick="agregarAlCarrito('Limonada - Copa', 9)">Copa</button>
@@ -1628,6 +1704,7 @@
                     <div class="plato-imagen">
                         <img src="img/limonada-frozen.png" alt="Limonada frozen">
                     </div>
+                    <!-- FIX: Verificados precios de Limonada Frozen (Litro: S/20, Copa: S/10) -->
                     <div style="display: flex; gap: 10px; margin-top: 10px;">
                         <button class="btn-agregar" onclick="agregarAlCarrito('Limonada frozen - Litro', 20)">Litro</button>
                         <button class="btn-agregar" onclick="agregarAlCarrito('Limonada frozen - Copa', 10)">Copa</button>
@@ -1652,6 +1729,7 @@
                     <div class="plato-imagen">
                         <img src="img/maracuya.png" alt="Maracuyá">
                     </div>
+                    <!-- FIX: Verificados precios de Maracuyá (Litro: S/18, Copa: S/9) -->
                     <div style="display: flex; gap: 10px; margin-top: 10px;">
                         <button class="btn-agregar" onclick="agregarAlCarrito('Maracuyá - Litro', 18)">Litro</button>
                         <button class="btn-agregar" onclick="agregarAlCarrito('Maracuyá - Copa', 9)">Copa</button>
@@ -1676,6 +1754,7 @@
                     <div class="plato-imagen">
                         <img src="img/maracuya-frozen.png" alt="Maracuyá Frozen">        
                     </div>
+                    <!-- FIX: Verificados precios de Maracuyá Frozen (Litro: S/20, Copa: S/10) -->
                     <div style="display: flex; gap: 10px; margin-top: 10px;">
                         <button class="btn-agregar" onclick="agregarAlCarrito('Maracuyá Frozen - Litro', 20)">Litro</button>
                         <button class="btn-agregar" onclick="agregarAlCarrito('Maracuyá Frozen - Copa', 10)">Copa</button>
@@ -1730,9 +1809,27 @@
             document.body.style.overflow = 'auto';
         }
 
+        // FIX: Validación de precio en agregarAlCarrito (fuerza parseFloat y valida que no sea NaN ni menor o igual a 0)
         function agregarAlCarrito(nombre, precio, especificaciones = '') {
-            const botonPresionado = event.currentTarget;
-            if (botonPresionado && botonPresionado.classList.contains('btn-agregar')) {
+            // FIX: Forzar conversión a float y validar
+            const precioNumerico = parseFloat(precio);
+            if (isNaN(precioNumerico) || precioNumerico <= 0) {
+                alert(`El precio del producto "${nombre}" no es válido. No se puede agregar al pedido.`);
+                return;
+            }
+            precio = precioNumerico;
+
+            // FIX: Manejo seguro de la animación del botón pulsado
+            let botonPresionado = null;
+            try {
+                if (typeof event !== 'undefined' && event && event.currentTarget) {
+                    botonPresionado = event.currentTarget;
+                }
+            } catch (e) {
+                botonPresionado = null;
+            }
+
+            if (botonPresionado && botonPresionado.classList && botonPresionado.classList.contains('btn-agregar')) {
                 const textoOriginal = botonPresionado.innerHTML;
                 botonPresionado.classList.add('btn-enviando');
                 botonPresionado.innerHTML = "✅ ¡LISTO!";
@@ -1817,6 +1914,8 @@
                 'ronda marina 3': 'img/ronda-3.png',
                 'ronda marina 4': 'img/ronda-4.png',
                 'jalea': 'img/jalea-mixta.png',
+                // FIX: Imagen de Chicharrón de pota (con fallback a pescado si no existe)
+                'chicharrón de pota': 'img/chicharron-pota.png',
                 'chicharrón': 'img/chicharron-pescado.png',
                 'cabrilla': 'img/cabrilla-dorada.jpg',
                 'trucha': 'img/trucha-dorada.png',
@@ -1885,7 +1984,7 @@
                     html += `
                         <div class="carrito-item">
                             <div class="carrito-item-imagen">
-                                <img src="${obtenerImagenPlato(item.nombre)}" alt="${item.nombre}">
+                                <img src="${obtenerImagenPlato(item.nombre)}" onerror="this.onerror=null; this.src='img/chicharron-pescado.png';" alt="${item.nombre}">
                             </div>
                             <div class="carrito-item-info">
                                 <div class="carrito-item-nombre">${item.nombre}</div>
@@ -1950,9 +2049,10 @@
                         );
                     }
                     if (!tieneBebidas) {
+                        // FIX: Precios corregidos a S/18 para Chicha y Limonada (anteriormente en S/16)
                         sugerencias.push(
-                            {nombre: 'Chicha Morada - 1 Litro', precio: 16, imagen: 'img/chicha.png'},
-                            {nombre: 'Limonada - 1 Litro', precio: 16, imagen: 'img/limonada.png'}
+                            {nombre: 'Chicha Morada - 1 Litro', precio: 18, imagen: 'img/chicha.png'},
+                            {nombre: 'Limonada - 1 Litro', precio: 18, imagen: 'img/limonada.png'}
                         );
                     }
                     
@@ -2298,6 +2398,45 @@
 
         function limpiarErrores() {
             document.querySelectorAll('.error-mensaje').forEach(el => el.style.display = 'none');
+            // FIX: Restaurar borde por defecto de cliente-telefono
+            const inputTelefono = document.getElementById('cliente-telefono');
+            if (inputTelefono) inputTelefono.style.borderColor = '';
+        }
+
+        // FIX: Función de validación estricta de celular peruano (debe empezar con 9 y tener 9 dígitos numéricos)
+        function validarTelefonoPeruano(valor) {
+            const limpio = (valor || '').toString().replace(/\D/g, '');
+            const esValido = /^9\d{8}$/.test(limpio);
+            return { esValido, telefonoLimpio: limpio };
+        }
+
+        // FIX: Validación en tiempo real y auto-limpieza de caracteres no numéricos
+        function validarTelefonoEnTiempoReal() {
+            const input = document.getElementById('cliente-telefono');
+            const error = document.getElementById('error-telefono');
+            if (!input || !error) return;
+
+            // Limpieza inmediata de caracteres no numéricos y límite de 9 dígitos
+            const limpio = input.value.replace(/\D/g, '').slice(0, 9);
+            if (input.value !== limpio) {
+                input.value = limpio;
+            }
+
+            if (limpio.length === 0) {
+                error.style.display = 'none';
+                input.style.borderColor = '';
+                return;
+            }
+
+            const { esValido } = validarTelefonoPeruano(limpio);
+            if (!esValido) {
+                error.textContent = 'Ingresa un celular válido de 9 dígitos que empiece con 9 (ej: 987654321)';
+                error.style.display = 'block';
+                input.style.borderColor = 'var(--ROJO)';
+            } else {
+                error.style.display = 'none';
+                input.style.borderColor = 'var(--VERDE)';
+            }
         }
 
         function obtenerUbicacion() {
@@ -2326,14 +2465,27 @@
             limpiarErrores();
             
             const nombre = document.getElementById('cliente-nombre').value.trim();
-            const telefono = document.getElementById('cliente-telefono').value.trim();
+            const inputTelefono = document.getElementById('cliente-telefono');
+            
+            // FIX: Limpieza de espacios, guiones y caracteres no numéricos, y validación estricta de celular peruano
+            const { esValido: telefonoValido, telefonoLimpio } = validarTelefonoPeruano(inputTelefono ? inputTelefono.value : '');
+            if (inputTelefono) {
+                inputTelefono.value = telefonoLimpio;
+            }
             
             if (!nombre) {
                 document.getElementById('error-nombre').style.display = 'block';
                 valido = false;
             }
-            if (!telefono || telefono.length < 9) {
-                document.getElementById('error-telefono').style.display = 'block';
+            if (!telefonoValido) {
+                const errorTel = document.getElementById('error-telefono');
+                if (errorTel) {
+                    errorTel.textContent = 'Ingresa un celular válido de 9 dígitos que empiece con 9 (ej: 987654321)';
+                    errorTel.style.display = 'block';
+                }
+                if (inputTelefono) {
+                    inputTelefono.style.borderColor = 'var(--ROJO)';
+                }
                 valido = false;
             }
             
@@ -2458,6 +2610,17 @@
                     boton.innerHTML = "🛒 AGREGAR A MI PEDIDO";
                 }
             });
+
+            // FIX: Listeners en tiempo real para validación y auto-limpieza de teléfono peruano
+            const inputTelefono = document.getElementById('cliente-telefono');
+            if (inputTelefono) {
+                inputTelefono.addEventListener('input', validarTelefonoEnTiempoReal);
+                inputTelefono.addEventListener('blur', function() {
+                    if (this.value.trim().length > 0) {
+                        validarTelefonoEnTiempoReal();
+                    }
+                });
+            }
         });
     </script>
 </body>
